@@ -1,0 +1,302 @@
+-- SYSLOG
+CREATE TABLE gross.sys_log_tb
+(
+id INT NOT NULL AUTO_INCREMENT,
+event_name VARCHAR(20) NOT NULL,
+params VARCHAR(200),
+op_date VARCHAR(8) NOT NULL,
+op_time VARCHAR(6) NOT NULL,
+PRIMARY KEY (id)
+);
+create index sys_log_i1 on gross.sys_log_tb (op_date);
+create index sys_log_i2 on gross.sys_log_tb (event_name,op_date);
+
+
+-- 檢體編號 取號 counter
+  CREATE TABLE gross.order_counter_tb 
+   (
+    id INT NOT NULL AUTO_INCREMENT,	
+    head VARCHAR(3) NOT NULL ,        /* 檢體編號分類頭 */
+    break_key VARCHAR(16) NOT NULL ,  /* 檢體編號次分類跳號規則 */
+    counter INT NOT NULL ,            /* 檢體目前取號數 */
+    PRIMARY KEY (id)
+   );
+
+  create unique index order_counter_ui1 on gross.order_counter_tb (head,break_key);
+
+
+
+-- 檢體編號 列印 Log
+Create table gross.order_barcode_log_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10) NOT NULL,       /* 檢體編號 */
+  amount INT,                        /* Barcode 列印數量 */
+  op_date VARCHAR(8) NOT NULL,       /* Barcode 列印日期 */
+  op_time VARCHAR(6) NOT NULL,       /* Barcode 列印時間 */
+  reprint VARCHAR(1) NOT NULL,       /* Barcode 重印註記 Y/N */
+  PRIMARY KEY (id)
+);
+
+create index order_barcode_log_i1 on gross.order_barcode_log_tb (ord_no);
+create index order_barcode_log_i2 on gross.order_barcode_log_tb (op_date);
+
+
+-- Barcode 主檔 Table
+Create table gross.order_barcode_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10),       /* 檢體編號 */
+/* 第一作業點 */
+  barcode_total_amount INT,       /* 條碼列印總數 */
+  cassette_total_amount INT,      /* cassette 列印總數 可做玻片印製的取號 */
+  create_date VARCHAR(8) NOT NULL,         /* 第一次列印條碼日期 */
+  create_time VARCHAR(6) NOT NULL,
+  op_date VARCHAR(8) NOT NULL,             /* 最後一次列印條碼日期 */
+  op_time VARCHAR(6) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+
+create unique index order_barcode_ui1 on gross.order_barcode_tb (ord_no);
+
+
+
+-- cassette 主檔 Table
+
+Create table gross.order_cassette_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10),       /* 檢體編號 */
+/* 第二作業點 */ 
+  cassette_sequence INT,        /* 同一檢體多個包埋盒序號 */ 
+  cassette_remark VARCHAR(10),  /* 包埋盒最新印製備註 */
+  cassette_fieldA VARCHAR(10),  /* 包埋盒最新印製FieldA */
+  cassette_fieldB VARCHAR(10),  /* 包埋盒最新印製FieldB */
+/* 第三作業點 */
+  gross_user VARCHAR(10),       /* 處理 Gross 人員 */
+  gross_date VARCHAR(8),        /* Gross 最新日期 YYYYMMDD */
+  gross_time VARCHAR(6),        /* Gross 最新時間 HHmmSS */
+/* 第四作業點 */
+  embed_user VARCHAR(10),       /* 處理包埋人員 */
+  embed_date VARCHAR(8),        /* 處理包埋日期 YYYYMMDD */
+  embed_time VARCHAR(6),        /* 處理包埋時間 HHmmSS */
+
+  slide_total_amount INT,       /* 包埋盒總切片數 可做玻片印製的取號 */
+  op_date VARCHAR(8) NOT NULL,           /* 列印cassette日期 */
+  op_time VARCHAR(6) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index order_cassette_ui1 on gross.order_cassette_tb (ord_no,cassette_sequence);
+create index order_cassette_i2 on gross.order_cassette_tb (gross_date,gross_user);
+create index order_cassette_i3 on gross.order_cassette_tb (embed_date,embed_user);
+create index order_cassette_i4 on gross.order_cassette_tb (op_date);
+
+
+-- gross 處理 Log
+Create table gross.order_gross_log_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10) NOT NULL,      /* 檢體編號 */
+/* 第三作業點 */
+  cassette_sequence INT,            /* 同一檢體多個包埋盒序號 */ 
+  gross_user VARCHAR(10),           /* 處理 GROSS 人員 */ 
+  gross_date VARCHAR(8),        /* Gross 日期 YYYYMMDD */
+  gross_time VARCHAR(6),        /* Gross 時間 HHmmSS */
+  op_date VARCHAR(8) NOT NULL,      /* system 日期 */
+  op_time VARCHAR(6) NOT NULL,      /* system 時間 */
+  is_delete_flag VARCHAR(1),        /* gross或取消gross N (normal)/D (delete) */
+  PRIMARY KEY (id)
+);
+
+create index order_gross_log_i1 on gross.order_gross_log_tb (ord_no,cassette_sequence);
+create index order_gross_log_i2 on gross.order_gross_log_tb (gross_date,gross_user);
+
+
+
+-- embed 處理 Log
+Create table gross.order_embed_log_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10) NOT NULL,      /* 檢體編號 */
+/* 第四作業點 */
+  cassette_sequence INT,            /* 同一檢體多個包埋盒序號 */ 
+  embed_user VARCHAR(10),           /* 包埋 人員 */ 
+  embed_date VARCHAR(8),        /* 處理包埋日期 YYYYMMDD */
+  embed_time VARCHAR(6),        /* 處理包埋時間 HHmmSS */
+  op_date VARCHAR(8) NOT NULL,      /* system 日期 */
+  op_time VARCHAR(6) NOT NULL,      /* system 時間 */
+  is_delete_flag VARCHAR(1),        /* 包埋或取消包埋  N (normal)/D (delete)  */
+  PRIMARY KEY (id)
+);
+
+create index order_embed_log_i1 on gross.order_embed_log_tb (ord_no,cassette_sequence);
+create index order_embed_log_i2 on gross.order_embed_log_tb (embed_date,embed_user);
+
+
+
+-- slide 玻片
+Create table gross.order_slide_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10),       /* 檢體編號 */
+/* 第五作業點 */ 
+  cassette_sequence INT,        /* 同一檢體多個包埋盒序號 */ 
+  slide_sequence INT,           /* 同一包埋盒多個玻片 */
+  slide_user  VARCHAR(10),          /* 玻片印製及撈片人員 */
+
+  slide_remark VARCHAR(10),  /* 玻片最新印製備註 */
+  slide_fieldA VARCHAR(10),  /* 玻片最新印製FieldA */
+  slide_fieldB VARCHAR(10),  /* 玻片最新印製FieldB */
+
+  doctor_user VARCHAR(10),         /* 分片病理醫師 */
+  doctor_date VARCHAR(8),      /* 分片操作日期 */
+  doctor_time VARCHAR(6),      /* 分片操作時間 */
+
+  op_date VARCHAR(8) NOT NULL,      /* 玻片印製日期 */
+  op_time VARCHAR(6) NOT NULL,      /* 玻片印製時間 */
+  PRIMARY KEY (id)
+);
+
+
+create unique index order_slide_ui1 on gross.order_slide_tb (ord_no,cassette_sequence,slide_sequence);
+create index order_slide_i2 on gross.order_slide_tb (op_date,slide_user);
+
+
+
+-- doctor 分片 Log
+Create table gross.doctor_slide_log_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  ord_no VARCHAR(10) NOT NULL,      /* 檢體編號 */
+  cassette_sequence INT,        /* 同一檢體多個包埋盒序號 */ 
+  slide_sequence INT,           /* 同一包埋盒多個玻片 */
+  doctor_user  VARCHAR(10),         /* 分片病理醫師 */
+  doctor_date VARCHAR(8),      /* 分片日期 */
+  doctor_time VARCHAR(6),      /* 分片時間 */
+  op_date VARCHAR(8) NOT NULL,      /* system 日期 */
+  op_time VARCHAR(6) NOT NULL,      /* system 時間 */
+  is_delete_flag VARCHAR(1),        /* 分片或取消分片  N (normal)/D (delete) */
+  PRIMARY KEY (id)
+);
+
+create index doctor_slide_log_i1 on gross.doctor_slide_log_tb (ord_no);
+create index doctor_slide_log_i2 on gross.doctor_slide_log_tb (doctor_date,doctor_user);
+
+
+
+
+
+-- sysparams 
+Create table gross.sysparams_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  seq INT DEFAULT 0,
+  value VARCHAR(20),
+  PRIMARY KEY (id)
+);
+
+create unique index sysparams_ui1 on gross.sysparams_tb (name,seq);
+
+insert into gross.sysparams_tb (name,seq,value) values ("SLIDE_REMARK",0,"");
+insert into gross.sysparams_tb (name,seq,value) values ("SLIDE_REMARK",1,"深切");
+insert into gross.sysparams_tb (name,seq,value) values ("SLIDE_REMARK",2,"Recut");
+insert into gross.sysparams_tb (name,seq,value) values ("SLIDE_STAIN",0,"");
+insert into gross.sysparams_tb (name,seq,value) values ("SLIDE_STAIN",1,"HP");
+insert into gross.sysparams_tb (name,seq,value) values ("SLIDE_STAIN",2,"IHC");
+
+commit;
+
+
+
+-- cassette_template : cassette printer template 樣版對照檔
+Create table gross.cassette_template_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  template VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index cassette_template_ui1 on gross.cassette_template_tb (name);
+
+insert into gross.cassette_template_tb (name,template) values ("default","Normal");
+
+commit;
+
+-- cassette_magazine : cassette printer 卡匣對照檔
+Create table gross.cassette_magazine_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  magazine VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index cassette_magazine_ui1 on gross.cassette_magazine_tb (name);
+
+insert into gross.cassette_magazine_tb (name,magazine) values ("default","Normal(White)");
+
+commit;
+
+-- cassette_workstation : cassette 工作站對照檔
+Create table gross.cassette_workstation_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  path VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index cassette_workstation_ui1 on gross.cassette_workstation_tb (name);
+
+insert into gross.cassette_workstation_tb (name,path) values ("default","C:\Cassette\WS1");
+
+commit;
+
+-- slide_template : slide printer template 樣版對照檔
+Create table gross.slide_template_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  template VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index slide_template_ui1 on gross.slide_template_tb (name);
+
+insert into gross.slide_template_tb (name,template) values ("default","LayoutSample");
+
+commit;
+
+-- slide_printer : slide printer 對照檔
+Create table gross.slide_printer_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  printer VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index slide_printer_ui1 on gross.slide_printer_tb (name);
+
+insert into gross.slide_printer_tb (name,printer) values ("default","PRN0");
+
+commit;
+
+-- slide : slide 工作站對照檔
+Create table gross.slide_workstation_tb
+(
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(20) NOT NULL,
+  path VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+create unique index slide_workstation_ui1 on gross.slide_workstation_tb (name);
+
+insert into gross.slide_workstation_tb (name,path) values ("default","C:\Slide\WS1");
+
+commit;

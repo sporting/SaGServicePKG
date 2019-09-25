@@ -1,0 +1,5 @@
+1. 安裝 IIS
+2. 安裝 .net framework 4.5.2
+3. 設定 IIS 不回收 memory
+
+4. grant cassette text file folder and slide csv file folder access permission to IUSR

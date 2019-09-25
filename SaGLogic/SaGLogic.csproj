@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CD76CFCE-A565-49F7-BE41-58AFC4A3B6A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SaGLogic</RootNamespace>
+    <AssemblyName>SaGLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SlidePrinter.cs" />
+    <Compile Include="SlideTemplate.cs" />
+    <Compile Include="SlideWorkStation.cs" />
+    <Compile Include="CassetteWorkStation.cs" />
+    <Compile Include="CassetteSlideSplit.cs" />
+    <Compile Include="CassetteMagazine.cs" />
+    <Compile Include="DoctorSlideLog.cs" />
+    <Compile Include="DoctorSlideWorkLoadV.cs" />
+    <Compile Include="SlideWorkLoadV.cs" />
+    <Compile Include="EmbedWorkLoadV.cs" />
+    <Compile Include="ITableModel.cs" />
+    <Compile Include="GrossWorkLoadV.cs" />
+    <Compile Include="CassetteTemplate.cs" />
+    <Compile Include="SysParams.cs" />
+    <Compile Include="SysLog.cs" />
+    <Compile Include="OrderEmbedLog.cs" />
+    <Compile Include="OrderGrossLog.cs" />
+    <Compile Include="OrderBarcode.cs" />
+    <Compile Include="OrderCassette.cs" />
+    <Compile Include="OrderBarcodeLog.cs" />
+    <Compile Include="OrderCounter.cs" />
+    <Compile Include="OrderSlide.cs" />
+    <Compile Include="UserValidate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SaGDB\SaGDB.csproj">
+      <Project>{3d0d9fed-82dc-45b0-8ad1-f528bfe36171}</Project>
+      <Name>SaGDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaGModel\SaGModel.csproj">
+      <Project>{c4e7d3f7-c873-432b-8a3d-77e868261471}</Project>
+      <Name>SaGModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaGUtil\SaGUtil.csproj">
+      <Project>{5DD96848-8F84-46B8-A95E-C9EB3858A753}</Project>
+      <Name>SaGUtil</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
