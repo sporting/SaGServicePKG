@@ -259,6 +259,10 @@
       <Project>{6032d90d-ee6b-44a5-8374-a97ee66ea2b3}</Project>
       <Name>PPMSXLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SaGKernel\SaGKernel.csproj">
+      <Project>{E61015F8-F665-4530-8582-9A8864242C5B}</Project>
+      <Name>SaGKernel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SaGLogic\SaGLogic.csproj">
       <Project>{CD76CFCE-A565-49F7-BE41-58AFC4A3B6A0}</Project>
       <Name>SaGLogic</Name>
