@@ -20,6 +20,10 @@ namespace PPMSXLib
         {
             _dataSections.Add(ds);
         }
+        public void AddSections(SlideFormat[] dss)
+        {
+            _dataSections.AddRange(dss);
+        }
 
         public bool SaveFile(string outputFolder)
         {
