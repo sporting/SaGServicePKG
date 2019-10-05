@@ -1,4 +1,5 @@
 ﻿using LCPMS15Lib;
+using SaGKernel;
 using SaGLogic;
 using SaGUtil.Data;
 using System;
@@ -18,8 +19,16 @@ namespace SaGService.Models
         public string CassetteName;
 
         public CassetteSlideSplit Data;
-                
 
+        public CassetteSampleFormat(string QRCode)
+        {
+            Clear();
+
+            TemplateName = string.Empty;
+            CassetteName = string.Empty;
+
+            Data = new CassetteSlideSplit(QRCode);
+        }
         public CassetteSampleFormat(string templateName, string cassetteName, string pathoNo,int cassetteSeq, string specialRemark, string fieldA, string fieldB)
         {
             Clear();

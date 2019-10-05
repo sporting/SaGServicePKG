@@ -169,17 +169,8 @@ namespace SaGUtil.Security
         public static string TextDecrypt(string encryptData, string key)
         {
             byte[] cipherTextData = Convert.FromBase64String(encryptData);
-            RijndaelManaged AES = new RijndaelManaged();
-            MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
-            byte[] keyData = MD5.ComputeHash(Encoding.Unicode.GetBytes(key));
-            byte[] IVData = MD5.ComputeHash(Encoding.Unicode.GetBytes("Super SportingApp For SaGUtil"));
-            AES.Key = keyData;
-            AES.IV = IVData;
-            AES.Padding = PaddingMode.PKCS7;
-            ICryptoTransform transform = AES.CreateDecryptor();
-            // Dim transform As ICryptoTransform = AES.CreateDecryptor(keyData, IVData)
-            byte[] outputData = transform.TransformFinalBlock(cipherTextData, 0, cipherTextData.Length);
-            return Encoding.Unicode.GetString(outputData);
+            return TextDecrypt(cipherTextData,key);
         }
+
     }
 }

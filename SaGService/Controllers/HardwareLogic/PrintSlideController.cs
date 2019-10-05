@@ -14,6 +14,10 @@ using System.Web.Http;
 
 namespace SaGService.Controllers
 {
+    /// <summary>
+    /// Server Side 列印玻片到設定的資料夾 (自資料庫讀取)
+    /// Template名稱、印表機名稱、輸出目錄
+    /// </summary>
     public class PrintSlideController : ApiController
     {
         //Server 列印 slide 
@@ -96,14 +100,10 @@ namespace SaGService.Controllers
                 //輸出 slide csv file，列印 slide
                 PPMSXData ppmsx = new PPMSXData();
 
-                SlideSampleFormat ssf = new SlideSampleFormat(psm.Data.OrdNo);
-                ssf.Data.SpecialRemark = psm.Data.SlideRemark;
-                ssf.Data.FieldA = psm.Data.SlideFieldA;
-                ssf.Data.FieldB = psm.Data.SlideFieldB;
-                ssf.Data.CassetteSequence = psm.Data.CassetteSequence;
-                ssf.SetSlideSequence(psm.Data.SlideSequence);
-
-                ppmsx.AddData(template.Template, slideM.Printer,0, new DataSection() { Val0 = ssf.Data.PathoQRText, Val1 = ssf.Data.PathoMajorText, Val2 = ssf.Data.PathoSequence, Val3 = ssf.Data.SpecialRemark, Val4 = ssf.Data.FieldA, Val5 = ssf.Data.FieldB });
+                SlideSampleFormat ssf = new SlideSampleFormat();
+                ssf.SetEnv(template.Template, slideM.Printer, 0);
+                ssf.SetVal(psm.Data.OrdNo, psm.Data.CassetteSequence, psm.Data.SlideSequence, psm.Data.SlideRemark, psm.Data.SlideFieldA, psm.Data.SlideFieldB);
+                ppmsx.AddSection(ssf);
 
                 if (ppmsx.SaveFile(workstation.Path))
                 {
