@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,10 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\MajorModelConfig.cs" />
+    <Compile Include="Config\MajorModelSection.cs" />
+    <Compile Include="Config\MajorModelElement.cs" />
+    <Compile Include="Config\MajorModelElementCollection.cs" />
     <Compile Include="Settings\CassetteSettings.cs" />
     <Compile Include="Settings\SlideSettingsApi.cs" />
     <Compile Include="Settings\CassetteSettingsApi.cs" />
-    <Compile Include="CassetteSlideSplit.cs" />
+    <Compile Include="QRDataStruct.cs" />
     <Compile Include="Format\CassetteEnvironment.cs" />
     <Compile Include="Format\SlideEnvironment.cs" />
     <Compile Include="Lib\SingletonProvider.cs" />

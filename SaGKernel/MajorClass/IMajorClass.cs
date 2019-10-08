@@ -19,12 +19,13 @@ namespace SaGKernel.MajorClass
         MajorClassEnum MajorClass { get;}
 
         //輸入PathoQRCode 判斷是否為該 major class
-        bool IsMe(CassetteSlideSplit css);
+        bool IsMe(QRDataStruct css);
     }
 
     public enum MajorClassEnum
     {
         SkinMC, //皮膚
+        FsMC, //冷凍切片
         DefaultMC //預設
     }
 }

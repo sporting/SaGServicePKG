@@ -1,5 +1,6 @@
 ﻿using SaGKernel.Lib;
 using SaGKernel.MajorClass;
+using SaGUtil.System;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,10 +27,11 @@ namespace SaGKernel.MajorClass
             _majorClassify = new HashSet<IMajorClass>();
 
             LoadAssembly();
+            AutoLoadAssemblyByConfig();
         }
 
         private HashSet<IMajorClass> _majorClassify;
-        public IMajorClass Classify(CassetteSlideSplit css)
+        public IMajorClass Classify(QRDataStruct css)
         {
             //判斷是哪一個檢體分類
             foreach (IMajorClass major in _majorClassify)
@@ -51,7 +53,7 @@ namespace SaGKernel.MajorClass
             LoadAssembly(asm);
         }
 
-        public  void LoadAssembly(Assembly assembly)
+        public void LoadAssembly(Assembly assembly)
         {
             if (_majorClassify == null)
             {
@@ -83,7 +85,7 @@ namespace SaGKernel.MajorClass
             }
         }
 
-        public  void LoadAssembly(string assemblyFileName)
+        public void LoadAssembly(string assemblyFileName)
         {
             if (File.Exists(assemblyFileName))
             {
@@ -95,7 +97,7 @@ namespace SaGKernel.MajorClass
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    LogMan.Instance.Error("MajorClassify.LoadAssembly", ex.Message, assemblyFileName);
                 }
             }
         }
@@ -128,6 +130,14 @@ namespace SaGKernel.MajorClass
             return (from IMajorClass major in _majorClassify
                     where major.MajorClass == MajorClassEnum.DefaultMC
                     select major).First();
+        }
+
+        private void AutoLoadAssemblyByConfig()
+        {
+            foreach (string fileName in Config.MajorModelConfig.MajorModelDll())
+            {
+                LoadAssembly(fileName);
+            }
         }
     }
 }

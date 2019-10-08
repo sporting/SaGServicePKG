@@ -9,24 +9,31 @@ namespace SaGKernel.Settings
 {
     public class SlideSettingsApi
     {
-        public static string[] SlideMagazineNames = { "卡匣1", "卡匣2"};
+        private static string SMN1 = "卡匣1";
+        private static string SMN2 = "卡匣2";
+
+        public static string[] SlideMagazineNames = { SMN1,SMN2};
 
         public static string GetDefaultSlideMagazineName() {
             return SlideMagazineNames[0];
         }
         public static int SlideValue(SlideSettings settings, IMajorClass currentMajorClass)
-        {         
-            string magazineName = (from MajorSlideSettings mcs in settings.MajorSlides
-                    where mcs.MajorClassName == currentMajorClass.ClassName
-                     select mcs.SlideMagazineName).First();            
+        {
+            var v = (from MajorSlideSettings mcs in settings.MajorSlides
+                     where mcs.MajorClassName == currentMajorClass.ClassName
+                     select mcs.SlideMagazineName);
+            if (v.Count() > 0)
+            {
+                string magazineName = v.First();
 
-            if (magazineName.Equals("卡匣1"))
-            {
-                return settings.SlotId;
-            }
-            else if (magazineName.Equals("卡匣2"))
-            {
-                return settings.SlotId2;
+                if (magazineName.Equals(SMN1))
+                {
+                    return settings.SlotId;
+                }
+                else if (magazineName.Equals(SMN2))
+                {
+                    return settings.SlotId2;
+                }
             }
 
             return 0;

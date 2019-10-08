@@ -1,9 +1,10 @@
-﻿using SaGUtil.Data;
+﻿using SaGKernel.MajorClass;
+using SaGUtil.Data;
 using System;
 
 namespace SaGKernel
 {
-    public class CassetteSlideSplit
+    public class QRDataStruct
     {
         public string PathoQRText
         {
@@ -36,12 +37,20 @@ namespace SaGKernel
         public int CassetteSequence; // 同一病理編號多個 cassette 的流水號
         public int SlideSequence; //同一病理編號多個 cassette，同一個 cassette 多個玻片，作流水號使用 // cassette 的 SlideSequence=0
 
-        public CassetteSlideSplit(string pathoNo, int cassetteSeq, int slideSeq, string specialRemark, string fieldA, string fieldB):this($"{pathoNo}${cassetteSeq}${slideSeq}${specialRemark}${fieldA}${fieldB}")
+        public IMajorClass SpecimenMajorClass
+        {
+            get
+            {
+                return MajorClassify.GetInstance().Classify(this);
+            }
+        }
+
+        public QRDataStruct(string pathoNo, int cassetteSeq, int slideSeq, string specialRemark, string fieldA, string fieldB):this($"{pathoNo}${cassetteSeq}${slideSeq}${specialRemark}${fieldA}${fieldB}")
         {
 
         }
 
-        public CassetteSlideSplit(string QRText)
+        public QRDataStruct(string QRText)
         {
             try
             {
@@ -62,7 +71,7 @@ namespace SaGKernel
             }
             catch (Exception ex)
             {
-                Console.WriteLine(string.Concat("CassetteSlideSplit: ", QRText, " ", ex.Message));
+                Console.WriteLine(string.Concat("QRDataStruct: ", QRText, " ", ex.Message));
             }
         }
 
@@ -176,5 +185,7 @@ namespace SaGKernel
             FieldB = string.Empty;
             CassetteSequence = 1;
         }
+
+
     }
 }

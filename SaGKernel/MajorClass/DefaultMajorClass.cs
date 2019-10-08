@@ -33,7 +33,7 @@ namespace SaGKernel.MajorClass
             }
         }
 
-        public bool IsMe(CassetteSlideSplit css)
+        public bool IsMe(QRDataStruct css)
         {
             return false;
         }
