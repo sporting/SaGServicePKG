@@ -35,8 +35,8 @@ namespace SaGUtil.Extensions
             if (columnType.Equals(typeof(DataGridViewCheckBoxColumn)))
             {
                 column = new DataGridViewCheckBoxColumn(false);
-                ((DataGridViewCheckBoxColumn)column).TrueValue = "Y";
-                ((DataGridViewCheckBoxColumn)column).FalseValue = "N";
+                ((DataGridViewCheckBoxColumn)column).TrueValue = true;
+                ((DataGridViewCheckBoxColumn)column).FalseValue = false;
             }
             else if (columnType.Equals(typeof(DataGridViewComboBoxColumn)))
                 column = new DataGridViewComboBoxColumn();
@@ -50,6 +50,35 @@ namespace SaGUtil.Extensions
             column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             column.HeaderText = displayName;
 
+            column.Name = GetNextColumnName(dgView, 0, fieldName);
+            column.DataPropertyName = fieldName;
+
+            dgView.Columns.Add(column);
+
+            return column;
+        }
+
+        public static DataGridViewColumn AddColumn(this DataGridView dgView, string fieldName, string displayName, Type columnType,int displayWidth)
+        {
+            DataGridViewColumn column;
+            if (columnType.Equals(typeof(DataGridViewCheckBoxColumn)))
+            {
+                column = new DataGridViewCheckBoxColumn(false);
+                ((DataGridViewCheckBoxColumn)column).TrueValue = true;
+                ((DataGridViewCheckBoxColumn)column).FalseValue = false;
+            }
+            else if (columnType.Equals(typeof(DataGridViewComboBoxColumn)))
+                column = new DataGridViewComboBoxColumn();
+            else if (columnType.Equals(typeof(DataGridViewButtonColumn)))
+            {
+                column = new DataGridViewButtonColumn();
+                ((DataGridViewButtonColumn)column).Text = displayName;
+            }
+            else
+                column = new DataGridViewTextBoxColumn();
+            //column.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            column.HeaderText = displayName;
+            column.Width = displayWidth;
             column.Name = GetNextColumnName(dgView, 0, fieldName);
             column.DataPropertyName = fieldName;
 

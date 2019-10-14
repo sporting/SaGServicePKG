@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -47,8 +48,8 @@
     <Compile Include="Config\MajorModelElement.cs" />
     <Compile Include="Config\MajorModelElementCollection.cs" />
     <Compile Include="Settings\CassetteSettings.cs" />
-    <Compile Include="Settings\SlideSettingsApi.cs" />
     <Compile Include="Settings\CassetteSettingsApi.cs" />
+    <Compile Include="Settings\SlideSettingsApi.cs" />
     <Compile Include="QRDataStruct.cs" />
     <Compile Include="Format\CassetteEnvironment.cs" />
     <Compile Include="Format\SlideEnvironment.cs" />
@@ -62,6 +63,8 @@
     <Compile Include="MajorClass\IMajorClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\SlideSettings.cs" />
+    <Compile Include="UI\CassetteColor.cs" />
+    <Compile Include="UI\CassetteColors.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaGUtil\SaGUtil.csproj">
