@@ -1,49 +1,50 @@
 ﻿
+using System.Text;
+
 namespace LCPMS15Lib
 {
+
     public abstract class CassetteFormat
     {
-        public abstract string Template(); //範本名稱
-        public abstract string Magazine(); //cassette 匣
-        //正面的文字
-        public virtual string[] FrontTexts()
-        {
-            return new string[] { };
-        }
-        //左側的文字
-        public virtual string[] LeftTexts()
-        {
-            return new string[] { };
-        }
-        //右側的文字
-        public virtual string[] RightTexts()
-        {
-            return new string[] { };
-        }
+        string TemplateChar = "TE";
+        string MagazineChar = "DT";
+        public abstract string Template { get; set; }
+        public abstract string Magazine { get; set; }
+        public abstract string[] LeftSide { get; set; }
+        public abstract string[] FrontSide { get; set; }
+        public abstract string[] RightSide { get; set; }
 
-        public DataSection ToDataSection()
+        private string ArrayText(string[] ss)
         {
-            DataSection ds = new DataSection();
-            ds.SetTemplate(Template());
-            ds.SetMagazine(Magazine());
-
-            string[] frontTexts = FrontTexts();
-            if (frontTexts.Length > 0)
+            if (ss.Length > 0)
             {
-                ds.SetFront(frontTexts);
-            }
-            string[] leftTexts = LeftTexts();
-            if (leftTexts.Length > 0)
-            {
-                ds.SetLeft(leftTexts);
-            }
-            string[] rightTexts = RightTexts();
-            if (rightTexts.Length > 0)
-            {
-                ds.SetRight(rightTexts);
+                string s = string.Empty;
+                for (int i = 0; i < ss.Length; i++)
+                {
+                    if (ss[i].Trim().Length > 0)
+                    {
+                        s += string.Format("#{0}#{1};", i + 1, ss[i]);
+                    }
+                }
+                return s;
             }
 
-            return ds;
+            return string.Empty;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            string s = string.Empty;
+            sb.AppendLine(string.Format("{0};{1};", TemplateChar, Template));
+            sb.AppendLine(string.Format("{0};{1};", MagazineChar, Magazine));
+            s = ArrayText(LeftSide);
+            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", EnumVal.Value(CSSide.Left), s)); }
+            s = ArrayText(FrontSide);
+            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", EnumVal.Value(CSSide.Front), s)); }
+            s = ArrayText(RightSide);
+            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", EnumVal.Value(CSSide.Right), s)); }
+            return sb.ToString().Trim();
         }
     }
 }

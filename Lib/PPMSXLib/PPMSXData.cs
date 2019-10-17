@@ -1,4 +1,5 @@
-﻿using SaGUtil.System;
+﻿using SaGUtil.IO;
+using SaGUtil.System;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,7 @@ namespace PPMSXLib
 
         public bool SaveFile(string outputFolder)
         {
-            string fileName = GetFileName(outputFolder);
+            string fileName = SaFile.GetTicksFileName(outputFolder, "CSV");
             try
             {
                 using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
@@ -51,21 +52,6 @@ namespace PPMSXLib
                 return false;
             }
         }
-        private string GetFileName(string outputFolder)
-        {
-            if (!Directory.Exists(outputFolder))
-                Directory.CreateDirectory(outputFolder);
-
-            if (Directory.Exists(outputFolder))
-            {
-                string uniqueFileName = string.Format(@"{0}.CSV", DateTime.Now.Ticks);
-                string outputFileName = Path.Combine(outputFolder, uniqueFileName);
-
-                return outputFileName;
-            }
-
-            LogMan.Instance.Error("PPMSXData", $"{outputFolder} Directory not found");
-            return string.Empty;
-        }
+     
     }
 }

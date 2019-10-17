@@ -13,10 +13,10 @@ namespace SaGService.Models
     /// <summary>
     /// Demo 使用的Cassette範例格式
     /// </summary>
-    public class CassetteSampleFormat:CassetteFormat
+    public class CassetteSampleFormat : CassetteFormat
     {
-        public string TemplateName;
-        public string CassetteName;
+        public override string Template { get; set; }
+        public override string Magazine { get; set; }
 
         public QRDataStruct Data;
 
@@ -24,60 +24,68 @@ namespace SaGService.Models
         {
             Clear();
 
-            TemplateName = string.Empty;
-            CassetteName = string.Empty;
+            Template = string.Empty;
+            Magazine = string.Empty;
 
             Data = new QRDataStruct(QRCode);
         }
-        public CassetteSampleFormat(string templateName, string cassetteName, string pathoNo,int cassetteSeq, string specialRemark, string fieldA, string fieldB)
+        public CassetteSampleFormat(string templateName, string cassetteName, string pathoNo, int cassetteSeq, string specialRemark, string fieldA, string fieldB)
         {
             Clear();
 
-            TemplateName = templateName;
-            CassetteName = cassetteName;
+            Template = templateName;
+            Magazine = cassetteName;
 
-            Data = new QRDataStruct(pathoNo, cassetteSeq, 0, specialRemark, fieldA, fieldB);          
+            Data = new QRDataStruct(pathoNo, cassetteSeq, 0, specialRemark, fieldA, fieldB);
         }
 
         public CassetteSampleFormat(string templateName, string cassetteName, string pathoMajor, string pathoMajorTail, string pathoSequence, int cassetteSeq, string specialRemark, string fieldA, string fieldB)
         {
             Clear();
 
-            TemplateName = templateName;
-            CassetteName = cassetteName;
+            Template = templateName;
+            Magazine = cassetteName;
 
             Data = new QRDataStruct($"{pathoMajorTail}-{pathoSequence}", cassetteSeq, 0, specialRemark, fieldA, fieldB);
         }
 
         private void Clear()
         {
-            TemplateName = string.Empty;
-            CassetteName = string.Empty;
+            Template = string.Empty;
+            Magazine = string.Empty;
             if (Data != null)
             {
                 Data.Clear();
             }
         }
 
-        public override string Template()
+
+        public override string[] LeftSide { get { return new string[] { }; } set { } }
+        public override string[] RightSide { get { return new string[] { }; } set { } }
+        public override string[] FrontSide
         {
-            return TemplateName;
+            get
+            {
+                return new string[] {
+                Data.PathoQRText,
+                Data.PathoNo,
+                Data.SpecialRemark,
+                Data.FieldA,
+                Data.FieldB
+            };
+            }
+            set { }
         }
 
-        public override string Magazine()
-        {
-            return CassetteName;
-        }
-
-        public override string[] FrontTexts()
-        {
-            List<string> ss = new List<string>();
-            ss.Add(Data.PathoQRText);
-            ss.Add(Data.PathoNo);
-            ss.Add(Data.SpecialRemark);
-            ss.Add(Data.FieldA);
-            ss.Add(Data.FieldB);
-            return ss.ToArray();
-        }
+        //public override string[] FrontTexts()
+        //{
+        //    return new string[] {
+        //        Data.PathoQRText,
+        //        Data.PathoNo,
+        //        Data.SpecialRemark,
+        //        Data.FieldA,
+        //        Data.FieldB
+        //    };
+        //}
     }
 }

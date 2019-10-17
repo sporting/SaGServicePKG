@@ -80,6 +80,7 @@
     <Compile Include="Data\DateFormatter.cs" />
     <Compile Include="Extensions\DataGridViewExt.cs" />
     <Compile Include="Extensions\ObjectExt.cs" />
+    <Compile Include="IO\SaFile.cs" />
     <Compile Include="Network\Machine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SaCryptography.cs" />

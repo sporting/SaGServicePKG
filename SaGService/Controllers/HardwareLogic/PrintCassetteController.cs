@@ -89,7 +89,7 @@ namespace SaGService.Controllers
                 //輸出 cassette 文字檔，列印 cassette
                 LCPMS15Data lcpms15 = new LCPMS15Data();
                 CassetteSampleFormat _cassette = new CassetteSampleFormat(template.Template, magazine.Magazine, pcm.Data.OrdNo, pcm.Data.CassetteSequence, pcm.Data.CassetteRemark, pcm.Data.CassetteFieldA, pcm.Data.CassetteFieldB);
-                lcpms15.AddSection(_cassette.ToDataSection());
+                lcpms15.AddCassette(_cassette);
 
                 if (lcpms15.SaveFile(workstation.Path))
                 {
