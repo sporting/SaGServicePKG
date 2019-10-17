@@ -18,7 +18,7 @@ namespace SaGService.Models
         public string TemplateName;
         public string CassetteName;
 
-        public CassetteSlideSplit Data;
+        public QRDataStruct Data;
 
         public CassetteSampleFormat(string QRCode)
         {
@@ -27,7 +27,7 @@ namespace SaGService.Models
             TemplateName = string.Empty;
             CassetteName = string.Empty;
 
-            Data = new CassetteSlideSplit(QRCode);
+            Data = new QRDataStruct(QRCode);
         }
         public CassetteSampleFormat(string templateName, string cassetteName, string pathoNo,int cassetteSeq, string specialRemark, string fieldA, string fieldB)
         {
@@ -36,7 +36,7 @@ namespace SaGService.Models
             TemplateName = templateName;
             CassetteName = cassetteName;
 
-            Data = new CassetteSlideSplit(pathoNo, cassetteSeq, 0, specialRemark, fieldA, fieldB);          
+            Data = new QRDataStruct(pathoNo, cassetteSeq, 0, specialRemark, fieldA, fieldB);          
         }
 
         public CassetteSampleFormat(string templateName, string cassetteName, string pathoMajor, string pathoMajorTail, string pathoSequence, int cassetteSeq, string specialRemark, string fieldA, string fieldB)
@@ -46,7 +46,7 @@ namespace SaGService.Models
             TemplateName = templateName;
             CassetteName = cassetteName;
 
-            Data = new CassetteSlideSplit($"{pathoMajorTail}-{pathoSequence}", cassetteSeq, 0, specialRemark, fieldA, fieldB);
+            Data = new QRDataStruct($"{pathoMajorTail}-{pathoSequence}", cassetteSeq, 0, specialRemark, fieldA, fieldB);
         }
 
         private void Clear()

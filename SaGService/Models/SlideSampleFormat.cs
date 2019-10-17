@@ -11,7 +11,7 @@ namespace SaGService.Models
     /// </summary>
     public class SlideSampleFormat:SlideFormat
     {
-        public CassetteSlideSplit Data;
+        public QRDataStruct Data;
         
         public SlideSampleFormat()
         {
@@ -25,7 +25,7 @@ namespace SaGService.Models
         //pathoQRText: PathoNo;Specimen;FieldABC; == QRCode
         public SlideSampleFormat(string pathoQRText):this()
         {
-            Data = new CassetteSlideSplit(pathoQRText);
+            Data = new QRDataStruct(pathoQRText);
 
             Val0 = Data.PathoQRText;
             Val1 = Data.PathoMajorText;
@@ -37,7 +37,7 @@ namespace SaGService.Models
 
         public void SetVal(string pathoNo,int cassetteSeq,int slideSeq, string specialRemark, string fieldA, string fieldB)
         {
-            Data = new CassetteSlideSplit(pathoNo, cassetteSeq, slideSeq, specialRemark, fieldA, fieldB);
+            Data = new QRDataStruct(pathoNo, cassetteSeq, slideSeq, specialRemark, fieldA, fieldB);
 
             Val0 = Data.PathoQRText;
             Val1 = Data.PathoMajorText;
