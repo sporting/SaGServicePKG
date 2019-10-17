@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SaGUtil.Data
 {
-    public class DateFormatter
+    /// <summary>
+    /// DateFormatter Function Collection
+    /// </summary>
+    public class SaDateFormatter
     {
         public static DateTime StrToDateTime(string s)
         {

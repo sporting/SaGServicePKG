@@ -23,7 +23,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: ModelState.IsValid = false");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }
@@ -38,7 +38,7 @@ namespace SaGService.Controllers
 
             if (templateAry.Count() <= 0)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: Template {pcm.Template} is not Exist");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: Template {pcm.Template} is not Exist");
 
                 return BadRequest(ModelState);
             }
@@ -55,7 +55,7 @@ namespace SaGService.Controllers
                         
             if (magazineAry.Count() <= 0)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: Magazine {pcm.Magazine} is not Exist");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: Magazine {pcm.Magazine} is not Exist");
 
                 return BadRequest(ModelState);
             }
@@ -72,7 +72,7 @@ namespace SaGService.Controllers
 
             if (workstationAry.Count() <= 0)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: WorkStation {pcm.WorkStation} is not Exist");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: WorkStation {pcm.WorkStation} is not Exist");
 
                 return BadRequest(ModelState);
             }
@@ -97,14 +97,14 @@ namespace SaGService.Controllers
                 }
                 else
                 {
-                    LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: LCPMS15Data save failed");
+                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: LCPMS15Data save failed");
                     
                     return BadRequest();
                 }
             }
             else
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: OrderCassette add data failed");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: OrderCassette add data failed");
 
                 return BadRequest();
             }

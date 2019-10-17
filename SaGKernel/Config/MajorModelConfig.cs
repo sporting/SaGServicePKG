@@ -21,7 +21,7 @@ namespace SaGKernel.Config
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error("MajorModelConfig.MajorModelDll", ex.Message);
+                SaLogMan.Instance.Error("MajorModelConfig.MajorModelDll", ex.Message);
                 return new string[] { };
             }
         }

@@ -30,9 +30,9 @@ namespace SaGLogic
                 var query = from row in tb.Table.AsEnumerable()
                             select new SysParamsM()
                             {
-                                Id = Converter.ToInt(row["id"].ToString(), 0),
+                                Id = SaConverter.ToInt(row["id"].ToString(), 0),
                                 Name = row["name"].ToString(),
-                                Seq = Converter.ToInt(row["seq"].ToString(), 0),
+                                Seq = SaConverter.ToInt(row["seq"].ToString(), 0),
                                 Value = row["value"].ToString()
                             };
 

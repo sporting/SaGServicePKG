@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace PPMSXLib
 {
+    /// <summary>
+    /// Slide Printer
+    /// PPMSX 每一個 Slide 對應欄位文字輸出
+    /// </summary>
     public abstract class SlideFormat
     {
         public string LayoutName { get; set; }
         public string PrinterName { get; set; }
-        public int SlotId { get; set; }   //玻片槽號碼 0,1,2 ?
+        public int SlotId { get; set; }   //玻片槽號碼 0,1
         public bool SeqPrintFlag { get; set; }//序列號是否列印
         public int Sequence { get; set; } //序列號
         public bool SubSeqPrintFlag { get; set; } //次編號是否列印

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SaGUtil.Extensions
 {
-    public static class ObjectExt
+    public static class SaObjectExt
     {
         public static string ToStringEx(this object s)
         {

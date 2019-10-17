@@ -20,7 +20,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"DoctorSlideLogsController: ModelState.IsValid = false");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"DoctorSlideLogsController: ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }
@@ -32,7 +32,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"DoctorSlideLogsController: DoctorSlideLog AddLog failed");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"DoctorSlideLogsController: DoctorSlideLog AddLog failed");
 
                 return BadRequest();
             }

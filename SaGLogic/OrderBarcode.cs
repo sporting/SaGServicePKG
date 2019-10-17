@@ -2,7 +2,7 @@
 using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
-using SaGUtil;
+using SaGUtil.System;
 using SaGUtil.Data;
 using System;
 using System.Collections.Generic;
@@ -28,8 +28,8 @@ namespace SaGLogic
                 row["ord_no"] = ordLog.OrdNo;
                 row["barcode_total_amount"] = ordLog.Amount;
                 row["cassette_total_amount"] = 0;
-                row["create_date"] = Utility.Today().ToString("yyyyMMdd");
-                row["create_time"] = Utility.Today().ToString("HHmmss");
+                row["create_date"] = SaDate.Today().ToString("yyyyMMdd");
+                row["create_time"] = SaDate.Today().ToString("HHmmss");
                 row["op_date"] = row["create_date"];
                 row["op_time"] = row["create_time"];
                 tb.Table.Rows.Add(row);
@@ -39,9 +39,9 @@ namespace SaGLogic
             else
             {
                 DataRow row = tb.Table.Rows[0];
-                row["barcode_total_amount"] = ordLog.Amount + Converter.ToInt(row["barcode_total_amount"], 0);
-                row["op_date"] = Utility.Today().ToString("yyyyMMdd");
-                row["op_time"] = Utility.Today().ToString("HHmmss");
+                row["barcode_total_amount"] = ordLog.Amount + SaConverter.ToInt(row["barcode_total_amount"], 0);
+                row["op_date"] = SaDate.Today().ToString("yyyyMMdd");
+                row["op_time"] = SaDate.Today().ToString("HHmmss");
 
                 return tb;
             }
@@ -58,22 +58,22 @@ namespace SaGLogic
                 row["ord_no"] = ordLog.OrdNo;
                 row["barcode_total_amount"] = 0;
                 row["cassette_total_amount"] = 1;
-                row["create_date"] = Utility.Today().ToString("yyyyMMdd");
-                row["create_time"] = Utility.Today().ToString("HHmmss");
+                row["create_date"] = SaDate.Today().ToString("yyyyMMdd");
+                row["create_time"] = SaDate.Today().ToString("HHmmss");
                 row["op_date"] = row["create_date"];
                 row["op_time"] = row["create_time"];
                 tb.Table.Rows.Add(row);
 
-                newCassetteSeq = Converter.ToInt(row["cassette_total_amount"], 1);
+                newCassetteSeq = SaConverter.ToInt(row["cassette_total_amount"], 1);
 
                 return tb;
             }
             else
             {
                 DataRow row = tb.Table.Rows[0];
-                row["cassette_total_amount"] = 1 + Converter.ToInt(row["cassette_total_amount"], 0);
+                row["cassette_total_amount"] = 1 + SaConverter.ToInt(row["cassette_total_amount"], 0);
 
-                newCassetteSeq = Converter.ToInt(row["cassette_total_amount"], 1);
+                newCassetteSeq = SaConverter.ToInt(row["cassette_total_amount"], 1);
 
                 return tb;
             }

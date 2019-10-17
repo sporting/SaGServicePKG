@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace SaGUtil.System
 {
-    public sealed class LogMan
+    public sealed class SaLogMan
     {
-        private LogMan()
+        private SaLogMan()
         {
         }
-        private static readonly Lazy<LogMan> lazy = new Lazy<LogMan>(() => new LogMan());
-        public static LogMan Instance
+        private static readonly Lazy<SaLogMan> lazy = new Lazy<SaLogMan>(() => new SaLogMan());
+        public static SaLogMan Instance
         {
             get
             {

@@ -51,7 +51,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(this.GetType().Name,$"{ex.Message}: {sql}");
+                SaLogMan.Instance.Error(this.GetType().Name,$"{ex.Message}: {sql}");
                 return 0;
             }
         }
@@ -68,7 +68,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(this.GetType().Name, $"{ex.Message}: {sql}");
+                SaLogMan.Instance.Error(this.GetType().Name, $"{ex.Message}: {sql}");
                 return null;
             }
         }

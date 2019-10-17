@@ -27,7 +27,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: ModelState.IsValid = false");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }
@@ -42,7 +42,7 @@ namespace SaGService.Controllers
 
             if (templateAry.Count() <= 0)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: Template {psm.Template} is not Exist");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: Template {psm.Template} is not Exist");
 
                 return BadRequest(ModelState);
             }
@@ -59,7 +59,7 @@ namespace SaGService.Controllers
                         
             if (slideAry.Count() <= 0)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: Printer {psm.Printer} is not Exist");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: Printer {psm.Printer} is not Exist");
 
                 return BadRequest(ModelState);
             }
@@ -76,7 +76,7 @@ namespace SaGService.Controllers
 
             if (workstationAry.Count() <= 0)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: WorkStation {psm.WorkStation} is not Exist");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: WorkStation {psm.WorkStation} is not Exist");
 
                 return BadRequest(ModelState);
             }
@@ -85,7 +85,7 @@ namespace SaGService.Controllers
             OrderCassette order = new OrderCassette();
             if (!order.CassetteExist(psm.Data.OrdNo, psm.Data.CassetteSequence))
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: 沒有此包埋盒 {psm.Data.OrdNo} {psm.Data.CassetteSequence}");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: 沒有此包埋盒 {psm.Data.OrdNo} {psm.Data.CassetteSequence}");
 
                 return BadRequest(ModelState);
             }
@@ -103,7 +103,7 @@ namespace SaGService.Controllers
                 SlideSampleFormat ssf = new SlideSampleFormat();
                 ssf.SetEnv(template.Template, slideM.Printer, 0);
                 ssf.SetVal(psm.Data.OrdNo, psm.Data.CassetteSequence, psm.Data.SlideSequence, psm.Data.SlideRemark, psm.Data.SlideFieldA, psm.Data.SlideFieldB);
-                ppmsx.AddSection(ssf);
+                ppmsx.AddSlides(ssf);
 
                 if (ppmsx.SaveFile(workstation.Path))
                 {
@@ -111,14 +111,14 @@ namespace SaGService.Controllers
                 }
                 else
                 {
-                    LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: OrderSlide add data failed");
+                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: OrderSlide add data failed");
 
                     return BadRequest();
                 }                
             }
             else
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: OrderSlide add data failed");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: OrderSlide add data failed");
 
                 return BadRequest();
             }

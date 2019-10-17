@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CassetteFormat.cs" />
-    <Compile Include="EnumVal.cs" />
     <Compile Include="LCPMS15Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

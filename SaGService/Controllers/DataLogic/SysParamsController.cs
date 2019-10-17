@@ -19,7 +19,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderSlideController: ModelState.IsValid = false");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderSlideController: ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }

@@ -76,7 +76,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(this.GetType().Name, ex.Message);
+                SaLogMan.Instance.Error(this.GetType().Name, ex.Message);
                 return false;
             }
         }

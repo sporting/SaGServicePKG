@@ -21,7 +21,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderBarcodeLogController: ModelState.IsValid = false");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderBarcodeLogController: ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }
@@ -33,7 +33,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderBarcodeLogController: OrderBarcodeLog Add failed");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderBarcodeLogController: OrderBarcodeLog Add failed");
 
                 return BadRequest();
             }

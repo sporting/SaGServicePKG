@@ -77,15 +77,5 @@ namespace SaGService.Models
             set { }
         }
 
-        //public override string[] FrontTexts()
-        //{
-        //    return new string[] {
-        //        Data.PathoQRText,
-        //        Data.PathoNo,
-        //        Data.SpecialRemark,
-        //        Data.FieldA,
-        //        Data.FieldB
-        //    };
-        //}
     }
 }

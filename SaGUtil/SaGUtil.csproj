@@ -76,16 +76,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Converter.cs" />
-    <Compile Include="Data\DateFormatter.cs" />
-    <Compile Include="Extensions\DataGridViewExt.cs" />
-    <Compile Include="Extensions\ObjectExt.cs" />
+    <Compile Include="Configuration\SaAppSettings.cs" />
+    <Compile Include="Data\SaConverter.cs" />
+    <Compile Include="Data\SaDateFormatter.cs" />
+    <Compile Include="Extensions\SaDataGridViewExt.cs" />
+    <Compile Include="Extensions\SaObjectExt.cs" />
     <Compile Include="IO\SaFile.cs" />
-    <Compile Include="Network\Machine.cs" />
+    <Compile Include="Network\SaMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SaCryptography.cs" />
-    <Compile Include="System\LogMan.cs" />
-    <Compile Include="Utility.cs" />
+    <Compile Include="System\SaEnumVal.cs" />
+    <Compile Include="System\SaLogMan.cs" />
+    <Compile Include="System\SaDate.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

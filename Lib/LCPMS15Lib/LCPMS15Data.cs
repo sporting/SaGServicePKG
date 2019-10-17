@@ -7,18 +7,17 @@ using System.Text;
 
 /// <summary>
 /// Cassette Printer
-/// LCPMS15 可接受的文字檔對應欄位
-/// 
+/// LCPMS15 文字檔內容
 /// </summary>
 namespace LCPMS15Lib
 {
     public enum CSSide
     {
-        [EnumVal("S1")]
+        [SaEnumVal("S1")]
         Left,
-        [EnumVal("S2")]
+        [SaEnumVal("S2")]
         Front,
-        [EnumVal("S3")]
+        [SaEnumVal("S3")]
         Right
     }
 
@@ -71,7 +70,7 @@ namespace LCPMS15Lib
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error("LCPMS15Data", $"{fileName} SaveFile failed:{ex.Message}");
+                SaLogMan.Instance.Error("LCPMS15Data", $"{fileName} SaveFile failed:{ex.Message}");
                 //Console.WriteLine(string.Concat("PPMSXData.SaveFile", ex.Message));
                 return false;
             }

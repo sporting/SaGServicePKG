@@ -29,7 +29,7 @@ namespace SaGLogic
                 var query = from row in tb.Table.AsEnumerable()
                             select new CassetteTemplateM()
                             {
-                                Id = Converter.ToInt(row["id"].ToString(), 0),
+                                Id = SaConverter.ToInt(row["id"].ToString(), 0),
                                 Name = row["name"].ToString(),
                                 Template = row["template"].ToString()
                             };

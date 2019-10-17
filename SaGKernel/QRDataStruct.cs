@@ -4,18 +4,19 @@ using System;
 
 namespace SaGKernel
 {
-    public class QRDataStruct
+    public abstract class QRDataStruct
     {
-        public string PathoQRText
+        //QR Code 內含的資訊 (ex: CS18-12345;1;1;FS;B;1)
+        public virtual string PathoQRText
         {
             get
             {
                 return $"{PathoMajorText}-{PathoSequence}${CassetteSequence}${SlideSequence}${SpecialRemark}${FieldA}${FieldB}";
             }
-        }//CS18-12345;1;1;FS;B;1
-        public string PathoMajor; // CS
-        public string PathoMajorTail; //18
-        public string PathoMajorText //CS18
+        }
+        public virtual string PathoMajor { get; set; } // CS
+        public virtual string PathoMajorTail { get; set; } //18
+        public virtual string PathoMajorText //CS18
         {
             get
             {
@@ -23,8 +24,8 @@ namespace SaGKernel
             }
         }
 
-        public string PathoSequence; //12345
-        public string PathoNo
+        public virtual string PathoSequence { get; set; } //12345
+        public virtual string PathoNo
         {
             get
             {
@@ -44,6 +45,8 @@ namespace SaGKernel
                 return MajorClassify.GetInstance().Classify(this);
             }
         }
+
+        protected QRDataStruct() { }
 
         public QRDataStruct(string pathoNo, int cassetteSeq, int slideSeq, string specialRemark, string fieldA, string fieldB):this($"{pathoNo}${cassetteSeq}${slideSeq}${specialRemark}${fieldA}${fieldB}")
         {
@@ -75,7 +78,7 @@ namespace SaGKernel
             }
         }
 
-        private void SetQRPartialParameter(string[] data)
+        protected virtual void SetQRPartialParameter(string[] data)
         {
 
             if (data.Length > 0)
@@ -122,7 +125,7 @@ namespace SaGKernel
             SlideSequence = 0;
         }
 
-        private void SetQRFullParameter(string[] data)
+        protected virtual void SetQRFullParameter(string[] data)
         {
             if (data.Length > 0)
             {
@@ -151,12 +154,12 @@ namespace SaGKernel
 
             if (data.Length > 1)
             {
-                CassetteSequence = Converter.ToInt(data[1], 1);
+                CassetteSequence = SaConverter.ToInt(data[1], 1);
             }
 
             if (data.Length > 2)
             {
-                SlideSequence = Converter.ToInt(data[2], 1);
+                SlideSequence = SaConverter.ToInt(data[2], 1);
             }
 
             if (data.Length > 3)
@@ -175,7 +178,7 @@ namespace SaGKernel
             }
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
             PathoMajor = string.Empty;
             PathoMajorTail = string.Empty;

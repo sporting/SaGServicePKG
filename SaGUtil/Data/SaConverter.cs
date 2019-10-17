@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SaGUtil.Data
 {
-    public class Converter
+    /// <summary>
+    /// Converter Function Collection
+    /// </summary>
+    public class SaConverter
     {
         public static int ToInt(object obj, int defVal)
         {

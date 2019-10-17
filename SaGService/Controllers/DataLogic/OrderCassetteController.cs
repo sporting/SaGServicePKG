@@ -21,7 +21,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderCassetteController: ModelState.IsValid = false");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderCassetteController: ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }
@@ -36,7 +36,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderCassetteController: OrderCassette Add failed");
+                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderCassetteController: OrderCassette Add failed");
                 return BadRequest();
             }
         }

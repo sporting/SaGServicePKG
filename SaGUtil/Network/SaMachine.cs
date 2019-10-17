@@ -13,7 +13,7 @@ namespace SaGUtil.Network
         public string IP;
         public string MachineName;
     }
-    public class Machine
+    public class SaMachine
     {
         public static MachineInfo Get()
         {

@@ -75,7 +75,7 @@ namespace SaGLogic
             string head = ordNo.Substring(0, ordNo.IndexOf("-"));
             string headYear = head.Substring(head.Length - 2, 2);
             string headTag = head.Substring(0, head.Length - 2);
-            int tailSeq = Converter.ToInt(ordNo.Substring(ordNo.IndexOf("-") + 1, 5), 0);
+            int tailSeq = SaConverter.ToInt(ordNo.Substring(ordNo.IndexOf("-") + 1, 5), 0);
 
             MyDB db = new MyDB();
             try

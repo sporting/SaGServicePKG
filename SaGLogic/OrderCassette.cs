@@ -1,7 +1,7 @@
 ﻿using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
-using SaGUtil;
+using SaGUtil.System;
 using SaGUtil.Data;
 using System;
 using System.Data;
@@ -20,8 +20,8 @@ namespace SaGLogic
 
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = Utility.Today().ToString("yyyyMMdd");
-                log.OpTime = Utility.Today().ToString("HHmmss");
+                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
+                log.OpTime = SaDate.Today().ToString("HHmmss");
 
                 MyDB db = new MyDB();
                 try
@@ -109,9 +109,9 @@ namespace SaGLogic
             if (tb.RowsCount > 0)
             {
                 DataRow row = tb.Table.Rows[0];
-                row["slide_total_amount"] = 1 + Converter.ToInt(row["slide_total_amount"], 0);
+                row["slide_total_amount"] = 1 + SaConverter.ToInt(row["slide_total_amount"], 0);
 
-                newSlideSeq = Converter.ToInt(row["slide_total_amount"], 1);
+                newSlideSeq = SaConverter.ToInt(row["slide_total_amount"], 1);
             }
 
             return tb;
@@ -200,7 +200,7 @@ namespace SaGLogic
                     TBOrderCassette tb = new TBOrderCassette(db, $"ord_no='{ordNo}' and cassette_sequence={cassetteSeq}");
                     if (tb.RowsCount > 0)
                     {
-                        return Converter.ToInt(tb.Table.Rows[0]["cassette_total_amount"].ToString(), 0);
+                        return SaConverter.ToInt(tb.Table.Rows[0]["cassette_total_amount"].ToString(), 0);
                     }
                 }
                 catch

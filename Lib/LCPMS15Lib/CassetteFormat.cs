@@ -1,9 +1,13 @@
 ﻿
+using SaGUtil.System;
 using System.Text;
 
 namespace LCPMS15Lib
 {
-
+    /// <summary>
+    /// Cassette Printer
+    /// LCPMS15 每一個 Cassette 對應欄位文字輸出
+    /// </summary>
     public abstract class CassetteFormat
     {
         string TemplateChar = "TE";
@@ -39,11 +43,11 @@ namespace LCPMS15Lib
             sb.AppendLine(string.Format("{0};{1};", TemplateChar, Template));
             sb.AppendLine(string.Format("{0};{1};", MagazineChar, Magazine));
             s = ArrayText(LeftSide);
-            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", EnumVal.Value(CSSide.Left), s)); }
+            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", SaEnumVal.Value(CSSide.Left), s)); }
             s = ArrayText(FrontSide);
-            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", EnumVal.Value(CSSide.Front), s)); }
+            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", SaEnumVal.Value(CSSide.Front), s)); }
             s = ArrayText(RightSide);
-            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", EnumVal.Value(CSSide.Right), s)); }
+            if (s.Length > 0) { sb.AppendLine(string.Format("{0};{1}", SaEnumVal.Value(CSSide.Right), s)); }
             return sb.ToString().Trim();
         }
     }

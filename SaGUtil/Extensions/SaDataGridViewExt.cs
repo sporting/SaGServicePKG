@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SaGUtil.Extensions
 {
-    public static class DataGridViewExt
+    /// <summary>
+    /// DataGridView Extension Methods
+    /// </summary>
+    public static class SaDataGridViewExt
     {
         private static string GetNextColumnName(DataGridView dgView, int counter, string fieldName)
         {

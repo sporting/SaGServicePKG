@@ -1,7 +1,7 @@
 ﻿using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
-using SaGUtil;
+using SaGUtil.System;
 using System;
 using System.Data;
 using System.Linq;
@@ -18,8 +18,8 @@ namespace SaGLogic
 
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = Utility.Today().ToString("yyyyMMdd");
-                log.OpTime = Utility.Today().ToString("HHmmss");
+                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
+                log.OpTime = SaDate.Today().ToString("HHmmss");
 
                 MyDB db = new MyDB();
                 try

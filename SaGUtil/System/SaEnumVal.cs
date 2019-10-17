@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LCPMS15Lib
+namespace SaGUtil.System
 {
-    public class EnumVal : Attribute
+    public class SaEnumVal : Attribute
     {
         public string Description { get; set; }
 
-        public EnumVal(string Description)
+        public SaEnumVal(string Description)
         {
             this.Description = Description;
         }
@@ -22,8 +22,8 @@ namespace LCPMS15Lib
         public static string Value(Enum e)
         {            
             var members = e.GetType().GetMember(e.ToString());
-            var attributes = members[0].GetCustomAttributes(typeof(EnumVal), false);
-            var description = ((EnumVal)attributes[0]).Description;
+            var attributes = members[0].GetCustomAttributes(typeof(SaEnumVal), false);
+            var description = ((SaEnumVal)attributes[0]).Description;
             return description;
         }
     }

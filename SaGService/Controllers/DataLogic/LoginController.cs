@@ -1,14 +1,9 @@
 ﻿using SaGLogic;
 using SaGModel;
 using SaGService.Security;
-using SaGService.Utils;
-using SaGUtil;
 using SaGUtil.System;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace SaGService.Controllers
@@ -17,7 +12,7 @@ namespace SaGService.Controllers
     {
         public IHttpActionResult Post(ApLoginRequest loginRequest)
         {
-            LogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"{loginRequest.App} {loginRequest.LoginUser} {loginRequest.ApMachine.IP} {loginRequest.ApMachine.MachineName}");
+            SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"{loginRequest.App} {loginRequest.LoginUser} {loginRequest.ApMachine.IP} {loginRequest.ApMachine.MachineName}");
 
             try
             {
@@ -26,7 +21,7 @@ namespace SaGService.Controllers
                     JwtAuthUtil jwtAuthUtil = new JwtAuthUtil();
                     string jwtToken = jwtAuthUtil.GenerateToken(loginRequest);
                     loginRequest.Token = jwtToken;
-                    loginRequest.LoginDate = Utility.Today();
+                    loginRequest.LoginDate = SaDate.Today();
 
                     if (LoginLog(loginRequest, true))
                     {
@@ -39,7 +34,7 @@ namespace SaGService.Controllers
                 }
                 else
                 {
-                    LogMan.Instance.Info(GlobalVars.LOGGER_NAME, "Unauthorized");
+                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, "Unauthorized");
                     LoginLog(loginRequest, false);
 
                     return StatusCode(HttpStatusCode.Unauthorized);
@@ -47,7 +42,7 @@ namespace SaGService.Controllers
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(GlobalVars.LOGGER_NAME, ex.Message);
+                SaLogMan.Instance.Error(GlobalVars.LOGGER_NAME, ex.Message);
                 LoginLog(loginRequest, false,ex.Message);
                 return InternalServerError();
             }

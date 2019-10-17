@@ -40,7 +40,7 @@ namespace SaGDB
                 }
                 catch (Exception ex)
                 {
-                    LogMan.Instance.Error(_logName, ex.Message);
+                    SaLogMan.Instance.Error(_logName, ex.Message);
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(_logName, ex.Message);
+                SaLogMan.Instance.Error(_logName, ex.Message);
             }
 
             return builder;
@@ -101,7 +101,7 @@ namespace SaGDB
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    LogMan.Instance.Error(_logName, ex.Message);
+                    SaLogMan.Instance.Error(_logName, ex.Message);
                     return false;
                 }
             }

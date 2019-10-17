@@ -97,7 +97,7 @@ namespace SaGKernel.MajorClass
                 }
                 catch (Exception ex)
                 {
-                    LogMan.Instance.Error("MajorClassify.LoadAssembly", ex.Message, assemblyFileName);
+                    SaLogMan.Instance.Error("MajorClassify.LoadAssembly", ex.Message, assemblyFileName);
                 }
             }
         }
