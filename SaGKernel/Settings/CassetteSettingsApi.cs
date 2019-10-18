@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace SaGKernel.Settings
 {
+    /// <summary>
+    /// 包埋盒列印卡匣取得的 API
+    /// </summary>
     public class CassetteSettingsApi
     {
         //private static string CM1 = "卡匣1";
@@ -91,6 +94,12 @@ namespace SaGKernel.Settings
         //    return CM1;
         //}
 
+            /// <summary>
+            /// 依照檢體類別取得對應的檢體類別對應的卡匣名稱
+            /// </summary>
+            /// <param name="settings"></param>
+            /// <param name="currentMajorClass"></param>
+            /// <returns></returns>
         public static string CassetteMazagineName(CassetteSettings settings, IMajorClass currentMajorClass)
         {
             var v = (from MajorCassetteSettings mcs in settings.MajorCassettes

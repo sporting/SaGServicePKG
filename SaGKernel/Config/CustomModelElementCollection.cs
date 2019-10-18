@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace SaGKernel.Config
 {
-    public class MajorModelElementCollection : ConfigurationElementCollection
+    public class CustomModelElementCollection : ConfigurationElementCollection
     {
-        public MajorModelElement this[int index]
+        public CustomModelElement this[int index]
         {
-            get { return (MajorModelElement)this.BaseGet(index); }
+            get { return (CustomModelElement)this.BaseGet(index); }
         }
 
         protected override ConfigurationElement CreateNewElement()
         {
-            return new MajorModelElement();
+            return new CustomModelElement();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((MajorModelElement)element).Key;
+            return ((CustomModelElement)element).Key;
         }
     }
 }

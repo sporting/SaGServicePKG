@@ -8,8 +8,12 @@ using System.Linq;
 
 namespace SaGLogic
 {
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.order_embed_log_tb Table
+    /// 包埋處理 log
+    /// </summary>
 
-    //包埋處理 log
     public class OrderEmbedLog : ITableModel<OrderEmbedLogM>
     {
         public bool AddLog(OrderEmbedLogM log)

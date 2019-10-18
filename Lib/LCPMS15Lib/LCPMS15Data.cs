@@ -1,4 +1,5 @@
-﻿using SaGUtil.IO;
+﻿using LCPMS15Lib.Format;
+using SaGUtil.IO;
 using SaGUtil.System;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace LCPMS15Lib
 
             try
             {
-                using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                using (FileStream fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
                 {
                     using (StreamWriter swWriter = new StreamWriter(fs, Encoding.UTF8))
                     {
@@ -70,8 +71,7 @@ namespace LCPMS15Lib
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error("LCPMS15Data", $"{fileName} SaveFile failed:{ex.Message}");
-                //Console.WriteLine(string.Concat("PPMSXData.SaveFile", ex.Message));
+                MyLog.Fatal(this, ex.Message);
                 return false;
             }
         }

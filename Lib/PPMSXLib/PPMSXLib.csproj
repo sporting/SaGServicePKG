@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Format\SlideEnvironment.cs" />
+    <Compile Include="MyLog.cs" />
     <Compile Include="PPMSXData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SlideFormat.cs" />
+    <Compile Include="Format\SlideFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\SaGUtil\SaGUtil.csproj">

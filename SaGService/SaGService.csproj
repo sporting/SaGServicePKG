@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -189,12 +190,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="GlobalVars.cs" />
-    <Compile Include="Models\CassetteSampleFormat.cs" />
-    <Compile Include="Models\SlideSampleFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\JwtAuthFilter .cs" />
     <Compile Include="Security\JwtAuthUtil.cs" />
     <Compile Include="Utils\AppSettings.cs" />
+    <Compile Include="Utils\MyLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -244,7 +244,9 @@
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -274,6 +276,10 @@
     <ProjectReference Include="..\SaGUtil\SaGUtil.csproj">
       <Project>{5dd96848-8f84-46b8-a95e-c9eb3858a753}</Project>
       <Name>SaGUtil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaGSampleModel\SaGSampleModel.csproj">
+      <Project>{3ba7dc32-16c0-4d6e-80ac-ff018ae6b4b7}</Project>
+      <Name>SaGSampleModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

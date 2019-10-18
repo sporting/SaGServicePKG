@@ -1,4 +1,5 @@
-﻿using SaGUtil.IO;
+﻿using PPMSXLib.Format;
+using SaGUtil.IO;
 using SaGUtil.System;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace PPMSXLib
             string fileName = SaFile.GetTicksFileName(outputFolder, "CSV");
             try
             {
-                using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                using (FileStream fs = new FileStream(fileName, FileMode.CreateNew, FileAccess.Write))
                 {
                     using (StreamWriter swWriter = new StreamWriter(fs, Encoding.GetEncoding(932))) //932 : Shift_JIS
                     {
@@ -51,7 +52,7 @@ namespace PPMSXLib
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error("PPMSXData.SaveFiles", $"{ex.Message}");
+                MyLog.Fatal(this, ex.Message);
                 return false;
             }
         }

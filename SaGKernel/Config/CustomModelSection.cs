@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SaGKernel.Config
 {
-    public class MajorModelSection : ConfigurationSection
+    public class CustomModelSection : ConfigurationSection
     {
-        private MajorModelSection()
+        private CustomModelSection()
         {
         }
 
@@ -20,11 +20,11 @@ namespace SaGKernel.Config
         //    set { this["MajorModel"] = value; }
         //}
 
-        [ConfigurationProperty("MajorModels"), ConfigurationCollection(typeof(MajorModelElement))]
-        public MajorModelElementCollection MajorModels
+        [ConfigurationProperty("CustomModels"), ConfigurationCollection(typeof(CustomModelElement))]
+        public CustomModelElementCollection CustomModels
         {
-            get { return this["MajorModels"] as MajorModelElementCollection; }
-            set { this["MajorModels"] = value; }
+            get { return this["CustomModels"] as CustomModelElementCollection; }
+            set { this["CustomModels"] = value; }
         }
     }
 }

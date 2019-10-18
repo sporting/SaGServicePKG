@@ -4,6 +4,11 @@ using System;
 
 namespace SaGKernel
 {
+    /// <summary>
+    /// QR Code 內容物，預定義為 CS19-12345$卡匣序$玻片序$特殊註記(檢體別/急)$FieldA(子編號)$FieldB
+    /// 依不同的醫院，區分不同的 SaGSampleModel，例如馬偕 MMHModel
+    /// 繼承 QRDataStruct，並實作符合該院的 QR Code 編碼規則
+    /// </summary>
     public abstract class QRDataStruct
     {
         //QR Code 內含的資訊 (ex: CS18-12345;1;1;FS;B;1)

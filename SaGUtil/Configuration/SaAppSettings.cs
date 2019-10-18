@@ -38,5 +38,10 @@ namespace SaGUtil.Configuration
             }
             return (T)val;
         }
+
+        public static ConnectionStringSettings GetConnectionSettings(string name)
+        {
+            return ConfigurationManager.ConnectionStrings[name];
+        }
     }
 }

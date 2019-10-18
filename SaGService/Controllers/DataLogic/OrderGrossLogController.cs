@@ -19,7 +19,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderGrossLogController: ModelState.IsValid = false");
+                MyLog.Info(this, "ModelState.IsValid = false");
 
                 return BadRequest(ModelState);
             }
@@ -31,7 +31,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"OrderGrossLogController: OrderGrossLog AddLog failed");
+                MyLog.Error(this, "OrderGrossLog AddLog failed");
 
                 return BadRequest();
             }

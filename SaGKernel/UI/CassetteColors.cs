@@ -1,13 +1,13 @@
-﻿using SaGKernel.Lib;
-using System;
+﻿using SaGUtil.Lib;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaGKernel.UI
 {
+    /// <summary>
+    /// 包埋盒顏色對應的集合 (Fixed 卡匣名稱跟顏色)
+    /// </summary>
     public class CassetteColors:List<CassetteColor>
     {
         public static CassetteColors GetInstance()

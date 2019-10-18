@@ -1,19 +1,15 @@
 ﻿using LCPMS15Lib;
+using LCPMS15Lib.Format;
 using SaGLogic;
 using SaGModel;
-using SaGService.Models;
-using SaGService.Security;
 using SaGService.Utils;
 using SaGUtil.System;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace SaGService.Controllers
 {
+    //Cassette印表相關設定儲存在DB端才使用 (template, folder)
     public class PrintCassetteController : ApiController
     {
         //Server 列印 cassette 
@@ -23,8 +19,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: ModelState.IsValid = false");
-
+                MyLog.Info(this, "ModelState.IsValid = false");
                 return BadRequest(ModelState);
             }
 
@@ -37,9 +32,8 @@ namespace SaGService.Controllers
             }
 
             if (templateAry.Count() <= 0)
-            {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: Template {pcm.Template} is not Exist");
-
+            {                
+                MyLog.Error(this, $"Template {pcm.Template} is not Exist");
                 return BadRequest(ModelState);
             }
 
@@ -55,8 +49,7 @@ namespace SaGService.Controllers
                         
             if (magazineAry.Count() <= 0)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: Magazine {pcm.Magazine} is not Exist");
-
+                MyLog.Error(this, $"Magazine {pcm.Magazine} is not Exist");
                 return BadRequest(ModelState);
             }
 
@@ -72,8 +65,7 @@ namespace SaGService.Controllers
 
             if (workstationAry.Count() <= 0)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: WorkStation {pcm.WorkStation} is not Exist");
-
+                MyLog.Error(this, $"WorkStation {pcm.WorkStation} is not Exist");
                 return BadRequest(ModelState);
             }
 
@@ -97,15 +89,13 @@ namespace SaGService.Controllers
                 }
                 else
                 {
-                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: LCPMS15Data save failed");
-                    
+                    MyLog.Error(this, "LCPMS15Data save failed");
                     return BadRequest();
                 }
             }
             else
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintCassetteController: OrderCassette add data failed");
-
+                MyLog.Error(this, "OrderCassette add data failed");
                 return BadRequest();
             }
         }

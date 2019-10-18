@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SaGKernel.Config
 {
-    public class MajorModelElement : ConfigurationElement
+    public class SpecimenElement : ConfigurationElement
     {
         [ConfigurationProperty("Key")]
         public string Key

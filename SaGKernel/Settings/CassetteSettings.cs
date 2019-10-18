@@ -8,6 +8,12 @@ using SaGKernel.UI;
 
 namespace SaGKernel.Settings
 {
+    /// <summary>
+    /// 包埋盒設定
+    ///     樣版
+    ///     輸出目錄
+    ///     檢體分類對應包埋盒卡匣
+    /// </summary>
     public class CassetteSettings
     {
         public string TemplateName;

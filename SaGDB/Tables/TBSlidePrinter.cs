@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SaGDB.Tables
 {
     /// <summary>
-    /// slide_printer
+    /// slide_printer : slide printer 對照檔
     /// </summary>
     public sealed class TBSlidePrinter : MyTable
     {

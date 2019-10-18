@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SaGDB.Tables
 {
     /// <summary>
-    /// cassette_magazine
+    /// cassette_magazine : cassette printer 卡匣對照檔
     /// </summary>
     public sealed class TBCassetteMagazine : MyTable
     {

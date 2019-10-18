@@ -12,6 +12,10 @@ using System.Threading.Tasks;
 
 namespace SaGLogic
 {
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.sysparams_tb Table
+    /// </summary>
     public class SysParams:ITableModel<SysParamsM>
     {
         public SysParamsM[] GetValues(string name)

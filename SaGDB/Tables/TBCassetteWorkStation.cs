@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SaGDB.Tables
 {
     /// <summary>
-    /// cassette_workstation
+    /// cassette_workstation : cassette 工作站對照檔
     /// </summary>
     public sealed class TBCassetteWorkStation : MyTable
     {

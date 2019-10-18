@@ -41,11 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SlidePrinter.cs" />
+    <Compile Include="CassetteMagazine.cs" />
     <Compile Include="SlideTemplate.cs" />
     <Compile Include="SlideWorkStation.cs" />
     <Compile Include="CassetteWorkStation.cs" />
-    <Compile Include="CassetteMagazine.cs" />
+    <Compile Include="SlidePrinter.cs" />
     <Compile Include="DoctorSlideLog.cs" />
     <Compile Include="DoctorSlideWorkLoadV.cs" />
     <Compile Include="SlideWorkLoadV.cs" />

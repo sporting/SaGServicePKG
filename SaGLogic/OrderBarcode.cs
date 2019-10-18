@@ -14,7 +14,12 @@ using System.Threading.Tasks;
 namespace SaGLogic
 {
 
-    //列印 Barcode list
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.order_barcode_tb Table
+    /// 列印 Barcode list
+    /// </summary>
+
     public class OrderBarcode : ITableModel<OrderBarcodeM>
     {
         //列印 barcode 時寫入

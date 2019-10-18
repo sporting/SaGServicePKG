@@ -1,4 +1,5 @@
-﻿using SaGUtil.System;
+﻿using SaGDB.Utils;
+using SaGUtil.System;
 using System;
 using System.Data;
 using System.Data.Common;
@@ -24,7 +25,7 @@ namespace SaGDB
         {
             get
             {
-                return Utils.AppSettings.SCHEMA_NAME;
+                return AppSettings.SCHEMA_NAME;
             }
         }
 
@@ -60,7 +61,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-
+                MyLog.Fatal(this, ex.Message);
             }
 
             return table;         
@@ -76,7 +77,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error(this.GetType().Name, ex.Message);
+                MyLog.Fatal(this, ex.Message);
                 return false;
             }
         }

@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using SaGDB.Utils;
+using System;
+using System.Data;
 using System.Data.Common;
 
 namespace SaGDB
@@ -44,9 +46,9 @@ namespace SaGDB
                 adapter.Fill(table);
                 table.EndLoadData();
             }
-            catch
+            catch (Exception ex)
             {
-
+                MyLog.Fatal(this, ex.Message);
             }
 
             return table;         

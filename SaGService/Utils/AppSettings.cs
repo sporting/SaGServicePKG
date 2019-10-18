@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
+using SaGUtil.Configuration;
 
 namespace SaGService.Utils
 {
@@ -11,7 +8,7 @@ namespace SaGService.Utils
         public static string DefaultKey = "default";
         public static string TokenSecretKey()
         {
-            return ConfigurationManager.AppSettings["TokenSecretKey"].ToString();
+            return SaAppSettings.GetAppSetting<string>("TokenSecretKey");
         }
     }
 }

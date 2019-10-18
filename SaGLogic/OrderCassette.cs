@@ -9,8 +9,12 @@ using System.Linq;
 
 namespace SaGLogic
 {
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.order_cassette_tb Table
+    /// Cassette 主檔
+    /// </summary>
 
-    //Cassette 主檔
     public class OrderCassette : ITableModel<OrderCassetteM>
     {
 

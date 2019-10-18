@@ -1,4 +1,5 @@
-﻿using SaGDB;
+﻿
+using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
 using SaGUtil.Data;
@@ -11,27 +12,32 @@ using System.Threading.Tasks;
 
 namespace SaGLogic
 {
-    public class SlidePrinter : ITableModel<SlidePrinterM>
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.cassette_magazine_tb Table
+    /// 包埋盒卡匣設定檔
+    /// </summary>
+    public class CassetteMagazine : ITableModel<CassetteMagazineM>
     {
-        public SlidePrinterM[] GetValues(string name)
+        public CassetteMagazineM[] GetValues(string name)
         {
             if (string.IsNullOrEmpty(name))
             {
-                return new SlidePrinterM[] { };
+                return new CassetteMagazineM[] { };
             }
 
             MyDB db = new MyDB();
             try
             {
                 db.OpenDB();
-                TBSlidePrinter tb = new TBSlidePrinter(db, $"name='{name}'");
+                TBCassetteMagazine tb = new TBCassetteMagazine(db, $"name='{name}'");
 
                 var query = from row in tb.Table.AsEnumerable()
-                            select new SlidePrinterM()
+                            select new CassetteMagazineM()
                             {
                                 Id = SaConverter.ToInt(row["id"].ToString(), 0),
                                 Name = row["name"].ToString(),
-                                Printer = row["printer"].ToString()
+                                Magazine = row["magazine"].ToString()
                             };
 
                 if (query.Count() > 0)
@@ -40,7 +46,7 @@ namespace SaGLogic
                 }
                 else
                 {
-                    return new SlidePrinterM[] { };
+                    return new CassetteMagazineM[] { };
                 }
             }
             finally
@@ -49,14 +55,14 @@ namespace SaGLogic
             }
         }
 
-        public SlidePrinterM[] GenerateModel(DataTable dt)
+        public CassetteMagazineM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()
-                    select new SlidePrinterM()
+                    select new CassetteMagazineM()
                     {
                         Id = Convert.ToInt32(row["id"]),
                         Name = row["name"].ToString(),
-                        Printer = row["printer"].ToString()
+                        Magazine = row["magazine"].ToString()
                     };
 
             if (v != null)
@@ -69,19 +75,19 @@ namespace SaGLogic
             }
         }
 
-        public DataTable GenerateDataTable(SlidePrinterM[] models)
+        public DataTable GenerateDataTable(CassetteMagazineM[] models)
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("id");
             dt.Columns.Add("name");
-            dt.Columns.Add("printer");
+            dt.Columns.Add("magazine");
 
-            foreach (SlidePrinterM ctm in models)
+            foreach (CassetteMagazineM ctm in models)
             {
                 DataRow row = dt.NewRow();
                 row["id"] = ctm.Id;
                 row["name"] = ctm.Name;
-                row["printer"] = ctm.Printer;
+                row["magazine"] = ctm.Magazine;
                 dt.Rows.Add(row);
             }
 

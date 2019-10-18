@@ -1,6 +1,7 @@
 ﻿using SaGLogic;
 using SaGModel;
 using SaGService.Security;
+using SaGService.Utils;
 using SaGUtil.System;
 using System;
 using System.Net;
@@ -11,8 +12,8 @@ namespace SaGService.Controllers
     public class LoginController : ApiController
     {
         public IHttpActionResult Post(ApLoginRequest loginRequest)
-        {
-            SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"{loginRequest.App} {loginRequest.LoginUser} {loginRequest.ApMachine.IP} {loginRequest.ApMachine.MachineName}");
+        {            
+            MyLog.Info(this, $"{loginRequest.App} {loginRequest.LoginUser} {loginRequest.ApMachine.IP} {loginRequest.ApMachine.MachineName}");
 
             try
             {
@@ -34,7 +35,7 @@ namespace SaGService.Controllers
                 }
                 else
                 {
-                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, "Unauthorized");
+                    MyLog.Info(this,"Unauthorized");
                     LoginLog(loginRequest, false);
 
                     return StatusCode(HttpStatusCode.Unauthorized);
@@ -42,7 +43,7 @@ namespace SaGService.Controllers
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error(GlobalVars.LOGGER_NAME, ex.Message);
+                MyLog.Fatal(this, ex.Message);
                 LoginLog(loginRequest, false,ex.Message);
                 return InternalServerError();
             }

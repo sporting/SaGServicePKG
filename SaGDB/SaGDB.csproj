@@ -93,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tables\TBOrderSlide.cs" />
     <Compile Include="Utils\AppSettings.cs" />
+    <Compile Include="Utils\MyLog.cs" />
     <Compile Include="Views\ViewSlideWorkLoad.cs" />
     <Compile Include="Views\ViewDoctorSlideWorkLoad.cs" />
     <Compile Include="Views\ViewEmbedWorkLoad.cs" />

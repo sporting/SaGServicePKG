@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace SaGKernel.Settings
 {
+    /// <summary>
+    /// 玻片印製機輸出 Slot 取得的 API
+    /// </summary>
     public class SlideSettingsApi
     {
         private static string SMN1 = "卡匣1";

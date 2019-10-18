@@ -2,7 +2,7 @@
 using SaGUtil.System;
 using System.Text;
 
-namespace LCPMS15Lib
+namespace LCPMS15Lib.Format
 {
     /// <summary>
     /// Cassette Printer

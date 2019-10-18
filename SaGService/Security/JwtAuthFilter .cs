@@ -21,8 +21,7 @@ namespace SaGService.Security
             {
                 if (request.Headers.Authorization == null || request.Headers.Authorization.Scheme != "Bearer")
                 {
-                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, "Lost Token");
-
+                    MyLog.Error(this, "Lost Token");
                     throw new System.Exception("Lost Token");
                 }
                 else
@@ -37,14 +36,13 @@ namespace SaGService.Security
 
                         if (IsTokenExpired(jwtObject["Expire"].ToString()))
                         {
-                            SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, "Token Expired");
-
+                            MyLog.Error(this, "Token Expired");
                             throw new System.Exception("Token Expired");
                         }
                     }
                     catch (Exception ex)
                     {
-                        SaLogMan.Instance.Error(GlobalVars.LOGGER_NAME, ex.Message);
+                        MyLog.Fatal(this, ex.Message);
                         throw new System.Exception(ex.Message);
                     }
                 }

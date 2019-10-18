@@ -1,13 +1,12 @@
-﻿using SaGKernel.Lib;
-using SaGKernel.MajorClass;
+﻿using SaGKernel.Config;
+using SaGKernel.Utils;
+using SaGUtil.Lib;
 using SaGUtil.System;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SaGKernel.MajorClass
 {
@@ -97,7 +96,7 @@ namespace SaGKernel.MajorClass
                 }
                 catch (Exception ex)
                 {
-                    SaLogMan.Instance.Error("MajorClassify.LoadAssembly", ex.Message, assemblyFileName);
+                    MyLog.Fatal(this, $"{assemblyFileName}: {ex.Message}");
                 }
             }
         }
@@ -134,7 +133,7 @@ namespace SaGKernel.MajorClass
 
         private void AutoLoadAssemblyByConfig()
         {
-            foreach (string fileName in Config.MajorModelConfig.MajorModelDll())
+            foreach (string fileName in CustomModelConfig.CustomModelDll())
             {
                 LoadAssembly(fileName);
             }

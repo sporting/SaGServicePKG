@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CassetteFormat.cs" />
+    <Compile Include="Format\CassetteFormat.cs" />
+    <Compile Include="Format\CassetteEnvironment.cs" />
     <Compile Include="LCPMS15Data.cs" />
+    <Compile Include="MyLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

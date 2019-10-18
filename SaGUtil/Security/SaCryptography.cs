@@ -10,6 +10,9 @@ using System.Security.Cryptography;
 
 namespace SaGUtil.Security
 {
+    /// <summary>
+    /// 從 SportinApp.SportingAppFW 專案上取得
+    /// </summary>
     public static class SaCryptography
     {
         /// <summary>

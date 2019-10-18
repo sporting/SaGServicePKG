@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 控制。變更這些屬性值可修改與組件關聯的
 // 資訊。
 [assembly: AssemblyTitle("SaGService")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Gross System .net web service provider")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SaGService")]

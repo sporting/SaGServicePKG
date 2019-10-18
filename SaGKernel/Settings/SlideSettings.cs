@@ -6,12 +6,19 @@ using System.Text;
 
 namespace SaGKernel.Settings
 {
+    /// <summary>
+    /// 玻片印製機設定
+    ///     樣版
+    ///     印表機名稱
+    ///     輸出目錄
+    ///     檢體分類對應玻片印製機 Slot
+    /// </summary>
    public class SlideSettings
     {
         public string LayoutName;
         public string PrinterName;
-        public int SlotId=0; //卡匣1
-        public int SlotId2=1; //卡匣2
+        public int SlotId = 0; //卡匣1
+        public int SlotId2 = 1; //卡匣2
         public string outputFolder;
         public MajorSlideSettingsCollection MajorSlides;
         public void InitialIfNull()

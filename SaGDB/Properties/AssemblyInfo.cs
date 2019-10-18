@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
 [assembly: AssemblyTitle("SaGDB")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("資料庫相關函式庫")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SaGDB")]

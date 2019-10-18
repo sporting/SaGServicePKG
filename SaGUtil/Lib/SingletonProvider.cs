@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SaGKernel.Lib
+namespace SaGUtil.Lib
 {
+    ///網路上抄來的，還不錯用
+
     /// <summary>
     /// 用于从另一个类创建或获取单例的静态助手。
     /// </summary>

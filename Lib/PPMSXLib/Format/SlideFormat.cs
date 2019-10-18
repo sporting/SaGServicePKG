@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PPMSXLib
+namespace PPMSXLib.Format
 {
     /// <summary>
     /// Slide Printer

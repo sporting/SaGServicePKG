@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
 [assembly: AssemblyTitle("PPMSXLib")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("武藤化學玻片印製機 PPMSX 文字檔列印格式")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PPMSXLib")]

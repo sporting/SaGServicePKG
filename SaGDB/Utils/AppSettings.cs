@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SaGUtil.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace SaGDB.Utils
         {
             get
             {
-                return ConfigurationManager.ConnectionStrings["db"].ConnectionString;
+                return SaAppSettings.GetConnectionSettings("db").ConnectionString;              
             }
         }
 
@@ -22,7 +23,7 @@ namespace SaGDB.Utils
         {
             get
             {
-                return ConfigurationManager.ConnectionStrings["db"].ProviderName;
+                return SaAppSettings.GetConnectionSettings("db").ProviderName;
             }
         }
     }

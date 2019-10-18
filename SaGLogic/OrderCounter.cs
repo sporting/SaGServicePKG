@@ -6,6 +6,13 @@ using System.Data;
 
 namespace SaGLogic
 {
+    /// <summary>
+    /// !!! 注意 !!!
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.order_counter_tb Table
+    /// 檢體編號取號器
+    /// !!! 須配合醫院檢體編號規則調整 !!! 
+    /// </summary>
     public class OrderCounter
     {
         public string GetNextOrderCount(string head, string yyyy)

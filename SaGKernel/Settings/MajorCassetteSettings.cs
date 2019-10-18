@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SaGKernel.Settings
 {
+    /// <summary>
+    /// 檢體分類對應包埋盒卡匣的結構
+    /// </summary>
     public class MajorCassetteSettings
     {
         public string MajorClassName { get; set; }

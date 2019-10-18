@@ -8,8 +8,11 @@ using System.Linq;
 
 namespace SaGLogic
 {
-
-    //Gross 處理 log
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 對應 SaGDB.order_gross_log_tb Table
+    /// Gross 處理 log
+    /// </summary>
     public class OrderGrossLog:ITableModel<OrderGrossLogM>
     {
         public bool AddLog(OrderGrossLogM log)

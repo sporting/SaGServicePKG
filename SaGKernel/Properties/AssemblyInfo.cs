@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
 [assembly: AssemblyTitle("SaGKernel")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Gross System Kernel Package")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SaGKernel")]

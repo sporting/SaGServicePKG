@@ -9,7 +9,7 @@ namespace SaGDB
 {
     public sealed class MyDB
     {
-        const string _logName = "MyDB";
+        //const string _logName = "MyDB";
 
         private DbConnection _conn;
         private DbProviderFactory _factory;
@@ -40,7 +40,7 @@ namespace SaGDB
                 }
                 catch (Exception ex)
                 {
-                    SaLogMan.Instance.Error(_logName, ex.Message);
+                    MyLog.Fatal(this, ex.Message);
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error(_logName, ex.Message);
+                MyLog.Fatal(this, ex.Message);
             }
 
             return builder;
@@ -101,7 +101,7 @@ namespace SaGDB
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    SaLogMan.Instance.Error(_logName, ex.Message);
+                    MyLog.Fatal(this, ex.Message);
                     return false;
                 }
             }

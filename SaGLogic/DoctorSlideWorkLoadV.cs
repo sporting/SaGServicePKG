@@ -10,6 +10,10 @@ using SaGDB.Views;
 
 namespace SaGLogic
 {
+    /// <summary>
+    /// 作為前端應用與資料庫物件的中介層 
+    /// 病理醫師工作量 View
+    /// </summary>
     public class DoctorSlideWorkLoadV : ITableModel<SlideWorkLoadMV>
     {
         public SlideWorkLoadMV[] Get(string begDate, string endDate, string doctorUser)

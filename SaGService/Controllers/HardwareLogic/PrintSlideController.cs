@@ -1,15 +1,10 @@
 ﻿using PPMSXLib;
+using PPMSXLib.Format;
 using SaGLogic;
 using SaGModel;
-using SaGService.Models;
-using SaGService.Security;
 using SaGService.Utils;
 using SaGUtil.System;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace SaGService.Controllers
@@ -27,8 +22,7 @@ namespace SaGService.Controllers
         {
             if (!ModelState.IsValid)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: ModelState.IsValid = false");
-
+                MyLog.Info(this, "ModelState.IsValid = false");
                 return BadRequest(ModelState);
             }
 
@@ -42,8 +36,7 @@ namespace SaGService.Controllers
 
             if (templateAry.Count() <= 0)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: Template {psm.Template} is not Exist");
-
+                MyLog.Error(this, $"Template {psm.Template} is not Exist");
                 return BadRequest(ModelState);
             }
 
@@ -59,8 +52,7 @@ namespace SaGService.Controllers
                         
             if (slideAry.Count() <= 0)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: Printer {psm.Printer} is not Exist");
-
+                MyLog.Error(this, $"Printer {psm.Printer} is not Exist");
                 return BadRequest(ModelState);
             }
 
@@ -76,8 +68,7 @@ namespace SaGService.Controllers
 
             if (workstationAry.Count() <= 0)
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: WorkStation {psm.WorkStation} is not Exist");
-
+                MyLog.Error(this, $"WorkStation {psm.WorkStation} is not Exist");
                 return BadRequest(ModelState);
             }
             SlideWorkStationM workstation = workstationAry[0];                        
@@ -85,8 +76,7 @@ namespace SaGService.Controllers
             OrderCassette order = new OrderCassette();
             if (!order.CassetteExist(psm.Data.OrdNo, psm.Data.CassetteSequence))
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: 沒有此包埋盒 {psm.Data.OrdNo} {psm.Data.CassetteSequence}");
-
+                MyLog.Error(this, $"沒有此包埋盒 {psm.Data.OrdNo} {psm.Data.CassetteSequence}");
                 return BadRequest(ModelState);
             }
 
@@ -111,15 +101,13 @@ namespace SaGService.Controllers
                 }
                 else
                 {
-                    SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: OrderSlide add data failed");
-
+                    MyLog.Error(this, "OrderSlide add data failed");
                     return BadRequest();
                 }                
             }
             else
             {
-                SaLogMan.Instance.Info(GlobalVars.LOGGER_NAME, $"PrintSlideController: OrderSlide add data failed");
-
+                MyLog.Error(this, "OrderSlide add data failed");
                 return BadRequest();
             }
         }

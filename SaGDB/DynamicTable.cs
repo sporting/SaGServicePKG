@@ -1,4 +1,5 @@
-﻿using SaGUtil.System;
+﻿using SaGDB.Utils;
+using SaGUtil.System;
 using System;
 using System.Data;
 using System.Data.Common;
@@ -51,7 +52,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error(this.GetType().Name,$"{ex.Message}: {sql}");
+                MyLog.Fatal(this, $"{ex.Message}: {sql}");
                 return 0;
             }
         }
@@ -68,7 +69,7 @@ namespace SaGDB
             }
             catch (Exception ex)
             {
-                SaLogMan.Instance.Error(this.GetType().Name, $"{ex.Message}: {sql}");
+                MyLog.Fatal(this, $"{ex.Message}: {sql}");
                 return null;
             }
         }

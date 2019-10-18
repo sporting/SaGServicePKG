@@ -82,6 +82,7 @@
     <Compile Include="Extensions\SaDataGridViewExt.cs" />
     <Compile Include="Extensions\SaObjectExt.cs" />
     <Compile Include="IO\SaFile.cs" />
+    <Compile Include="Lib\SingletonProvider.cs" />
     <Compile Include="Network\SaMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SaCryptography.cs" />

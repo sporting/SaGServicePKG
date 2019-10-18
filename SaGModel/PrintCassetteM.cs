@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace SaGModel
 {
     // Cassette 列印需要的資訊 for server side 
+    // 儲存在資料庫端才須使用
     public class PrintCassetteM
     {
         //例如 default 對應到 Normal template
