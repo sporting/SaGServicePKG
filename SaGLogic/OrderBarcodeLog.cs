@@ -19,8 +19,8 @@ namespace SaGLogic
         {
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-                log.OpTime = SaDate.Today().ToString("HHmmss");
+                log.OpDate = SaDate.TodayYMD();
+                log.OpTime = SaDate.TodayHMS();
 
                 MyDB db = new MyDB();
                 try
@@ -90,9 +90,8 @@ namespace SaGLogic
             dt.Columns.Add("op_date");
             dt.Columns.Add("op_time");
             dt.Columns.Add("reprint");
-
-            foreach (OrderBarcodeLogM oblm in models)
-            {
+            
+            Array.ForEach(models, oblm => {
                 DataRow row = dt.NewRow();
                 row["id"] = oblm.Id;
                 row["ord_no"] = oblm.OrdNo;
@@ -101,8 +100,8 @@ namespace SaGLogic
                 row["op_time"] = oblm.OpTime;
                 row["reprint"] = oblm.RePrint ? "Y" : "N";
                 dt.Rows.Add(row);
-            }
-
+            });
+         
             return dt;
         }
     }

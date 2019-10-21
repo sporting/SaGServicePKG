@@ -2,6 +2,7 @@
 using PPMSXLib.Format;
 using LCPMS15Lib.Format;
 using SaGKernel.Specimen;
+using System;
 
 namespace SaGKernel.CSFilter
 {
@@ -37,13 +38,12 @@ namespace SaGKernel.CSFilter
                 string[] stainings = SPCollection.GetStainingMethods(css.Data.SpecialRemark);
                 List<SlideSampleFormat> list = new List<SlideSampleFormat>();
 
-                foreach (string staining in stainings)
-                {
-                    SlideSampleFormat smmh=   new SlideSampleFormat();
+                Array.ForEach(stainings, staining => {
+                    SlideSampleFormat smmh = new SlideSampleFormat();
                     smmh.SetVal(slenv, css.Data.PathoNo, css.Data.CassetteSequence, css.Data.SlideSequence, css.Data.SpecialRemark, css.Data.FieldA, staining);
                     list.Add(smmh);
-                }
-
+                });
+                
                 return list.ToArray();
             }
 

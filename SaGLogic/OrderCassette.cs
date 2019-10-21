@@ -24,8 +24,8 @@ namespace SaGLogic
 
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-                log.OpTime = SaDate.Today().ToString("HHmmss");
+                log.OpDate = SaDate.TodayYMD();
+                log.OpTime = SaDate.TodayHMS();
 
                 MyDB db = new MyDB();
                 try
@@ -298,8 +298,7 @@ namespace SaGLogic
             dt.Columns.Add("op_date");
             dt.Columns.Add("op_time");
 
-            foreach (OrderCassetteM ocm in models)
-            {
+            Array.ForEach(models, ocm => { 
                 DataRow row = dt.NewRow();
                 row["id"] = ocm.Id;
                 row["ord_no"] = ocm.OrdNo;
@@ -317,9 +316,9 @@ namespace SaGLogic
                 row["op_date"] = ocm.OpDate;
                 row["op_time"] = ocm.OpTime;
                 dt.Rows.Add(row);
-            }
+            });
 
-            return dt;
+                return dt;
         }
     }
 }

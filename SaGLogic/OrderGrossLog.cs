@@ -19,8 +19,8 @@ namespace SaGLogic
         {
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-                log.OpTime = SaDate.Today().ToString("HHmmss");
+                log.OpDate = SaDate.TodayYMD();
+                log.OpTime = SaDate.TodayHMS();
 
                 MyDB db = new MyDB();
                 try
@@ -100,8 +100,7 @@ namespace SaGLogic
             dt.Columns.Add("op_time");
             dt.Columns.Add("is_delete_flag");
 
-            foreach (OrderGrossLogM oglm in models)
-            {
+            Array.ForEach(models, oglm => {
                 DataRow row = dt.NewRow();
                 row["id"] = oglm.Id;
                 row["ord_no"] = oglm.OrdNo;
@@ -113,7 +112,7 @@ namespace SaGLogic
                 row["op_time"] = oglm.OpTime;
                 row["is_delete_flag"] = oglm.IsDeleteFlag == DeleteFlagEnum.Normal ? "N" : "D";
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

@@ -21,8 +21,8 @@ namespace SaGLogic
         {
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-                log.OpTime = SaDate.Today().ToString("HHmmss");
+                log.OpDate = SaDate.TodayYMD();
+                log.OpTime = SaDate.TodayHMS();
 
                 MyDB db = new MyDB();
                 try
@@ -72,10 +72,9 @@ namespace SaGLogic
                 IDbTransaction transaction = db.StartTransaction();
                 TBDoctorSlideLog tb = new TBDoctorSlideLog(db, "1=0");
 
-                foreach (DoctorSlideLogM log in logs)
-                {
-                    log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-                    log.OpTime = SaDate.Today().ToString("HHmmss");                 
+                Array.ForEach(logs, log => {
+                    log.OpDate = SaDate.TodayYMD();
+                    log.OpTime = SaDate.TodayHMS();
 
                     DataRow row = tb.Table.NewRow();
                     row["ord_no"] = log.OrdNo;
@@ -93,8 +92,8 @@ namespace SaGLogic
                     TBOrderSlide tbOrder = order.Update(db, log);
 
                     tbOrder.Update();
-                }
-
+                });
+                
                 if (tb.Update())
                 {
                     if (db.Commit(transaction))
@@ -176,8 +175,7 @@ namespace SaGLogic
             dt.Columns.Add("op_time");
             dt.Columns.Add("is_delete_flag");
 
-            foreach (DoctorSlideLogM oslm in models)
-            {
+            Array.ForEach(models, oslm => {
                 DataRow row = dt.NewRow();
                 row["id"] = oslm.Id;
                 row["ord_no"] = oslm.OrdNo;
@@ -190,8 +188,8 @@ namespace SaGLogic
                 row["op_time"] = oslm.OpTime;
                 row["is_delete_flag"] = oslm.IsDeleteFlag == DeleteFlagEnum.Normal ? "N" : "D";
                 dt.Rows.Add(row);
-            }
-
+            });
+            
             return dt;
         }
     }

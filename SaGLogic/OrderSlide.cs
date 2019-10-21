@@ -22,8 +22,8 @@ namespace SaGLogic
 
             if (!string.IsNullOrEmpty(log.OrdNo))
             {
-                log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-                log.OpTime = SaDate.Today().ToString("HHmmss");
+                log.OpDate = SaDate.TodayYMD();
+                log.OpTime = SaDate.TodayHMS();
 
                 MyDB db = new MyDB();
                 try
@@ -243,8 +243,7 @@ namespace SaGLogic
             dt.Columns.Add("op_date");
             dt.Columns.Add("op_time");
 
-            foreach (OrderSlideM osm in models)
-            {
+            Array.ForEach(models, osm => { 
                 DataRow row = dt.NewRow();
                 row["id"] = osm.Id;
                 row["ord_no"] = osm.OrdNo;
@@ -260,9 +259,9 @@ namespace SaGLogic
                 row["op_date"] = osm.OpDate;
                 row["op_time"] = osm.OpTime;
                 dt.Rows.Add(row);
-            }
+            });
 
-            return dt;
+                return dt;
         }
 
         public OrderSlideM[] GetSlideDetail(string begDate, string endDate, string slideUser)

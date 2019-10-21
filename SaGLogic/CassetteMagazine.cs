@@ -82,14 +82,13 @@ namespace SaGLogic
             dt.Columns.Add("name");
             dt.Columns.Add("magazine");
 
-            foreach (CassetteMagazineM ctm in models)
-            {
+            Array.ForEach(models, ctm => {
                 DataRow row = dt.NewRow();
                 row["id"] = ctm.Id;
                 row["name"] = ctm.Name;
                 row["magazine"] = ctm.Magazine;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

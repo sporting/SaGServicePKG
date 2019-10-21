@@ -43,14 +43,13 @@ namespace SaGLogic
             dt.Columns.Add("user");
             dt.Columns.Add("total");
 
-            foreach (WorkLoadMV wl in models)
-            {
+            Array.ForEach(models, wl => {
                 DataRow row = dt.NewRow();
                 row["date"] = wl.Date;
                 row["user"] = wl.User;
                 row["total"] = wl.Total;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

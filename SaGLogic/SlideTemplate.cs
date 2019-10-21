@@ -81,14 +81,13 @@ namespace SaGLogic
             dt.Columns.Add("name");
             dt.Columns.Add("template");
 
-            foreach (SlideTemplateM ctm in models)
-            {
+            Array.ForEach(models, ctm => {
                 DataRow row = dt.NewRow();
                 row["id"] = ctm.Id;
                 row["name"] = ctm.Name;
                 row["template"] = ctm.Template;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

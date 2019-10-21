@@ -1,7 +1,6 @@
 ﻿using SaGKernel.Config;
 using SaGKernel.Utils;
 using SaGUtil.Lib;
-using SaGUtil.System;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,17 +32,13 @@ namespace SaGKernel.MajorClass
         public IMajorClass Classify(QRDataStruct css)
         {
             //判斷是哪一個檢體分類
-            foreach (IMajorClass major in _majorClassify)
+            var v = _majorClassify.Where(el => el.IsMe(css));
+            if (v.Count() > 0)
             {
-                if (major.IsMe(css))
-                {
-                    return major;
-                }
+                return v.First();
             }
 
-            return (from IMajorClass major in _majorClassify
-                    where major.MajorClass == MajorClassEnum.DefaultMC
-                    select major).First();
+            return _majorClassify.Where(el => el.MajorClass == MajorClassEnum.DefaultMC).First();
         }
 
         private  void LoadAssembly()
@@ -65,22 +60,20 @@ namespace SaGKernel.MajorClass
                 //動態載入所有 IMajorClass instance
                 Assembly sgkModel = assembly;
 
-                foreach (Type type in sgkModel.GetTypes())
-                {
-                    if (type.GetInterfaces().Contains(typeof(IMajorClass)))
+                Array.ForEach(sgkModel.GetTypes(), t => {
+                    if (t.GetInterfaces().Contains(typeof(IMajorClass)))
                     {
-                        IMajorClass mc = (IMajorClass)Activator.CreateInstance(type);
+                        IMajorClass mc = (IMajorClass)Activator.CreateInstance(t);
 
-                        int existCnt = (from v in _majorClassify
-                                        where v.ClassName == mc.ClassName
-                                        select v).Count();
+                        int existCnt = _majorClassify.Where(el => el.ClassName == mc.ClassName).Count();
 
-                        if (existCnt<=0)
+                        if (existCnt <= 0)
                         {
                             _majorClassify.Add(mc);
                         }
                     }
-                }
+                });
+
             }
         }
 
@@ -112,31 +105,20 @@ namespace SaGKernel.MajorClass
         //取得任一MajorClass
         public  IMajorClass GetMajorClassByName(string className)
         {
-            var v = (from IMajorClass mc in _majorClassify
-                     where mc.ClassName == className
-                     select mc);
-            if (v.Count() > 0)
-            {
-                return v.First();
-            }
+            var v = _majorClassify.Where(el => el.ClassName == className);
 
-            return null;
+            return v.Count() > 0 ? v.First() : null;
         }
 
         //取得Default MajorClass
         public  IMajorClass GetDefaultMajorClass()
         {
-            return (from IMajorClass major in _majorClassify
-                    where major.MajorClass == MajorClassEnum.DefaultMC
-                    select major).First();
+            return _majorClassify.Where(el => el.MajorClass == MajorClassEnum.DefaultMC).First();
         }
 
         private void AutoLoadAssemblyByConfig()
         {
-            foreach (string fileName in CustomModelConfig.CustomModelDll())
-            {
-                LoadAssembly(fileName);
-            }
+            Array.ForEach(CustomModelConfig.CustomModelDll(), el => LoadAssembly(el));
         }
     }
 }

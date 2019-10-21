@@ -45,7 +45,7 @@ namespace SaGLogic
             dt.Columns.Add("slide_fieldB");
             dt.Columns.Add("total");
 
-            foreach (SlideWorkLoadMV wl in models)
+            Array.ForEach(models, wl =>
             {
                 DataRow row = dt.NewRow();
                 row["date"] = wl.Date;
@@ -54,8 +54,8 @@ namespace SaGLogic
                 row["slide_fieldB"] = wl.FieldB;
                 row["total"] = wl.Total;
                 dt.Rows.Add(row);
-            }
-
+            });
+            
             return dt;
         }
 

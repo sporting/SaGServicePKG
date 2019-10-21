@@ -43,27 +43,27 @@ namespace SaGLogic
             dt.Columns.Add("user");
             dt.Columns.Add("total");
 
-            foreach (WorkLoadMV wl in models)
-            {
+            Array.ForEach(models, wl => {
                 DataRow row = dt.NewRow();
                 row["date"] = wl.Date;
                 row["user"] = wl.User;
                 row["total"] = wl.Total;
                 dt.Rows.Add(row);
-            }
-
+            });
+                        
             return dt;
         }
 
         public WorkLoadMV[] GenerateModel(DataTable dt)
         {
-            var v = from DataRow row in dt.AsEnumerable()
-                    select new WorkLoadMV()
-                    {
-                        Date=row["date"].ToString(),
-                        User=row["user"].ToString(),
-                        Total=Convert.ToInt32(row["total"].ToString())
-                    };
+            var v = dt.AsEnumerable().Select(row => 
+                new WorkLoadMV()
+                {
+                    Date = row["date"].ToString(),
+                    User = row["user"].ToString(),
+                    Total = Convert.ToInt32(row["total"].ToString())
+                }
+            );
 
             if (v != null)
             {

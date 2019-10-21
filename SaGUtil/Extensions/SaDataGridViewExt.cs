@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SaGUtil.Extensions
 {
@@ -133,18 +134,17 @@ namespace SaGUtil.Extensions
                 if (dgView.DataSource is DataTable)
                 {
                     DataTable table = (DataTable)dgView.DataSource;
-                    foreach (DataColumn col in table.Columns)
+
+                    var v = table.Columns.Cast<DataColumn>().Join(
+                        dgView.Columns.Cast<DataGridViewColumn>(),
+                        c => c.ColumnName, s => s.DataPropertyName,
+                        (tab, dgv) => new { col = dgv, allowDBNull = tab.AllowDBNull })
+                        .Where(p => !p.allowDBNull);
+
+                    if (v.Count() > 0)
                     {
-                        foreach (DataGridViewColumn dCol in dgView.Columns)
-                        {
-                            if (col.ColumnName == dCol.DataPropertyName)
-                            {
-                                if (!col.AllowDBNull)
-                                    dCol.DefaultCellStyle.ForeColor = color;
-                                break;
-                            }
-                        }
-                    }
+                        v.First().col.DefaultCellStyle.ForeColor = color;
+                    }                    
                 }
             }
         }
@@ -154,12 +154,8 @@ namespace SaGUtil.Extensions
             {
                 StreamWriter sr = File.CreateText(strExportFileName);
                 string strDelimiter = strDelimiterType;
-                int intColumnCount = 0;
-                foreach (DataGridViewColumn col in dgv.Columns)
-                {
-                    if (col.Visible)
-                        intColumnCount += 1;
-                }
+                int intColumnCount = dgv.Columns.Cast<DataGridViewColumn>().Where(c=>c.Visible).Count();
+                
                 string strRowData = "";
                 if (blnWriteColumnHeaderNames)
                 {
@@ -191,7 +187,7 @@ namespace SaGUtil.Extensions
                 return true;
             }
             catch (Exception ex)
-            {
+            {                
                 return false;
             }
         }

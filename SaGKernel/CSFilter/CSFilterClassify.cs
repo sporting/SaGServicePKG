@@ -50,15 +50,14 @@ namespace SaGKernel.CSFilter
                 //動態載入所有 ICassetteToSlideFilter instance
                 Assembly sgkCSFilter = assembly;
 
-                foreach (Type type in sgkCSFilter.GetTypes())
-                {
-                    if (type.GetInterfaces().Contains(typeof(ICassetteToSlideFilter)))
-                    {                        
-                        ICassetteToSlideFilter csf = (ICassetteToSlideFilter)Activator.CreateInstance(type);
-                        PropertyInfo info = type.GetProperty("SPCollection");
+                Array.ForEach(sgkCSFilter.GetTypes(), t => {
+                    if (t.GetInterfaces().Contains(typeof(ICassetteToSlideFilter)))
+                    {
+                        ICassetteToSlideFilter csf = (ICassetteToSlideFilter)Activator.CreateInstance(t);
+                        PropertyInfo info = t.GetProperty("SPCollection");
                         if (info != null)
                         {
-                            info.SetValue(csf,_Sc,null);
+                            info.SetValue(csf, _Sc, null);
                         }
 
                         int existCnt = (from v in _CsFilters
@@ -70,7 +69,7 @@ namespace SaGKernel.CSFilter
                             _CsFilters.Add(csf);
                         }
                     }
-                }
+                });
             }
         }
 
@@ -93,10 +92,7 @@ namespace SaGKernel.CSFilter
 
         private void AutoLoadAssemblyByConfig()
         {
-            foreach (string fileName in CustomModelConfig.CustomModelDll())
-            {
-                LoadAssembly(fileName);
-            }
+            Array.ForEach(CustomModelConfig.CustomModelDll(), dll => LoadAssembly(dll));
         }
 
         public void SetSlideEnvironment(SlideEnvironment slenv)
@@ -107,15 +103,13 @@ namespace SaGKernel.CSFilter
         public SlideFormat[] MatchRule2GetSlides(CassetteFormat css)
         {
             var matches = _CsFilters.OrderByDescending(csf => csf.Priority);
-
-            foreach (ICassetteToSlideFilter csf in matches)
+            var v = matches.Where(csf => csf.MatchRule(css));
+            
+            if (v.Count() > 0)
             {
-                if (csf.MatchRule(css))
-                {
-                    return csf.GenerateSlides(css, _Slenv);
-                }
+                return v.First().GenerateSlides(css, _Slenv);
             }
-
+           
             return new SlideFormat[] { };   
         }
     }

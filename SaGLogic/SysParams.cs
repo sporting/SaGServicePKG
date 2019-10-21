@@ -84,15 +84,14 @@ namespace SaGLogic
             dt.Columns.Add("name");
             dt.Columns.Add("value");
 
-            foreach (SysParamsM spm in models)
-            {
+            Array.ForEach(models, spm => {
                 DataRow row = dt.NewRow();
                 row["id"] = spm.Id;
                 row["seq"] = spm.Seq;
                 row["name"] = spm.Name;
                 row["value"] = spm.Value;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

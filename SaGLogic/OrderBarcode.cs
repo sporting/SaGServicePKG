@@ -33,8 +33,8 @@ namespace SaGLogic
                 row["ord_no"] = ordLog.OrdNo;
                 row["barcode_total_amount"] = ordLog.Amount;
                 row["cassette_total_amount"] = 0;
-                row["create_date"] = SaDate.Today().ToString("yyyyMMdd");
-                row["create_time"] = SaDate.Today().ToString("HHmmss");
+                row["create_date"] = SaDate.TodayYMD();
+                row["create_time"] = SaDate.TodayHMS();
                 row["op_date"] = row["create_date"];
                 row["op_time"] = row["create_time"];
                 tb.Table.Rows.Add(row);
@@ -45,8 +45,8 @@ namespace SaGLogic
             {
                 DataRow row = tb.Table.Rows[0];
                 row["barcode_total_amount"] = ordLog.Amount + SaConverter.ToInt(row["barcode_total_amount"], 0);
-                row["op_date"] = SaDate.Today().ToString("yyyyMMdd");
-                row["op_time"] = SaDate.Today().ToString("HHmmss");
+                row["op_date"] = SaDate.TodayYMD();
+                row["op_time"] = SaDate.TodayHMS();
 
                 return tb;
             }
@@ -63,8 +63,8 @@ namespace SaGLogic
                 row["ord_no"] = ordLog.OrdNo;
                 row["barcode_total_amount"] = 0;
                 row["cassette_total_amount"] = 1;
-                row["create_date"] = SaDate.Today().ToString("yyyyMMdd");
-                row["create_time"] = SaDate.Today().ToString("HHmmss");
+                row["create_date"] = SaDate.TodayYMD();
+                row["create_time"] = SaDate.TodayHMS();
                 row["op_date"] = row["create_date"];
                 row["op_time"] = row["create_time"];
                 tb.Table.Rows.Add(row);
@@ -149,8 +149,7 @@ namespace SaGLogic
             dt.Columns.Add("op_date");
             dt.Columns.Add("op_time");
 
-            foreach (OrderBarcodeM obm in models)
-            {
+            Array.ForEach(models, obm => { 
                 DataRow row = dt.NewRow();
                 row["id"] = obm.Id;
                 row["ord_no"] = obm.OrdNo;
@@ -161,7 +160,7 @@ namespace SaGLogic
                 row["op_date"] = obm.OpDate;
                 row["op_time"] = obm.OpTime;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

@@ -80,14 +80,13 @@ namespace SaGLogic
             dt.Columns.Add("name");
             dt.Columns.Add("printer");
 
-            foreach (SlidePrinterM ctm in models)
-            {
+            Array.ForEach(models, ctm => {
                 DataRow row = dt.NewRow();
                 row["id"] = ctm.Id;
                 row["name"] = ctm.Name;
                 row["printer"] = ctm.Printer;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }

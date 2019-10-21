@@ -18,8 +18,8 @@ namespace SaGLogic
     {
         public bool Add(SysLogM log)
         {
-            log.OpDate = SaDate.Today().ToString("yyyyMMdd");
-            log.OpTime = SaDate.Today().ToString("HHmmss");
+            log.OpDate = SaDate.TodayYMD();
+            log.OpTime = SaDate.TodayHMS();
 
             MyDB db = new MyDB();
             try
@@ -81,8 +81,7 @@ namespace SaGLogic
             dt.Columns.Add("op_date");
             dt.Columns.Add("op_time");
 
-            foreach (SysLogM slm in models)
-            {
+            Array.ForEach(models, slm => {
                 DataRow row = dt.NewRow();
                 row["id"] = slm.Id;
                 row["event_name"] = slm.EventName;
@@ -90,7 +89,7 @@ namespace SaGLogic
                 row["op_date"] = slm.OpDate;
                 row["op_time"] = slm.OpTime;
                 dt.Rows.Add(row);
-            }
+            });
 
             return dt;
         }
