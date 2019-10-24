@@ -25,6 +25,11 @@ namespace SaGKernel.UI
             this.Add(new CassetteColor() { Name = "Normal(Yellow)", AssignColor = Color.Yellow });
         }
 
+        public CassetteColors(CassetteColor[] colors)
+        {
+            this.AddRange(colors);
+        }
+
         public Color GetColor(string name)
         {
             var v= this.Find((x) => (x.Name == name));

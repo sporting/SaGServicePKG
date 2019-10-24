@@ -20,7 +20,7 @@ namespace SaGKernel.Settings
         public static string GetDefaultSlideMagazineName() {
             return SlideMagazineNames[0];
         }
-        public static int SlideValue(SlideSettings settings, IMajorClass currentMajorClass)
+        public static int SlideMappingValue(SlideSettings settings, IMajorClass currentMajorClass)
         {
             var v = (from MajorSlideSettings mcs in settings.MajorSlides
                      where mcs.MajorClassName == currentMajorClass.ClassName
@@ -31,12 +31,40 @@ namespace SaGKernel.Settings
 
                 if (magazineName.Equals(SMN1))
                 {
-                    return settings.SlotId;
+                    return 0;
                 }
                 else if (magazineName.Equals(SMN2))
                 {
-                    return settings.SlotId2;
+                    return 1;
                 }
+            }
+
+            return 0;
+        }
+
+        public static string SlideName(int slot)
+        {
+            if (slot == 0)
+            {
+                return SMN1;
+            }
+            else if (slot == 1)
+            {
+                return SMN2;
+            }
+
+            return SMN1;
+        }
+
+        public static int SlideValue(string name)
+        {
+            if (name == SMN1)
+            {
+                return 0;
+            }
+            else if (name == SMN2)
+            {
+                return 1;
             }
 
             return 0;

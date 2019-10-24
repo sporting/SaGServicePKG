@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.System;
 using System;
@@ -20,16 +21,17 @@ namespace SaGBridge
             }
         }
 
-        public OrderSlideBridge(string token):base(token)
+        public OrderSlideBridge(string token) : base(token)
         {
-            
+
         }
 
         public async Task<BridgeResult<OrderSlideM>> GetByOrdNoSeq(string ordNo, int cassetteSequence, int slideSequence)
         {
             string url = $"{ApiUrl}/?ordNo={ordNo}&cassetteSequence={cassetteSequence}&slideSequence={slideSequence}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo} {cassetteSequence} {slideSequence}");
+            MyLog.Info(this, $"{Api}: {url}: {ordNo} {cassetteSequence} {slideSequence}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo} {cassetteSequence} {slideSequence}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             OrderSlideM res = new OrderSlideM();
@@ -50,7 +52,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<OrderSlideM> { status = false, result = res };
             }
         }
@@ -58,7 +61,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?date={date}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {date}");
+            MyLog.Info(this, $"{Api}: {url}: {date}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {date}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             OrderSlideM[] res = null;
@@ -79,7 +83,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<OrderSlideM[]> { status = false, result = res };
             }
         }
@@ -88,7 +93,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?doctorDate={date}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {date}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {date}");
+            MyLog.Info(this, $"{Api}: {url}: {date}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             OrderSlideM[] res = null;
@@ -109,7 +115,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<OrderSlideM[]> { status = false, result = res };
             }
         }
@@ -118,7 +125,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?ordNo={ordNo}&cassetteSeq={cassetteSeq}&slideSeq={slideSeq}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo} {cassetteSeq} {slideSeq}");
+            MyLog.Info(this, $"{Api}: {url}: {ordNo} {cassetteSeq} {slideSeq}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo} {cassetteSeq} {slideSeq}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             bool res = false;
@@ -139,16 +147,18 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<bool> { status = false, result = res };
             }
         }
 
-            public async Task<BridgeResult<OrderSlideM[]>> Get(string type, string begDate, string endDate, string user)
+        public async Task<BridgeResult<OrderSlideM[]>> Get(string type, string begDate, string endDate, string user)
         {
             string url = $"{ApiUrl}/?type={type}&begDate={begDate}&endDate={endDate}&user={user}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
+            MyLog.Info(this, $"{Api}: {url}: {type} {begDate} {endDate} {user}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             OrderSlideM[] res = new OrderSlideM[] { };
@@ -170,7 +180,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<OrderSlideM[]> { status = false, result = res, message = ex.Message };
             }
         }

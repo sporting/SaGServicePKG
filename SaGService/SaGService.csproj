@@ -135,7 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\HardwareLogic\" />
     <Folder Include="Models\" />
+    <Folder Include="PreLoader\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -173,8 +175,12 @@
     <Compile Include="Controllers\DataLogic\DoctorSlideLogsController.cs" />
     <Compile Include="Controllers\DataLogic\DoctorSlideLogController.cs" />
     <Compile Include="Controllers\DataLogic\HomeController.cs" />
+    <Compile Include="Controllers\DataRefLogic\SysSlideSlotController.cs" />
+    <Compile Include="Controllers\DataRefLogic\SysCassetteMagazineController.cs" />
+    <Compile Include="Controllers\DataRefLogic\SysSpecimenStainValidController.cs" />
+    <Compile Include="Controllers\DataRefLogic\SysSpecimenStainController.cs" />
     <Compile Include="Controllers\DataLogic\WorkLoadController.cs" />
-    <Compile Include="Controllers\DataLogic\SysParamsController.cs" />
+    <Compile Include="Controllers\DataRefLogic\SysParamsController.cs" />
     <Compile Include="Controllers\DataLogic\OrderBarcodeController.cs" />
     <Compile Include="Controllers\DataLogic\OrderBarcodeLogController.cs" />
     <Compile Include="Controllers\DataLogic\LoginController.cs" />
@@ -184,8 +190,6 @@
     <Compile Include="Controllers\DataLogic\OrderEmbedLogController.cs" />
     <Compile Include="Controllers\DataLogic\OrderGrossLogController.cs" />
     <Compile Include="Controllers\DataLogic\SampleController.cs" />
-    <Compile Include="Controllers\HardwareLogic\PrintSlideController.cs" />
-    <Compile Include="Controllers\HardwareLogic\PrintCassetteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +204,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="data\SaSampleModel.dll" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,6 +237,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="data\specimen.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

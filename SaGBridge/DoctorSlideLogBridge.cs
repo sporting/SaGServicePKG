@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.System;
 using System;
@@ -34,7 +35,8 @@ namespace SaGBridge
             string js = JsonConvert.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
-            LogMan.Instance.Info(Api, $"{Api}: Post: {ApiUrl}: {js}");
+            MyLog.Info(this, $"{Api}: {ApiUrl}: {js}");
+            //LogMan.Instance.Info(Api, $"{Api}: Post: {ApiUrl}: {js}");
 
             HttpResponseMessage response = await Client.PostAsync(ApiUrl, content);
             DoctorSlideLogM[] res = new DoctorSlideLogM[] { };
@@ -55,7 +57,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {ApiUrl}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
                 return new BridgeResult<DoctorSlideLogM[]> { status = false, message = ex.Message, result = res };
             }
         }
@@ -64,7 +67,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?date={date}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {date}");
+            MyLog.Info(this, $"{Api}: {url}: {date}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {date}");
             HttpResponseMessage response = await Client.GetAsync(url);
             DoctorSlideLogM[] res = null;
             try
@@ -84,7 +88,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<DoctorSlideLogM[]> { status = false, result = res };
             }
         }

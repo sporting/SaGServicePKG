@@ -34,10 +34,6 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SaGModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SaGModel\bin\Release\SaGModel.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -58,6 +54,12 @@
     <Compile Include="DoctorSlideLogBridge.cs" />
     <Compile Include="OrderBarcodeBridge.cs" />
     <Compile Include="OrderBarcodeLogBridge.cs" />
+    <Compile Include="PreLoader\CassetteColorsBridge.cs" />
+    <Compile Include="PreLoader\SysSlideSlotBridge.cs" />
+    <Compile Include="PreLoader\SysSpecimenStainValidBridge.cs" />
+    <Compile Include="PreLoader\SysSpecimenStainBridge.cs" />
+    <Compile Include="PreLoader\SysCassetteMagazineBridge.cs" />
+    <Compile Include="Utils\MyLog.cs" />
     <Compile Include="WorkLoadBridge.cs" />
     <Compile Include="SysParamsBridge.cs" />
     <Compile Include="OrderSlideBridge.cs" />
@@ -74,6 +76,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SaGKernel\SaGKernel.csproj">
+      <Project>{E61015F8-F665-4530-8582-9A8864242C5B}</Project>
+      <Name>SaGKernel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaGModel\SaGModel.csproj">
+      <Project>{C4E7D3F7-C873-432B-8A3D-77E868261471}</Project>
+      <Name>SaGModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SaGUtil\SaGUtil.csproj">
       <Project>{5dd96848-8f84-46b8-a95e-c9eb3858a753}</Project>
       <Name>SaGUtil</Name>

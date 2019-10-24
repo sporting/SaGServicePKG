@@ -1,6 +1,7 @@
 ﻿using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
+using SaGUtil.Data;
 using SaGUtil.System;
 using System;
 using System.Data;
@@ -13,7 +14,7 @@ namespace SaGLogic
     /// 對應 SaGDB.order_barcode_log_tb Table
     /// 列印 Barcode log
     /// </summary>
-    public class OrderBarcodeLog : ITableModel<OrderBarcodeLogM>
+    public class OrderBarcodeLog 
     {
         public bool Add(OrderBarcodeLogM log)
         {
@@ -58,51 +59,5 @@ namespace SaGLogic
         }
 
 
-        public OrderBarcodeLogM[] GenerateModel(DataTable dt)
-        {
-            var v = from DataRow row in dt.AsEnumerable()
-                    select new OrderBarcodeLogM()
-                    {
-                        Id = Convert.ToInt32(row["id"]),
-                        OrdNo = row["ord_no"].ToString(),
-                        Amount = Convert.ToInt32(row["amount"].ToString()),
-                        RePrint = row["reprint"].ToString() == "Y",
-                        OpDate = row["op_date"].ToString(),
-                        OpTime = row["op_time"].ToString()
-                    };
-
-            if (v != null)
-            {
-                return v.ToArray();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public DataTable GenerateDataTable(OrderBarcodeLogM[] models)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("ord_no");
-            dt.Columns.Add("amount");
-            dt.Columns.Add("op_date");
-            dt.Columns.Add("op_time");
-            dt.Columns.Add("reprint");
-            
-            Array.ForEach(models, oblm => {
-                DataRow row = dt.NewRow();
-                row["id"] = oblm.Id;
-                row["ord_no"] = oblm.OrdNo;
-                row["amount"] = oblm.Amount;
-                row["op_date"] = oblm.OpDate;
-                row["op_time"] = oblm.OpTime;
-                row["reprint"] = oblm.RePrint ? "Y" : "N";
-                dt.Rows.Add(row);
-            });
-         
-            return dt;
-        }
     }
 }

@@ -12,10 +12,10 @@ using System.Web.Http;
 
 namespace SaGService.Controllers
 {
-    public class SysParamsController : ApiController
+    public class SysSpecimenStainValidController : ApiController
     {
-        //GET api/SysParams/?key=xxxx Entity Json
-        public IHttpActionResult GetValues(string name)
+  
+        public IHttpActionResult GetValidAll()
         {
             if (!ModelState.IsValid)
             {
@@ -24,9 +24,10 @@ namespace SaGService.Controllers
                 return BadRequest(ModelState);
             }
 
-            SysParams sysparams = new SysParams();
+            SysSpecimenStain ssStain = new SysSpecimenStain();
 
-            return Ok(sysparams.GetValues(name));
+            return Ok(ssStain.GetValidAll());
         }
+
     }
 }

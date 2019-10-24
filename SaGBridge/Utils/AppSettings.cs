@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using SaGUtil.Configuration;
 
 namespace SaGBridge.Utils
 {
@@ -11,7 +12,7 @@ namespace SaGBridge.Utils
     {
         public static string SaGServiceUrl()
         {
-            return ConfigurationManager.AppSettings["SaGServiceUrl"].ToString();
+            return SaAppSettings.GetAppSetting<string>("SaGServiceUrl");
         }
     }
 }

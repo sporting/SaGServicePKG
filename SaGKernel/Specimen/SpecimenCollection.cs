@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,6 +20,11 @@ namespace SaGKernel.Specimen
             _List = list;
         }
 
+        public SpecimenCollection(SpecimenItem[] list) : this()
+        {
+            _List.AddRange(list);
+        }
+
         public SpecimenItem this[int index]
         {
             get { return _List[index]; }
@@ -40,6 +44,16 @@ namespace SaGKernel.Specimen
         public void Add(string kind, string seq, string staining)
         {
             _List.Add(new SpecimenItem(kind, seq, staining));
+        }
+
+        public void Add(SpecimenItem si)
+        {
+            _List.Add(si);
+        }
+
+        public void AddRange(SpecimenItem[] sis)
+        {
+            _List.AddRange(sis);
         }
 
         public void Clear()

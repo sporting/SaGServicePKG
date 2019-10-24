@@ -41,18 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CassetteMagazine.cs" />
-    <Compile Include="SlideTemplate.cs" />
-    <Compile Include="SlideWorkStation.cs" />
-    <Compile Include="CassetteWorkStation.cs" />
-    <Compile Include="SlidePrinter.cs" />
     <Compile Include="DoctorSlideLog.cs" />
     <Compile Include="DoctorSlideWorkLoadV.cs" />
+    <Compile Include="SysSlideSlot.cs" />
+    <Compile Include="SysCassetteMagazine.cs" />
+    <Compile Include="SysSpecimenStain.cs" />
     <Compile Include="SlideWorkLoadV.cs" />
     <Compile Include="EmbedWorkLoadV.cs" />
-    <Compile Include="ITableModel.cs" />
     <Compile Include="GrossWorkLoadV.cs" />
-    <Compile Include="CassetteTemplate.cs" />
     <Compile Include="SysParams.cs" />
     <Compile Include="SysLog.cs" />
     <Compile Include="OrderEmbedLog.cs" />

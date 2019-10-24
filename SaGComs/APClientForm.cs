@@ -1,4 +1,5 @@
 ﻿using SaGBridge;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.Network;
 using SaGUtil.System;
@@ -7,13 +8,14 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SaGComs
 {
-    public class APClientForm : Form
+    public  class APClientForm : Form
     {
         private string _opUser = string.Empty;
         public string OpUser
@@ -28,7 +30,14 @@ namespace SaGComs
                 _statusLabelOpUser.Text = string.IsNullOrEmpty(_opUser) ? "" : $"操作人員: {_opUser}";
             }
         }
-        public virtual string AssemblyName { get { return "APClientForm"; } }
+        public string AssemblyName
+        {
+            get
+            {
+                return $"{Assembly.GetExecutingAssembly().GetName().Name} {Application.ProductVersion}";
+                //return $"{AppDomain.CurrentDomain.FriendlyName} {Application.ProductVersion}";
+            }
+        }
         private string _token = string.Empty;
 
         public string ServiceToken
@@ -93,7 +102,7 @@ namespace SaGComs
         ToolStripStatusLabel _statusLabelDateTime;
         public APClientForm()
         {
-            InitializeComponent();
+            InitializeComponent();            
 
             Application.Idle += Application_Idle;
             Application.ApplicationExit += Application_ApplicationExit;
@@ -141,6 +150,7 @@ namespace SaGComs
                 _timer.Start();
             }
         }
+        
 
         public virtual void FormLoad(object sender, EventArgs e)
         {
@@ -153,7 +163,8 @@ namespace SaGComs
             if (!(this.GetService(typeof(IDesignerHost)) != null || System.ComponentModel.LicenseManager.UsageMode == System.ComponentModel.LicenseUsageMode.Designtime))
             {
                 OpUserPromptAttribute attr = GetAttr<OpUserPromptAttribute>();
-                if (attr.NeedOpUser)
+                
+                if (attr!=null && attr.NeedOpUser)
                 {
                     using (OpUserPromptForm prompt = new OpUserPromptForm())
                     {
@@ -168,6 +179,8 @@ namespace SaGComs
                     }
                 }
             }
+
+            Text = $"{Text} {Application.ProductVersion}";
 
             FormLoad(sender,e);
         }
@@ -234,11 +247,12 @@ namespace SaGComs
             {
                 LoginBridge lb = new LoginBridge(string.Empty);
 
-                BridgeResult<ApLoginRequest> res = await lb.Post(new ApLoginRequest { App = AssemblyName, ApMachine = Machine.Get(), LoginUser = OpUser });
+                BridgeResult<ApLoginRequest> res = await lb.Post(new ApLoginRequest { App = AssemblyName, ApMachine = SaMachine.Get(), LoginUser = OpUser });
 
                 if (!res.status)
                 {
-                    LogMan.Instance.Error("APClientForm", res.message);
+                    MyLog.Info(this, res.message);
+                    //LogMan.Instance.Error("APClientForm", res.message);
                     //MessageBox.Show($"系統服務連接失敗，請確認伺服器服務是否正常, {res.message}", "System", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     ServiceLoginErrorMessage = res.message;
                     return false;
@@ -255,7 +269,8 @@ namespace SaGComs
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error("APClientForm", ex.Message);
+                MyLog.Fatal(this,ex.Message);
+                //LogMan.Instance.Error("APClientForm", ex.Message);
                 //MessageBox.Show($"系統服務連接失敗，請確認伺服器服務是否正常, {ex.Message}", "System", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ServiceLoginErrorMessage = ex.Message;
                 return false;

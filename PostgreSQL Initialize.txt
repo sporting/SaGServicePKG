@@ -232,8 +232,6 @@ create index doctor_slide_log_i2 on gross.doctor_slide_log_tb (doctor_date,docto
 
 
 
-
-
 -- sysparams 
 Create table gross.sysparams_tb
 (
@@ -252,115 +250,85 @@ insert into gross.sysparams_tb (name,seq,value) values ('SLIDE_REMARK',2,'Recut'
 insert into gross.sysparams_tb (name,seq,value) values ('SLIDE_STAIN',0,'');
 insert into gross.sysparams_tb (name,seq,value) values ('SLIDE_STAIN',1,'HP');
 insert into gross.sysparams_tb (name,seq,value) values ('SLIDE_STAIN',2,'IHC');
+insert into gross.sysparams_tb (name,seq,value) values ('SPECIMEN',0,'HP');
+insert into gross.sysparams_tb (name,seq,value) values ('SPECIMEN',1,'BM');
+insert into gross.sysparams_tb (name,seq,value) values ('SPECIMEN',2,'LV');
+insert into gross.sysparams_tb (name,seq,value) values ('SPECIMEN',3,'KI');
+insert into gross.sysparams_tb (name,seq,value) values ('SLIDE_TEMPLATE',1,'LayoutSample');
+insert into gross.sysparams_tb (name,seq,value) values ('CASSETTE_TEMPLATE',1,'Normal');
 
 commit;
 
-
-
--- cassette_template : cassette printer template 樣版對照檔
-Create table gross.cassette_template_tb
+-- Specimen mapping stain  檢體別對照染色
+Create table gross.sys_specimen_stain_tb 
 (
   id SERIAL,
-  name VARCHAR(20) NOT NULL,
-  template VARCHAR(50) NOT NULL,
+  specimen VARCHAR(20) NOT NULL,
+  seq INT DEFAULT 0,
+  stain VARCHAR(50) NOT NULL,
+  stop_flag VARCHAR(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (id)
 );
 
-create unique index cassette_template_ui1 on gross.cassette_template_tb (name);
+create unique index sys_specimen_stain_ui1 on gross.sys_specimen_stain_tb (specimen,seq);
 
-insert into gross.cassette_template_tb (name,template) values ('default','Normal');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('HP',1,'HP');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('HP',2,'HE');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('BM',1,'BM');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('BM',2,'Giemsa');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('BM',3,'PAS');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('BM',4,'Ruticulum');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('LV',1,'Liver');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('LV',2,'Trichrome');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('LV',3,'Reticulum');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('KI',1,'1HE');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('KI',2,'2PAS');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('KI',3,'3Silver');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('KI',4,'4Trichrome');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('KI',5,'5HE');
+insert into gross.sys_specimen_stain_tb (specimen,seq,stain) values ('KI',6,'6HE');
 
 commit;
 
--- cassette_magazine : cassette printer 卡匣對照檔
-Create table gross.cassette_magazine_tb
+-- 包埋盒檢體對應卡匣設定 
+Create table gross.sys_cassette_magazine_tb 
 (
   id SERIAL,
-  name VARCHAR(20) NOT NULL,
-  magazine VARCHAR(50) NOT NULL,
+  major_class VARCHAR(20) NOT NULL,
+  magazine    VARCHAR(20) NOT NULL,
   PRIMARY KEY (id)
 );
 
-create unique index cassette_magazine_ui1 on gross.cassette_magazine_tb (name);
+create unique index sys_cassette_magazine_ui1 on gross.sys_cassette_magazine_tb (major_class);
 
-insert into gross.cassette_magazine_tb (name,magazine) values ('default','Normal(White)');
+insert into gross.sys_cassette_magazine_tb (major_class,magazine) values ('Default','Normal(White)');
 
 commit;
 
--- cassette_workstation : cassette 工作站對照檔
-Create table gross.cassette_workstation_tb
+-- 玻片檢體對應Slot設定 
+Create table gross.sys_slide_slot_tb 
 (
   id SERIAL,
-  name VARCHAR(20) NOT NULL,
-  path VARCHAR(50) NOT NULL,
+  major_class VARCHAR(20) NOT NULL,
+  slot        INT Default 0,
   PRIMARY KEY (id)
 );
 
-create unique index cassette_workstation_ui1 on gross.cassette_workstation_tb (name);
+create unique index sys_slide_slot_ui1 on gross.sys_slide_slot_tb (major_class);
 
-insert into gross.cassette_workstation_tb (name,path) values ('default','C:\Cassette\WS1');
-
-commit;
-
--- slide_template : slide printer template 樣版對照檔
-Create table gross.slide_template_tb
-(
-  id SERIAL,
-  name VARCHAR(20) NOT NULL,
-  template VARCHAR(50) NOT NULL,
-  PRIMARY KEY (id)
-);
-
-create unique index slide_template_ui1 on gross.slide_template_tb (name);
-
-insert into gross.slide_template_tb (name,template) values ('default','LayoutSample');
+insert into gross.sys_slide_slot_tb  (major_class,slot) values ('Default',0);
 
 commit;
 
--- slide_printer : slide printer 對照檔
-Create table gross.slide_printer_tb
-(
-  id SERIAL,
-  name VARCHAR(20) NOT NULL,
-  printer VARCHAR(50) NOT NULL,
-  PRIMARY KEY (id)
-);
 
-create unique index slide_printer_ui1 on gross.slide_printer_tb (name);
 
-insert into gross.slide_printer_tb (name,printer) values ('default','PRN0');
 
-commit;
-
--- slide : slide 工作站對照檔
-Create table gross.slide_workstation_tb
-(
-  id SERIAL,
-  name VARCHAR(20) NOT NULL,
-  path VARCHAR(50) NOT NULL,
-  PRIMARY KEY (id)
-);
-
-create unique index slide_workstation_ui1 on gross.slide_workstation_tb (name);
-
-insert into gross.slide_workstation_tb (name,path) values ('default','C:\Slide\WS1');
-
-commit;
 
 -- fix owner
 ALTER TABLE gross.sysparams_tb
     OWNER TO "AP";
 
 ALTER TABLE gross.sys_log_tb
-    OWNER TO "AP";
-
-ALTER TABLE gross.slide_workstation_tb
-    OWNER TO "AP";
-
-ALTER TABLE gross.slide_template_tb
-    OWNER TO "AP";
-
-ALTER TABLE gross.slide_printer_tb
     OWNER TO "AP";
 
 ALTER TABLE gross.order_slide_tb
@@ -387,11 +355,11 @@ ALTER TABLE gross.order_barcode_log_tb
 ALTER TABLE gross.doctor_slide_log_tb
     OWNER TO "AP";
 
-ALTER TABLE gross.cassette_workstation_tb
+ALTER TABLE gross.sys_specimen_stain_tb 
     OWNER TO "AP";
 
-ALTER TABLE gross.cassette_template_tb
+ALTER TABLE gross.sys_cassette_magazine_tb 
     OWNER TO "AP";
 
-ALTER TABLE gross.cassette_magazine_tb
+ALTER TABLE gross.sys_slide_slot_tb 
     OWNER TO "AP";

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.System;
 using System;
@@ -29,7 +30,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?type={type}&begDate={begDate}&endDate={endDate}&user={user}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
+            MyLog.Info(this, $"{Api}: {url}: {type} {begDate} {endDate} {user}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             WorkLoadMV[] res = new WorkLoadMV[] { };
@@ -51,7 +53,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<WorkLoadMV[]> { status = false, result = res,message=ex.Message };
             }
         }
@@ -60,7 +63,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?type={type}&begDate={begDate}&endDate={endDate}&user={user}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
+            MyLog.Info(this, $"{Api}: {url}: {type} {begDate} {endDate} {user}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             SlideWorkLoadMV[] res = new SlideWorkLoadMV[] { };
@@ -82,7 +86,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<SlideWorkLoadMV[]> { status = false, result = res, message = ex.Message };
             }
         }

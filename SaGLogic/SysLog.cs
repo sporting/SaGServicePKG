@@ -1,6 +1,7 @@
 ﻿using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
+using SaGUtil.Data;
 using SaGUtil.System;
 using System;
 using System.Data;
@@ -14,7 +15,7 @@ namespace SaGLogic
     /// system log
     /// </summary>
 
-    public class SysLog : ITableModel<SysLogM>
+    public class SysLog 
     {
         public bool Add(SysLogM log)
         {
@@ -50,48 +51,6 @@ namespace SaGLogic
             }
         }
 
-        public SysLogM[] GenerateModel(DataTable dt)
-        {
-            var v = from DataRow row in dt.AsEnumerable()
-                    select new SysLogM()
-                    {
-                        Id = Convert.ToInt32(row["id"]),
-                        EventName = row["event_name"].ToString(),
-                        Params = row["params"].ToString(),
-                        OpDate = row["op_date"].ToString(),
-                        OpTime = row["op_time"].ToString()
-                    };
-
-            if (v != null)
-            {
-                return v.ToArray();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public DataTable GenerateDataTable(SysLogM[] models)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("event_name");
-            dt.Columns.Add("params");
-            dt.Columns.Add("op_date");
-            dt.Columns.Add("op_time");
-
-            Array.ForEach(models, slm => {
-                DataRow row = dt.NewRow();
-                row["id"] = slm.Id;
-                row["event_name"] = slm.EventName;
-                row["params"] = slm.Params;
-                row["op_date"] = slm.OpDate;
-                row["op_time"] = slm.OpTime;
-                dt.Rows.Add(row);
-            });
-
-            return dt;
-        }
+    
     }
 }

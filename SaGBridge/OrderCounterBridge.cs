@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.System;
 using System;
@@ -29,7 +30,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?ordNo={ordNo}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo}");
+            MyLog.Info(this, $"{Api}: {url}: {ordNo}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             bool res = false;
@@ -50,7 +52,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<bool> { status = false, result = res };
             }
         }
@@ -59,7 +62,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?head={head}&yyyy={yyyy}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {head} {yyyy}");
+            MyLog.Info(this, $"{Api}: {url}: {head} {yyyy}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {head} {yyyy}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             string res = string.Empty;
@@ -80,7 +84,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<string> { status = false, result = res };
             }
         }

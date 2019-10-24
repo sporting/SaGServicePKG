@@ -55,7 +55,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Info(_bridge, $"Load AppSettings SaGServiceUrl Exception: {ex.Message}");
+                MyLog.Fatal(this,$"{_bridge}: {ex.Message}");
+                //LogMan.Instance.Info(_bridge,$"Load AppSettings SaGServiceUrl Exception: {ex.Message}");
             }
         }
 
@@ -63,7 +64,8 @@ namespace SaGBridge
         // http://host/api/[Api]/
         public async Task<BridgeResult<T[]>> GetAll()
         {
-            LogMan.Instance.Info(Api, $"{Api}: Get: {ApiUrl}");
+            MyLog.Info(this, $"{Api}: {ApiUrl}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {ApiUrl}");
 
             HttpResponseMessage response = await _client.GetAsync(ApiUrl);
 
@@ -76,7 +78,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {ApiUrl}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {ex.Message}");
                 return new BridgeResult<T[]> { status = false,message=ex.Message, result = new T[] { } };
             }
         }
@@ -87,7 +90,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/{id.ToString()}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {id}");
+            MyLog.Info(this, $"{Api}: {ApiUrl}: {id}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {id}");
 
             HttpResponseMessage response = await _client.GetAsync(url);
             T res = default(T);
@@ -108,7 +112,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<T> { status = false, message = ex.Message, result = res };
             }
         }
@@ -119,8 +124,8 @@ namespace SaGBridge
         public async Task<BridgeResult<T>> Delete(int id)
         {
             string url = $"{ApiUrl}/{id.ToString()}";
-
-            LogMan.Instance.Info(Api, $"{Api}: Delete: {url}: {id}");
+            MyLog.Info(this, $"{Api}: {url}: {id}");
+            //LogMan.Instance.Info(Api, $"{Api}: Delete: {url}: {id}");
 
             HttpResponseMessage response = await _client.DeleteAsync(url);
             T res = default(T);
@@ -140,10 +145,12 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<T> { status = false, message = ex.Message, result = res };
             }
         }
+
 
         //Update Data by id, data
         // http://host/api/[Api]/id
@@ -153,7 +160,8 @@ namespace SaGBridge
             string js = JsonConvert.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
-            LogMan.Instance.Info(Api, $"{Api}: Put: {url}: {js}");
+            MyLog.Info(this, $"{Api}: {url}: {id}");
+            //LogMan.Instance.Info(Api, $"{Api}: Put: {url}: {js}");
 
             HttpResponseMessage response = await _client.PutAsync(url, content);
             T res = default(T);
@@ -173,10 +181,12 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {ApiUrl}:{js}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
                 return new BridgeResult<T> { status = false, message = ex.Message, result = res };
             }
         }
+
 
         //Post Data by id, data
         // http://host/api/[Api]/
@@ -185,7 +195,8 @@ namespace SaGBridge
             string js = JsonConvert.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
-            LogMan.Instance.Info(Api, $"{Api}: Post: {ApiUrl}: {js}");
+            MyLog.Info(this, $"{Api}: {ApiUrl}: {js}");
+            //LogMan.Instance.Info(Api, $"{Api}: Post: {ApiUrl}: {js}");
 
             HttpResponseMessage response = await _client.PostAsync(ApiUrl, content);
             T res = default(T);
@@ -206,8 +217,44 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {ApiUrl}:{js}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
                 return new BridgeResult<T> { status = false, message = ex.Message, result = res };
+            }
+        }
+
+        //Post Data by id, data
+        // http://host/api/[Api]/
+        public async Task<BridgeResult<T[]>> Post(T[] data)
+        {
+            string js = JsonConvert.SerializeObject(data);
+            StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
+
+            MyLog.Info(this, $"{Api}: {ApiUrl}: {js}");
+            //LogMan.Instance.Info(Api, $"{Api}: Post: {ApiUrl}: {js}");
+
+            HttpResponseMessage response = await _client.PostAsync(ApiUrl, content);
+            T[] res = default(T[]);
+            try
+            {
+                response.EnsureSuccessStatusCode();
+
+                try
+                {
+                    string responseBody = await response.Content.ReadAsStringAsync();
+                    res = JsonConvert.DeserializeObject<T[]>(responseBody);
+                }
+                catch
+                {
+                }
+
+                return new BridgeResult<T[]> { status = true, message = string.Empty, result = res };
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, $"{Api}: {ApiUrl}:{js}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {ApiUrl}: {js}: {ex.Message}");
+                return new BridgeResult<T[]> { status = false, message = ex.Message, result = res };
             }
         }
     }

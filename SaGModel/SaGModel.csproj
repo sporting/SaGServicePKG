@@ -43,16 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApLoginRequest.cs" />
-    <Compile Include="PrintSlideM.cs" />
-    <Compile Include="SlidePrinterM.cs" />
-    <Compile Include="SlideTemplateM.cs" />
-    <Compile Include="SlideWorkStationM.cs" />
-    <Compile Include="CassetteWorkStationM.cs" />
-    <Compile Include="CassetteMagazineM.cs" />
     <Compile Include="DeleteFlagEnum.cs" />
     <Compile Include="DoctorSlideLogM.cs" />
-    <Compile Include="PrintCassetteM.cs" />
-    <Compile Include="CassetteTemplateM.cs" />
+    <Compile Include="ITableModel.cs" />
+    <Compile Include="SysSlideSlotM.cs" />
+    <Compile Include="SysCassetteMagazineM.cs" />
+    <Compile Include="SysSpecimenStainM.cs" />
     <Compile Include="WorkLoadMV.cs" />
     <Compile Include="SysParamsM.cs" />
     <Compile Include="SysLogM.cs" />

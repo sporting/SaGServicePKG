@@ -25,11 +25,16 @@ namespace SaGKernel.CSFilter
 
         public CSFilterClassify()
         {
-            _Sc = SpeicmenConfig.GetSpecimenData();
+            //_Sc = SpeicmenConfig.GetSpecimenData();
 
             LoadAssembly();
             AutoLoadAssemblyByConfig();
         }
+        public void SetSpecimenCollection(SpecimenCollection sc)
+        {
+            _Sc = sc;
+        }
+
         private void LoadAssembly()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
@@ -54,10 +59,13 @@ namespace SaGKernel.CSFilter
                     if (t.GetInterfaces().Contains(typeof(ICassetteToSlideFilter)))
                     {
                         ICassetteToSlideFilter csf = (ICassetteToSlideFilter)Activator.CreateInstance(t);
-                        PropertyInfo info = t.GetProperty("SPCollection");
-                        if (info != null)
+                        if (_Sc != null)
                         {
-                            info.SetValue(csf, _Sc, null);
+                            PropertyInfo info = t.GetProperty("SPCollection");
+                            if (info != null)
+                            {
+                                info.SetValue(csf, _Sc, null);
+                            }
                         }
 
                         int existCnt = (from v in _CsFilters

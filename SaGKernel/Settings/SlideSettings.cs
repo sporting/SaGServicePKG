@@ -17,8 +17,8 @@ namespace SaGKernel.Settings
     {
         public string LayoutName;
         public string PrinterName;
-        public int SlotId = 0; //卡匣1
-        public int SlotId2 = 1; //卡匣2
+        //public int SlotId = 0; //卡匣1
+        //public int SlotId2 = 1; //卡匣2
         public string outputFolder;
         public MajorSlideSettingsCollection MajorSlides;
         public void InitialIfNull()
@@ -46,8 +46,8 @@ namespace SaGKernel.Settings
                 PrinterName = "PRN0";
             }
 
-            SlotId = 0;
-            SlotId2 = 1;
+            //SlotId = 0;
+            //SlotId2 = 1;
             //if (string.IsNullOrEmpty(SlotId.ToString()))
             //{
             //    SlotId = 0;

@@ -1,6 +1,7 @@
 ﻿using SaGDB;
 using SaGDB.Tables;
 using SaGModel;
+using SaGUtil.Data;
 using SaGUtil.System;
 using System;
 using System.Data;
@@ -14,7 +15,7 @@ namespace SaGLogic
     /// 玻片 list
     /// </summary>
 
-    public class OrderSlide : ITableModel<OrderSlideM>
+    public class OrderSlide 
     {
         public bool Add(OrderSlideM log, out int newSlideSeq)
         {
@@ -74,7 +75,7 @@ namespace SaGLogic
 
         public TBOrderSlide Update(MyDB db, DoctorSlideLogM log)
         {
-            TBOrderSlide tb = new TBOrderSlide(db, $"ord_no='{log.OrdNo}' and cassette_sequence={log.CassetteSequence} and slide_sequence={log.SlideSequence} for update");
+            TBOrderSlide tb = new TBOrderSlide(db, $"Id='{log.Id}' for update");
 
             if (tb.RowsCount > 0)
             {
@@ -123,7 +124,7 @@ namespace SaGLogic
                     db.OpenDB();
 
                     TBOrderSlide tb = new TBOrderSlide(db, $"ord_no='{ordNo}' and cassette_sequence={cassetteSequence} and slide_sequence={slideSequence}");
-                    OrderSlideM[] osms= GenerateModel(tb.Table);
+                    OrderSlideM[] osms= new OrderSlideM().GenerateModel(tb.Table);
 
                     if (osms.Count() == 1)
                     {
@@ -157,7 +158,7 @@ namespace SaGLogic
                     db.OpenDB();
 
                     TBOrderSlide tb = new TBOrderSlide(db, $"doctor_date='{doctorDate}'");
-                    return GenerateModel(tb.Table);
+                    return new OrderSlideM().GenerateModel(tb.Table);
                 }
                 catch
                 {
@@ -181,7 +182,7 @@ namespace SaGLogic
                     db.OpenDB();
 
                     TBOrderSlide tb = new TBOrderSlide(db, $"op_date='{date}'");
-                    return GenerateModel(tb.Table);
+                    return new OrderSlideM().GenerateModel(tb.Table);
                 }
                 catch
                 {
@@ -196,73 +197,6 @@ namespace SaGLogic
             return null;
         }
 
-        public OrderSlideM[] GenerateModel(DataTable dt)
-        {
-            var v = from DataRow row in dt.AsEnumerable()
-                    select new OrderSlideM()
-                    {
-                        Id = Convert.ToInt32(row["id"]),
-                        OrdNo = row["ord_no"].ToString(),
-                        CassetteSequence = Convert.ToInt32(row["cassette_sequence"]),
-                        SlideFieldA = row["slide_fieldA"].ToString(),
-                        SlideFieldB = row["slide_fieldB"].ToString(),
-                        SlideRemark = row["slide_remark"].ToString(),
-                        SlideSequence = Convert.ToInt32(row["slide_sequence"]),
-                        SlideUser = row["slide_user"].ToString(),
-                        DoctorDate = row["doctor_date"].ToString(),
-                        DoctorTime = row["doctor_time"].ToString(),
-                        DoctorUser = row["doctor_user"].ToString(),
-                        OpDate = row["op_date"].ToString(),
-                        OpTime = row["op_time"].ToString()
-                    };
-
-            if (v != null)
-            {
-                return v.ToArray();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public DataTable GenerateDataTable(OrderSlideM[] models)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("ord_no");
-            dt.Columns.Add("cassette_sequence");
-            dt.Columns.Add("slide_sequence");
-            dt.Columns.Add("slide_user");
-            dt.Columns.Add("slide_remark");
-            dt.Columns.Add("slide_fieldA");
-            dt.Columns.Add("slide_fieldB");
-            dt.Columns.Add("doctor_user");
-            dt.Columns.Add("doctor_date");
-            dt.Columns.Add("doctor_time");
-            dt.Columns.Add("op_date");
-            dt.Columns.Add("op_time");
-
-            Array.ForEach(models, osm => { 
-                DataRow row = dt.NewRow();
-                row["id"] = osm.Id;
-                row["ord_no"] = osm.OrdNo;
-                row["cassette_sequence"] = osm.CassetteSequence;
-                row["slide_sequence"] = osm.SlideSequence;
-                row["slide_user"] = osm.SlideUser;
-                row["slide_remark"] = osm.SlideRemark;
-                row["slide_fieldA"] = osm.SlideFieldA;
-                row["slide_fieldB"] = osm.SlideFieldB;
-                row["doctor_user"] = osm.DoctorUser;
-                row["doctor_date"] = osm.DoctorDate;
-                row["doctor_time"] = osm.DoctorTime;
-                row["op_date"] = osm.OpDate;
-                row["op_time"] = osm.OpTime;
-                dt.Rows.Add(row);
-            });
-
-                return dt;
-        }
 
         public OrderSlideM[] GetSlideDetail(string begDate, string endDate, string slideUser)
         {
@@ -284,7 +218,7 @@ namespace SaGLogic
                         tb = new TBOrderSlide(db, $"op_date>='{begDate}' and op_date<='{endDate}' and slide_user='{slideUser}'");
                     }
 
-                    return GenerateModel(tb.Table);
+                    return new OrderSlideM().GenerateModel(tb.Table);
                 }
                 catch
                 {
@@ -319,7 +253,7 @@ namespace SaGLogic
                         tb = new TBOrderSlide(db, $"doctor_date>='{begDate}' and doctor_date<='{endDate}' and doctor_user='{doctorUser}'");
                     }
 
-                    return GenerateModel(tb.Table);
+                    return new OrderSlideM().GenerateModel(tb.Table);
                 }
                 catch
                 {

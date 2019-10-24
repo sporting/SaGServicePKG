@@ -16,7 +16,7 @@ namespace SaGLogic
     /// 作為前端應用與資料庫物件的中介層 
     /// 對應 SaGDB.sysparams_tb Table
     /// </summary>
-    public class SysParams:ITableModel<SysParamsM>
+    public class SysParams
     {
         public SysParamsM[] GetValues(string name)
         {
@@ -55,45 +55,95 @@ namespace SaGLogic
             }
         }
 
-        public SysParamsM[] GenerateModel(DataTable dt)
+        private TBSysParams Update(MyDB db, SysParamsM spm)
         {
-            var v = from DataRow row in dt.AsEnumerable()
-                    select new SysParamsM()
-                    {
-                        Id = Convert.ToInt32(row["id"]),
-                        Seq = Convert.ToInt32(row["seq"]),
-                        Name = row["name"].ToString(),
-                        Value = row["value"].ToString()
-                    };
+            TBSysParams tb = new TBSysParams(db, $"Id='{spm.Id}' for update");
 
-            if (v != null)
+            if (tb.RowsCount <= 0)
             {
-                return v.ToArray();
+                DataRow row = tb.Table.NewRow();
+                row["name"] = spm.Name;
+                row["seq"] = spm.Seq;
+                row["value"] = spm.Value;
+                tb.Table.Rows.Add(row);
             }
             else
             {
-                return null;
+                DataRow row = tb.Table.Rows[0];
+                row["name"] = spm.Name;
+                row["seq"] = spm.Seq;
+                row["value"] = spm.Value;
+            }
+
+            return tb;
+        }
+        public bool Update(SysParamsM[] spms)
+        {
+            MyDB db = new MyDB();
+            try
+            {
+                db.OpenDB();
+                IDbTransaction transaction = db.StartTransaction();
+                bool res = true;
+                Array.ForEach(spms, spm =>
+                {
+                    if (!res) { return; }
+
+                    MyTable tb = Update(db, spm);
+                    res = tb.Update();
+                });
+
+                if (res)
+                {
+                    if (db.Commit(transaction))
+                        return true;
+                }
+                return false;
+            }
+            finally
+            {
+                db.CloseDB();
             }
         }
 
-        public DataTable GenerateDataTable(SysParamsM[] models)
+        private TBSysParams Delete(MyDB db, int id)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("seq");
-            dt.Columns.Add("name");
-            dt.Columns.Add("value");
+            TBSysParams tb = new TBSysParams(db, $"Id={id} for update");
 
-            Array.ForEach(models, spm => {
-                DataRow row = dt.NewRow();
-                row["id"] = spm.Id;
-                row["seq"] = spm.Seq;
-                row["name"] = spm.Name;
-                row["value"] = spm.Value;
-                dt.Rows.Add(row);
-            });
+            if (tb.RowsCount > 0)
+            {
+                tb.Table.Rows[0].Delete();
+            }
 
-            return dt;
+            return tb;
+        }
+        public bool Delete(int[] ids)
+        {
+            MyDB db = new MyDB();
+            try
+            {
+                db.OpenDB();
+                IDbTransaction transaction = db.StartTransaction();
+                bool res = true;
+                Array.ForEach(ids, id =>
+                {
+                    if (!res) { return; }
+
+                    MyTable tb = Delete(db, id);
+                    res = tb.Update();
+                });
+
+                if (res)
+                {
+                    if (db.Commit(transaction))
+                        return true;
+                }
+                return false;
+            }
+            finally
+            {
+                db.CloseDB();
+            }
         }
     }
 }

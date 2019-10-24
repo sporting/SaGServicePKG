@@ -2,6 +2,7 @@
 using SaGDB.Tables;
 using SaGModel;
 using SaGUtil;
+using SaGUtil.Data;
 using SaGUtil.System;
 using System;
 using System.Data;
@@ -15,7 +16,7 @@ namespace SaGLogic
     /// 對應 SaGDB.doctor_slide_log_tb Table
     /// 病理醫師分片 Log
     /// </summary>
-    public class DoctorSlideLog : ITableModel<DoctorSlideLogM>
+    public class DoctorSlideLog 
     {
         public bool AddLog(DoctorSlideLogM log)
         {
@@ -119,7 +120,7 @@ namespace SaGLogic
                     db.OpenDB();
 
                     TBDoctorSlideLog tb = new TBDoctorSlideLog(db, $"op_date='{date}'");
-                    return GenerateModel(tb.Table);
+                    return new DoctorSlideLogM().GenerateModel(tb.Table);
                 }
                 catch
                 {
@@ -134,63 +135,5 @@ namespace SaGLogic
             return null;
         }
 
-        public DoctorSlideLogM[] GenerateModel(DataTable dt)
-        {
-            var v = from DataRow row in dt.AsEnumerable()
-                    select new DoctorSlideLogM()
-                    {
-                        Id = Convert.ToInt32(row["id"]),
-                        OrdNo = row["ord_no"].ToString(),
-                        CassetteSequence = Convert.ToInt32(row["cassette_sequence"]),
-                        SlideSequence = Convert.ToInt32(row["slide_sequence"]),
-                        DoctorUser = row["doctor_user"].ToString(),
-                        DoctorDate = row["doctor_date"].ToString(),
-                        DoctorTime = row["doctor_time"].ToString(),
-                        OpDate = row["op_date"].ToString(),
-                        OpTime = row["op_time"].ToString(),
-                        IsDeleteFlag = row["is_delete_flag"].ToString() == "N" ? DeleteFlagEnum.Normal : DeleteFlagEnum.Delete
-                    };
-
-            if (v != null)
-            {
-                return v.ToArray();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public DataTable GenerateDataTable(DoctorSlideLogM[] models)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("id");
-            dt.Columns.Add("ord_no");
-            dt.Columns.Add("cassette_sequence");
-            dt.Columns.Add("slide_sequence");
-            dt.Columns.Add("doctor_user");
-            dt.Columns.Add("doctor_date");
-            dt.Columns.Add("doctor_time");
-            dt.Columns.Add("op_date");
-            dt.Columns.Add("op_time");
-            dt.Columns.Add("is_delete_flag");
-
-            Array.ForEach(models, oslm => {
-                DataRow row = dt.NewRow();
-                row["id"] = oslm.Id;
-                row["ord_no"] = oslm.OrdNo;
-                row["cassette_sequence"] = oslm.CassetteSequence;
-                row["slide_sequence"] = oslm.SlideSequence;
-                row["doctor_user"] = oslm.DoctorUser;
-                row["doctor_date"] = oslm.DoctorDate;
-                row["doctor_time"] = oslm.DoctorTime;
-                row["op_date"] = oslm.OpDate;
-                row["op_time"] = oslm.OpTime;
-                row["is_delete_flag"] = oslm.IsDeleteFlag == DeleteFlagEnum.Normal ? "N" : "D";
-                dt.Rows.Add(row);
-            });
-            
-            return dt;
-        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.System;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SaGBridge
 {
-    public class SysParamsBridge : BaseBridge<string>
+    public class SysParamsBridge : BaseBridge<SysParamsM>
     {
         protected override string Api
         {
@@ -29,7 +30,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?name={name}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {name}");
+            MyLog.Info(this, $"{Api}: {url}: {name}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {name}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             SysParamsM[] res=null;
@@ -50,7 +52,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<SysParamsM[]> { status = false, result = res };
             }
         }

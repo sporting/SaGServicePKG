@@ -45,7 +45,7 @@ namespace SaGLogic
                 else
                 {
                     DataRow row = tb.Table.Rows[0];
-                    counter = Convert.ToInt32(row["counter"].ToString());
+                    counter = SaConverter.ToInt(row["counter"].ToString(),0);
                     counter += 1;
 
                     row["counter"] = counter;

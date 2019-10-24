@@ -79,6 +79,9 @@
     <Compile Include="Tables\TBCassetteWorkStation.cs" />
     <Compile Include="Tables\TBDoctorSlideLog.cs" />
     <Compile Include="Tables\TBCassetteTemplate.cs" />
+    <Compile Include="Tables\TBSysSlideSlot.cs" />
+    <Compile Include="Tables\TBSysCassetteMagazine.cs" />
+    <Compile Include="Tables\TBSysSpecimenStain.cs" />
     <Compile Include="Tables\TBSysParams.cs" />
     <Compile Include="Tables\TBOrderCounter.cs" />
     <Compile Include="Tables\TBOrderEmbedLog.cs" />

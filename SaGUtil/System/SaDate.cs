@@ -23,5 +23,10 @@ namespace SaGUtil.System
         {
             return Today().ToString("HHmmss");
         }
+
+        public static string TodayY()
+        {
+            return Today().ToString("yyyy");
+        }
     }
 }

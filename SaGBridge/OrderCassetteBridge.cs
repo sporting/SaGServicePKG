@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.System;
 using System;
@@ -29,7 +30,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?ordNo={ordNo}&cassetteSeq={cassetteSeq}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo} {cassetteSeq}");
+            MyLog.Info(this, $"{Api}: {url}: {ordNo} {cassetteSeq}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo} {cassetteSeq}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             bool res = false;
@@ -51,7 +53,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<bool> { status = false, result = res,message=ex.Message };
             }
         }
@@ -60,7 +63,8 @@ namespace SaGBridge
         {
             string url = $"{ApiUrl}/?type={type}&begDate={begDate}&endDate={endDate}&user={user}";
 
-            LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
+            MyLog.Info(this, $"{Api}: {url}: {type} {begDate} {endDate} {user}");
+            //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {type} {begDate} {endDate} {user}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
             OrderCassetteM[] res = new OrderCassetteM[] { };
@@ -82,7 +86,8 @@ namespace SaGBridge
             }
             catch (Exception ex)
             {
-                LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
+                MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
+                //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
                 return new BridgeResult<OrderCassetteM[]> { status = false, result = res, message = ex.Message };
             }
         }
