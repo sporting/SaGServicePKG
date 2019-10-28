@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using SaGBridge.Utils;
 using System.Net.Http.Headers;
 using SaGUtil.System;
+using SaGUtil.Utils;
 
 namespace SaGBridge
 {

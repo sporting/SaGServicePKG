@@ -65,16 +65,12 @@ namespace SaGKernel.Specimen
 
         public string[] DistinctSpecimens()
         {
-            return (from SpecimenItem item in _List
-                    select item.SpecimenKind).Distinct().ToArray();
+            return _List.Select(item => item.SpecimenKind).Distinct().ToArray();
         }
 
         public string[] GetStainingMethods(string kind)
         {
-            return (from SpecimenItem item in _List
-                    where item.SpecimenKind==kind
-                    orderby item.Sequence
-                    select item.StainingMethod).ToArray();
+            return _List.Where(item => item.SpecimenKind == kind).OrderBy(item => item.Sequence).Select(item => item.StainingMethod).ToArray();            
         }
 
         //csv 檔案格式如下

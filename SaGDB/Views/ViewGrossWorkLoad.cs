@@ -24,11 +24,11 @@ namespace SaGDB.Views
                 string sql = string.Empty;
                 if (string.IsNullOrEmpty(grossUser))
                 {
-                    sql = $"SELECT gross_date date,gross_user user,count(*) total FROM {SchemaName}.order_cassette_tb WHERE gross_date>='{begDate}' and gross_date<='{endDate}' group by gross_date,gross_user";
+                    sql = $"SELECT gross_date date,gross_user as user,count(*) total FROM {SchemaName}.order_cassette_tb WHERE gross_date>='{begDate}' and gross_date<='{endDate}' group by gross_date,gross_user";
                 }
                 else
                 {
-                    sql = $"SELECT gross_date date,gross_user user,count(*) total FROM {SchemaName}.order_cassette_tb WHERE gross_date>='{begDate}' and gross_date<='{endDate}' and gross_user='{grossUser}' group by gross_date,gross_user";
+                    sql = $"SELECT gross_date date,gross_user as user,count(*) total FROM {SchemaName}.order_cassette_tb WHERE gross_date>='{begDate}' and gross_date<='{endDate}' and gross_user='{grossUser}' group by gross_date,gross_user";
                 }
 
                 return GetView(db,sql);

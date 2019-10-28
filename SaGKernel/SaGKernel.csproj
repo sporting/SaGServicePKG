@@ -65,7 +65,6 @@
     <Compile Include="Specimen\SpecimenCollection.cs" />
     <Compile Include="UI\CassetteColor.cs" />
     <Compile Include="UI\CassetteColors.cs" />
-    <Compile Include="Utils\MyLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lib\LCPMS15Lib\LCPMS15Lib.csproj">
@@ -80,6 +79,9 @@
       <Project>{5dd96848-8f84-46b8-a95e-c9eb3858a753}</Project>
       <Name>SaGUtil</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

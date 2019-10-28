@@ -88,7 +88,7 @@ namespace PPMSXLib.Format
         public static SlideFormat[] GenerateSlideFormat(CSFilterClassify csFilterChooseser,SlideSettings settings, string pathoNo, string specimen, string subSequence)
         {
             SampleQRDataStruct css = new SampleQRDataStruct(pathoNo, 0, 0, specimen, subSequence, string.Empty);
-            int slideMagazine = SlideSettingsApi.SlideValue(settings, css.SpecimenMajorClass);
+            int slideMagazine = SlideSettingsApi.SlideMappingValue(settings, css.SpecimenMajorClass);
 
             csFilterChooseser.SetSlideEnvironment(new SlideEnvironment(settings.LayoutName, settings.PrinterName, slideMagazine));
             SlideFormat[] smmhs = csFilterChooseser.MatchRule2GetSlides(new CassetteSampleFormat(string.Empty, string.Empty, pathoNo, 0, specimen, subSequence, string.Empty));

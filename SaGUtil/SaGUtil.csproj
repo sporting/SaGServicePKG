@@ -83,8 +83,10 @@
     <Compile Include="Extensions\SaObjectExt.cs" />
     <Compile Include="IO\SaFile.cs" />
     <Compile Include="Lib\SingletonProvider.cs" />
+    <Compile Include="MyLog.cs" />
     <Compile Include="Network\SaMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForm\SaAssembly.cs" />
     <Compile Include="Security\SaCryptography.cs" />
     <Compile Include="System\SaEnumVal.cs" />
     <Compile Include="System\SaLogMan.cs" />

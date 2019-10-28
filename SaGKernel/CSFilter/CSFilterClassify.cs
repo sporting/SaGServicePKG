@@ -8,7 +8,7 @@ using System.Reflection;
 using SaGKernel.Specimen;
 using SaGKernel.Config;
 using System.IO;
-using SaGKernel.Utils;
+using SaGUtil.Utils;
 
 namespace SaGKernel.CSFilter
 {
@@ -32,7 +32,19 @@ namespace SaGKernel.CSFilter
         }
         public void SetSpecimenCollection(SpecimenCollection sc)
         {
-            _Sc = sc;
+            _Sc = sc;            
+
+            if (_Sc != null)
+            {
+                foreach (ICassetteToSlideFilter csf in _CsFilters)
+                {
+                    PropertyInfo info = csf.GetType().GetProperty("SPCollection");
+                    if (info != null)
+                    {
+                        info.SetValue(csf, _Sc, null);
+                    }
+                }                
+            }
         }
 
         private void LoadAssembly()

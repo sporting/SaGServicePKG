@@ -2,14 +2,12 @@
 using SaGBridge.Utils;
 using SaGModel;
 using SaGUtil.Network;
-using SaGUtil.System;
+using SaGUtil.Utils;
+using SaGUtil.WinForm;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,14 +28,14 @@ namespace SaGComs
                 _statusLabelOpUser.Text = string.IsNullOrEmpty(_opUser) ? "" : $"操作人員: {_opUser}";
             }
         }
-        public string AssemblyName
-        {
-            get
-            {
-                return $"{Assembly.GetExecutingAssembly().GetName().Name} {Application.ProductVersion}";
-                //return $"{AppDomain.CurrentDomain.FriendlyName} {Application.ProductVersion}";
-            }
-        }
+        //public string AssemblyName
+        //{
+        //    get
+        //    {
+        //        return $"{Assembly.GetExecutingAssembly().GetName().Name} {Application.ProductVersion}";
+        //        //return $"{AppDomain.CurrentDomain.FriendlyName} {Application.ProductVersion}";
+        //    }
+        //}
         private string _token = string.Empty;
 
         public string ServiceToken
@@ -180,8 +178,8 @@ namespace SaGComs
                 }
             }
 
-            Text = $"{Text} {Application.ProductVersion}";
-
+            Text = $"{Text} {ProductVersion}";
+            
             FormLoad(sender,e);
         }
 
@@ -247,7 +245,7 @@ namespace SaGComs
             {
                 LoginBridge lb = new LoginBridge(string.Empty);
 
-                BridgeResult<ApLoginRequest> res = await lb.Post(new ApLoginRequest { App = AssemblyName, ApMachine = SaMachine.Get(), LoginUser = OpUser });
+                BridgeResult<ApLoginRequest> res = await lb.Post(new ApLoginRequest { App = $"{SaAssembly.EntryName} {SaAssembly.ProductVersion}", ApMachine = SaMachine.Get(), LoginUser = OpUser });
 
                 if (!res.status)
                 {

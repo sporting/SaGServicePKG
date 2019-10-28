@@ -1,11 +1,13 @@
 ﻿using SaGUtil.System;
+using SaGUtil.WinForm;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
-namespace SaGBridge.Utils
+namespace SaGUtil.Utils
 {
     public sealed class MyLog
     {
-        static string LogName = "SaGBridge";
+        static string LogName = SaAssembly.EntryName;
         //Info 使用時機: 程式掌控中的提示訊息
         public static void Info(object sender, string message,
             [CallerMemberName] string memberName = "",

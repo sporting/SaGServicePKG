@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Format\SlideEnvironment.cs" />
-    <Compile Include="MyLog.cs" />
     <Compile Include="PPMSXData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Format\SlideFormat.cs" />

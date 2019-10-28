@@ -77,7 +77,7 @@ namespace SaGLogic
 
         public TBOrderCassette Update(MyDB db, OrderGrossLogM log)
         {
-            TBOrderCassette tb = new TBOrderCassette(db, $"Id='{log.Id}' for update");
+            TBOrderCassette tb = new TBOrderCassette(db, $"ord_no='{log.OrdNo}' and cassette_sequence={log.CassetteSequence} for update");
 
             if (tb.RowsCount > 0)
             {
@@ -117,6 +117,7 @@ namespace SaGLogic
 
                 newSlideSeq = SaConverter.ToInt(row["slide_total_amount"], 1);
             }
+
 
             return tb;
         }

@@ -24,11 +24,11 @@ namespace SaGDB.Views
                 string sql = string.Empty;
                 if (string.IsNullOrEmpty(slideUser))
                 {
-                    sql = $"SELECT op_date date,slide_user user,slide_fieldA,slide_fieldB,count(*) total FROM {SchemaName}.order_slide_tb WHERE op_date>='{begDate}' and op_date<='{endDate}' group by op_date,slide_user,slide_fieldA,slide_fieldB";
+                    sql = $"SELECT op_date date,slide_user as user,slide_fieldA,slide_fieldB,count(*) total FROM {SchemaName}.order_slide_tb WHERE op_date>='{begDate}' and op_date<='{endDate}' group by op_date,slide_user,slide_fieldA,slide_fieldB";
                 }
                 else
                 {
-                    sql = $"SELECT op_date date,slide_user user,slide_fieldA,slide_fieldB,count(*) total FROM {SchemaName}.order_slide_tb WHERE op_date>='{begDate}' and op_date<='{endDate}' and slide_user='{slideUser}' group by op_date,slide_user,slide_fieldA,slide_fieldB";
+                    sql = $"SELECT op_date date,slide_user as user,slide_fieldA,slide_fieldB,count(*) total FROM {SchemaName}.order_slide_tb WHERE op_date>='{begDate}' and op_date<='{endDate}' and slide_user='{slideUser}' group by op_date,slide_user,slide_fieldA,slide_fieldB";
                 }
 
                 return GetView(db,sql);

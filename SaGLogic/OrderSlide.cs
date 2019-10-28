@@ -75,7 +75,7 @@ namespace SaGLogic
 
         public TBOrderSlide Update(MyDB db, DoctorSlideLogM log)
         {
-            TBOrderSlide tb = new TBOrderSlide(db, $"Id='{log.Id}' for update");
+            TBOrderSlide tb = new TBOrderSlide(db, $"ord_no='{log.OrdNo}' and cassette_sequence='{log.CassetteSequence}' and slide_sequence='{log.SlideSequence}' for update");
 
             if (tb.RowsCount > 0)
             {

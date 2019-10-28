@@ -59,7 +59,6 @@
     <Compile Include="PreLoader\SysSpecimenStainValidBridge.cs" />
     <Compile Include="PreLoader\SysSpecimenStainBridge.cs" />
     <Compile Include="PreLoader\SysCassetteMagazineBridge.cs" />
-    <Compile Include="Utils\MyLog.cs" />
     <Compile Include="WorkLoadBridge.cs" />
     <Compile Include="SysParamsBridge.cs" />
     <Compile Include="OrderSlideBridge.cs" />

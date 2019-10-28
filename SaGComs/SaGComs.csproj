@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SaGModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\SaGModel\bin\Release\SaGModel.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -73,6 +69,10 @@
     <ProjectReference Include="..\SaGBridge\SaGBridge.csproj">
       <Project>{2C399567-C233-4BF9-9638-F6568D47FB0E}</Project>
       <Name>SaGBridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaGModel\SaGModel.csproj">
+      <Project>{c4e7d3f7-c873-432b-8a3d-77e868261471}</Project>
+      <Name>SaGModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\SaGUtil\SaGUtil.csproj">
       <Project>{5dd96848-8f84-46b8-a95e-c9eb3858a753}</Project>
