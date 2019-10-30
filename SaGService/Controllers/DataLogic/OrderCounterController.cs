@@ -28,11 +28,11 @@ namespace SaGService.Controllers
         }
 
         //Get api/OrderCounter/?ordNo=xxx
-        public IHttpActionResult GetExist(string ordNo)
+        public IHttpActionResult GetExist(string headTag, string headYear, string tailSeq)
         {
             OrderCounter counter = new OrderCounter();
             
-            if (!counter.GetExist(ordNo))
+            if (!counter.GetExist( headTag,  headYear,  tailSeq))
             {
                 return NotFound();
             }

@@ -67,22 +67,22 @@ namespace SaGLogic
             }           
         }
 
-        public bool GetExist(string ordNo)
+        public bool GetExist(string headTag, string headYear, string tailSeq)
         {
-            if (ordNo.Length < 9 || ordNo.Length > 10)
-            {
-                return false;
-            }
+            //if (ordNo.Length < 9 || ordNo.Length > 10)
+            //{
+            //    return false;
+            //}
 
-            if (ordNo.IndexOf("-") < 0)
-            {
-                return false;
-            }
+            //if (ordNo.IndexOf("-") < 0)
+            //{
+            //    return false;
+            //}
 
-            string head = ordNo.Substring(0, ordNo.IndexOf("-"));
-            string headYear = head.Substring(head.Length - 2, 2);
-            string headTag = head.Substring(0, head.Length - 2);
-            int tailSeq = SaConverter.ToInt(ordNo.Substring(ordNo.IndexOf("-") + 1, 5), 0);
+            //string head = ordNo.Substring(0, ordNo.IndexOf("-"));
+            //string headYear = head.Substring(head.Length - 2, 2);
+            //string headTag = head.Substring(0, head.Length - 2);
+            //int tailSeq = SaConverter.ToInt(ordNo.Substring(ordNo.IndexOf("-") + 1, 5), 0);
 
             MyDB db = new MyDB();
             try

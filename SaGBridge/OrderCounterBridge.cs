@@ -27,11 +27,11 @@ namespace SaGBridge
             
         }
 
-        public async Task<BridgeResult<bool>> GetExist(string ordNo)
+        public async Task<BridgeResult<bool>> GetExist(string headTag, string headYear, string tailSeq)
         {
-            string url = $"{ApiUrl}/?ordNo={ordNo}";
+            string url = $"{ApiUrl}/?headTag={headTag}&headYear={headYear}&tailSeq={tailSeq}";
 
-            MyLog.Info(this, $"{Api}: {url}: {ordNo}");
+            MyLog.Info(this, $"{Api}: {url}");
             //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {ordNo}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
