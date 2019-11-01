@@ -1,5 +1,4 @@
-﻿using SaGBridge;
-using SaGBridge.Utils;
+﻿using SaGCSBridge;
 using SaGModel;
 using SaGUtil.Network;
 using SaGUtil.Utils;
@@ -13,7 +12,7 @@ using System.Windows.Forms;
 
 namespace SaGComs
 {
-    public  class APClientForm : Form
+    public  class APClientCSForm : Form
     {
         private string _opUser = string.Empty;
         public string OpUser
@@ -98,7 +97,7 @@ namespace SaGComs
         ToolStripStatusLabel _statusLabel;
         ToolStripStatusLabel _statusLabelOpUser;
         ToolStripStatusLabel _statusLabelDateTime;
-        public APClientForm()
+        public APClientCSForm()
         {
             InitializeComponent();            
 
@@ -126,7 +125,6 @@ namespace SaGComs
             this.PerformLayout();
 
             ServiceToken = string.Empty;
-
         }
 
         private Timer _timer;
@@ -247,7 +245,7 @@ namespace SaGComs
             {
                 LoginBridge lb = new LoginBridge(string.Empty);
 
-                BridgeResult<ApLoginRequest> res = await lb.Post(new ApLoginRequest { App = $"{SaAssembly.EntryName} {SaAssembly.ProductVersion}", ApMachine = SaMachine.Get(), LoginUser = OpUser });
+                BridgeResult<ApLoginRequest> res = await lb.Login(new ApLoginRequest { App = $"{SaAssembly.EntryName} {SaAssembly.ProductVersion}", ApMachine = SaMachine.Get(), LoginUser = OpUser });
 
                 if (!res.status)
                 {

@@ -46,7 +46,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                MyLog.Error(this, "SysParamsM Add failed");
+                MyLog.Error(this, "SysParams Add failed");
                 return BadRequest();
             }
         }
@@ -68,7 +68,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                MyLog.Error(this, "SysParamsM Delete failed");
+                MyLog.Error(this, "SysParams Delete failed");
                 return BadRequest();
             }
         }

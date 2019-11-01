@@ -15,15 +15,15 @@ namespace SaGService.Controllers
         public IHttpActionResult GetNext(string head,string yyyy)
         {
             OrderCounter counter = new OrderCounter();
-            string nextCount = counter.GetNextOrderCount(head, yyyy);
+            int nextCount = counter.GetNextOrderCount(head, yyyy);
 
-            if (string.IsNullOrEmpty(nextCount))
+            if (nextCount==0)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(nextCount);
+                return Ok(nextCount.ToString());
             }
         }
 

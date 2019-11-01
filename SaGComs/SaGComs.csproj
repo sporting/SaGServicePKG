@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APClientCSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="APClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +61,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReportCSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportCSForm.Designer.cs">
+      <DependentUpon>ReportCSForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,8 +75,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SaGCSBridge\SaGCSBridge.csproj">
+      <Project>{368481fc-e153-44c5-81ed-44a47d40962a}</Project>
+      <Name>SaGCSBridge</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SaGBridge\SaGBridge.csproj">
-      <Project>{2C399567-C233-4BF9-9638-F6568D47FB0E}</Project>
+      <Project>{2c399567-c233-4bf9-9638-f6568d47fb0e}</Project>
       <Name>SaGBridge</Name>
     </ProjectReference>
     <ProjectReference Include="..\SaGModel\SaGModel.csproj">
@@ -80,6 +93,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="APClientCSForm.resx">
+      <DependentUpon>APClientCSForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="APClientForm.resx">
       <DependentUpon>APClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +105,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportCSForm.resx">
+      <DependentUpon>ReportCSForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>

@@ -47,6 +47,9 @@
     <Compile Include="Config\CustomModelSection.cs" />
     <Compile Include="Config\CustomModelElement.cs" />
     <Compile Include="Config\CustomModelElementCollection.cs" />
+    <Compile Include="Config\SpecimenConfig.cs" />
+    <Compile Include="Config\SpecimenElement.cs" />
+    <Compile Include="Config\SpecimenSection.cs" />
     <Compile Include="CSFilter\CSFilterClassify.cs" />
     <Compile Include="CSFilter\ICassetteToSlideFilter.cs" />
     <Compile Include="Settings\CassetteSettings.cs" />

@@ -52,7 +52,7 @@ namespace SaGService.Controllers
             }
             else
             {
-                MyLog.Error(this, "SysParamsM Delete failed");
+                MyLog.Error(this, "SysCassetteMagazine Delete failed");
                 return BadRequest();
             }
         }

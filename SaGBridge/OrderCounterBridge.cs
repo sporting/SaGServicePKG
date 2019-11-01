@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SaGBridge.Utils;
 using SaGModel;
+using SaGUtil.Data;
 using SaGUtil.System;
 using SaGUtil.Utils;
 using System;
@@ -59,7 +60,7 @@ namespace SaGBridge
             }
         }
 
-        public async Task<BridgeResult<string>> Get(string head, string yyyy)
+        public async Task<BridgeResult<int>> Get(string head, string yyyy)
         {
             string url = $"{ApiUrl}/?head={head}&yyyy={yyyy}";
 
@@ -67,7 +68,7 @@ namespace SaGBridge
             //LogMan.Instance.Info(Api, $"{Api}: Get: {url}: {head} {yyyy}");
 
             HttpResponseMessage response = await Client.GetAsync(url);
-            string res = string.Empty;
+            string res = "0";
             try
             {
                 response.EnsureSuccessStatusCode();
@@ -81,13 +82,13 @@ namespace SaGBridge
                 {
                 }
 
-                return new BridgeResult<string> { status = true, result = res };
+                return new BridgeResult<int> { status = true, result = SaConverter.ToInt(res,0) };
             }
             catch (Exception ex)
             {
                 MyLog.Fatal(this, $"{Api}: {url}: {ex.Message}");
                 //LogMan.Instance.Error(Api, $"{Api}: {url}: {ex.Message}");
-                return new BridgeResult<string> { status = false, result = res };
+                return new BridgeResult<int> { status = false, result = SaConverter.ToInt(res, 0) };
             }
         }
     }

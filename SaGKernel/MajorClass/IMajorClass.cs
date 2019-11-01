@@ -26,6 +26,7 @@ namespace SaGKernel.MajorClass
     {
         SkinMC, //皮膚
         FsMC, //冷凍切片
+        EMRMC, //急作檢體
         DefaultMC //預設
     }
 }
