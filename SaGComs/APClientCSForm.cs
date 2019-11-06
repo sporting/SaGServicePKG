@@ -6,6 +6,7 @@ using SaGUtil.WinForm;
 using System;
 using System.ComponentModel.Design;
 using System.Drawing;
+using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -222,7 +223,9 @@ namespace SaGComs
             //    _statusLabel.ForeColor = Color.Red;
             //    _statusLabel.Text = "Service Not Active!!!";
             //}
-            _statusLabelDateTime.Text = Now.ToString("MM/dd HH:mm:ss");
+            _statusLabelDateTime.Text = Now.ToString("MM/dd (ddd) HH:mm:ss");
+            //_statusLabelDateTime.Text = Now.ToString("F",
+            //CultureInfo.CreateSpecificCulture("zh-TW"));
 
             ApplicationIdle(sender, e);
         }

@@ -224,7 +224,8 @@ namespace SaGComs
             //    _statusLabel.ForeColor = Color.Red;
             //    _statusLabel.Text = "Service Not Active!!!";
             //}
-            _statusLabelDateTime.Text = Now.ToString("MM/dd HH:mm:ss");
+            _statusLabelDateTime.Text = Now.ToString("MM/dd (ddd) HH:mm:ss");
+            //_statusLabelDateTime.Text = Now.ToString("MM/dd HH:mm:ss");
 
             ApplicationIdle(sender, e);
         }
