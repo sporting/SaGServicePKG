@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using SaGUtil.Utils;
 
 namespace SaGUtil.Extensions
 {
@@ -187,7 +188,8 @@ namespace SaGUtil.Extensions
                 return true;
             }
             catch (Exception ex)
-            {                
+            {
+                MyLog.Fatal(dgv, ex.Message);
                 return false;
             }
         }
@@ -217,6 +219,7 @@ namespace SaGUtil.Extensions
             }
             catch (Exception ex)
             {
+                MyLog.Fatal(dgv, ex.Message);
                 return false;
             }
         }
@@ -271,6 +274,7 @@ namespace SaGUtil.Extensions
             }
             catch (Exception ex)
             {
+                MyLog.Fatal(dgv, ex.Message);
                 return false;
             }
         }

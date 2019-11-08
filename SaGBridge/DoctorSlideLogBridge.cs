@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using SaGBridge.Utils;
+﻿using SaGBridge.Utils;
 using SaGModel;
+using SaGUtil.Json;
 using SaGUtil.System;
 using SaGUtil.Utils;
 using System;
@@ -33,7 +33,7 @@ namespace SaGBridge
         // http://host/api/[Api]/
         public async Task<BridgeResult<DoctorSlideLogM[]>> PostAll(DoctorSlideLogM[] data)
         {
-            string js = JsonConvert.SerializeObject(data);
+            string js = SaJson.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
             MyLog.Info(this, $"{Api}: {ApiUrl}: {js}");
@@ -48,7 +48,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<DoctorSlideLogM[]>(responseBody);
+                    res = SaJson.DeserializeObject<DoctorSlideLogM[]>(responseBody);
                 }
                 catch
                 {
@@ -79,7 +79,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<DoctorSlideLogM[]>(responseBody);
+                    res = SaJson.DeserializeObject<DoctorSlideLogM[]>(responseBody);
                 }
                 catch
                 {

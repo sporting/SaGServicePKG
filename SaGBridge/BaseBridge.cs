@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
-using Newtonsoft.Json;
 using SaGBridge.Utils;
 using System.Net.Http.Headers;
 using SaGUtil.System;
 using SaGUtil.Utils;
+using SaGUtil.Json;
 
 namespace SaGBridge
 {
@@ -74,7 +74,7 @@ namespace SaGBridge
             {
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                List<T> result = JsonConvert.DeserializeObject<List<T>>(responseBody);
+                List<T> result = SaJson.DeserializeObject<List<T>>(responseBody);
                 return new BridgeResult<T[]> { status = true,message=string.Empty, result = result.ToArray() };
             }
             catch (Exception ex)
@@ -103,7 +103,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<T>(responseBody);
+                    res = SaJson.DeserializeObject<T>(responseBody);
                 }
                 catch
                 {
@@ -136,7 +136,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<T>(responseBody);
+                    res = SaJson.DeserializeObject<T>(responseBody);
                 }
                 catch
                 {
@@ -158,7 +158,7 @@ namespace SaGBridge
         public async Task<BridgeResult<T>> Put(int id, T data)
         {
             string url = $"{ApiUrl}/{id.ToString()}";
-            string js = JsonConvert.SerializeObject(data);
+            string js = SaJson.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
             MyLog.Info(this, $"{Api}: {url}: {id}");
@@ -172,7 +172,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();                    
-                    res = JsonConvert.DeserializeObject<T>(responseBody);
+                    res = SaJson.DeserializeObject<T>(responseBody);
                 }
                 catch
                 {
@@ -193,7 +193,7 @@ namespace SaGBridge
         // http://host/api/[Api]/
         public async Task<BridgeResult<T>> Post(T data)
         {
-            string js = JsonConvert.SerializeObject(data);
+            string js = SaJson.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
             MyLog.Info(this, $"{Api}: {ApiUrl}: {js}");
@@ -208,7 +208,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<T>(responseBody);
+                    res = SaJson.DeserializeObject<T>(responseBody);
                 }
                 catch
                 {
@@ -228,7 +228,7 @@ namespace SaGBridge
         // http://host/api/[Api]/
         public async Task<BridgeResult<T[]>> Post(T[] data)
         {
-            string js = JsonConvert.SerializeObject(data);
+            string js = SaJson.SerializeObject(data);
             StringContent content = new StringContent(js, Encoding.UTF8, "application/json");
 
             MyLog.Info(this, $"{Api}: {ApiUrl}: {js}");
@@ -243,7 +243,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<T[]>(responseBody);
+                    res = SaJson.DeserializeObject<T[]>(responseBody);
                 }
                 catch
                 {

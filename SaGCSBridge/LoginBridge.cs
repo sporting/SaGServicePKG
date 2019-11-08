@@ -87,8 +87,7 @@ namespace SaGCSBridge
             try
             {
                 SysLog syslog = new SysLog();
-                syslog.Add(new SysLogM() { EventName = "Login", Params = $"App='{loginRequest.App}',User='{loginRequest.LoginUser}',IP='{loginRequest.ApMachine.IP}',Name='{loginRequest.ApMachine.MachineName}',result={v.ToString()},msg='{msg}'" });
-                return true;
+                return syslog.Add(new SysLogM() { EventName = "Login", Params = $"App='{loginRequest.App}',User='{loginRequest.LoginUser}',IP='{loginRequest.ApMachine.IP}',Name='{loginRequest.ApMachine.MachineName}',result={v.ToString()},msg='{msg}'" });
             }
             catch (Exception ex)
             {

@@ -3,6 +3,7 @@ using SaGDB.Tables;
 using SaGModel;
 using SaGUtil.Data;
 using SaGUtil.System;
+using SaGUtil.Utils;
 using System;
 using System.Data;
 using System.Linq;
@@ -43,6 +44,11 @@ namespace SaGLogic
                         return true; ;
                 }
 
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
                 return false;
             }
             finally

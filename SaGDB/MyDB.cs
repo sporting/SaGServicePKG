@@ -19,9 +19,16 @@ namespace SaGDB
 
         public MyDB()
         {
-            _factory = DbProviderFactories.GetFactory(AppSettings.MyDBProviderName);
-            _conn = _factory.CreateConnection();
-            _conn.ConnectionString = AppSettings.MyDBConnectionString;
+            try
+            {
+                _factory = DbProviderFactories.GetFactory(AppSettings.MyDBProviderName);
+                _conn = _factory.CreateConnection();
+                _conn.ConnectionString = AppSettings.MyDBConnectionString;
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+            }
         }
 
         public bool IsOpen

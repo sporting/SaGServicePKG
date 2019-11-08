@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using SaGModel;
+﻿using SaGModel;
 using SaGUtil.System;
 using System;
 using System.Collections.Generic;

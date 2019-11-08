@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿
 using SaGBridge.Utils;
 using SaGModel;
+using SaGUtil.Json;
 using SaGUtil.System;
 using SaGUtil.Utils;
 using System;
@@ -43,7 +44,7 @@ namespace SaGBridge
                 try
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    res = JsonConvert.DeserializeObject<bool>(responseBody);
+                    res = SaJson.DeserializeObject<bool>(responseBody);
                 }
                 catch
                 {
