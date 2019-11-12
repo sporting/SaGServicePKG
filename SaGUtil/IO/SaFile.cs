@@ -29,7 +29,7 @@ namespace SaGUtil.IO
             if (Directory.Exists(outputFolder))
             {
                 string uniqueFileName = DateTime.Now.Ticks.ToString();
-                uniqueFileName = string.Concat(uniqueFileName,string.IsNullOrEmpty(fileNameExt) ? "" : $".{fileNameExt}");
+                uniqueFileName = string.Concat(uniqueFileName,string.IsNullOrEmpty(fileNameExt) ? "" : $"{fileNameExt}");
 
                 string outputFileName = Path.Combine(outputFolder, uniqueFileName);
 
