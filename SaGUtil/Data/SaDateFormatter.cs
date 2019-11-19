@@ -43,5 +43,24 @@ namespace SaGUtil.Data
                 return string.Concat(s.Substring(0, 2), ":", s.Substring(2, 2));
             return s;
         }
+
+        public static string SubMonthDay(string s, string delimiter = "/")
+        {
+            if (string.IsNullOrEmpty(s))
+                return string.Empty;
+
+            return StrToDateTime(s).ToString(string.Format("MM{0}dd", delimiter));
+        }
+        public static string SubHourMinute(string s)
+        {
+            if (s.Length >= 4)
+            {
+                return TimeFormat(s.Substring(0, 4));
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
     }
 }

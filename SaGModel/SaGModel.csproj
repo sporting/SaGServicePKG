@@ -46,9 +46,11 @@
     <Compile Include="DeleteFlagEnum.cs" />
     <Compile Include="DoctorSlideLogM.cs" />
     <Compile Include="ITableModel.cs" />
+    <Compile Include="SysUserM.cs" />
     <Compile Include="SysSlideSlotM.cs" />
     <Compile Include="SysCassetteMagazineM.cs" />
     <Compile Include="SysSpecimenStainM.cs" />
+    <Compile Include="BarcodeCassetteMV.cs" />
     <Compile Include="WorkLoadMV.cs" />
     <Compile Include="SysParamsM.cs" />
     <Compile Include="SysLogM.cs" />

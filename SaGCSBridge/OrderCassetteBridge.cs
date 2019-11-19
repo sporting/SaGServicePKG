@@ -4,6 +4,7 @@ using SaGUtil.System;
 using SaGUtil.Utils;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -21,9 +22,9 @@ namespace SaGCSBridge
             }
         }
 
-        public OrderCassetteBridge(string token):base(token)
+        public OrderCassetteBridge(string token) : base(token)
         {
-            
+
         }
         public async Task<BridgeResult<OrderCassetteM>> AddCassette(OrderCassetteM log)
         {
@@ -50,7 +51,7 @@ namespace SaGCSBridge
                         message = "OrderCassette Add Error",
                         result = log
                     });
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -69,7 +70,7 @@ namespace SaGCSBridge
             try
             {
                 OrderCassette order = new OrderCassette();
-                
+
                 return await Task.FromResult(new BridgeResult<bool>
                 {
                     status = true,
@@ -113,7 +114,7 @@ namespace SaGCSBridge
                         result = order.GetEmbedDetail(begDate, endDate, user)
                     });
                 }
-                
+
                 return await Task.FromResult(new BridgeResult<OrderCassetteM[]>
                 {
                     status = false,
@@ -130,6 +131,107 @@ namespace SaGCSBridge
                     message = ex.Message,
                     result = new OrderCassetteM[] { }
                 });
+            }
+        }
+
+        public async Task<BridgeResult<DataTable>> GetGroupByDate(string begDate, string endDate)
+        {
+            try
+            {
+                OrderCassette order = new OrderCassette();
+
+                return await Task.FromResult(new BridgeResult<DataTable>
+                {
+                    status = true,
+                    message = string.Empty,
+                    result = order.GetCassettesGroup(begDate, endDate)
+                });
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+                return await Task.FromResult(new BridgeResult<DataTable>
+                {
+                    status = false,
+                    message = ex.Message,
+                    result = null
+                });
+            }
+        }
+
+        public async Task<BridgeResult<DataTable>> GetGroupByPathoNo(string pathoNo)
+        {
+            try
+            {
+                OrderCassette order = new OrderCassette();
+
+                return await Task.FromResult(new BridgeResult<DataTable>
+                {
+                    status = true,
+                    message = string.Empty,
+                    result = order.GetCassettesGroup(pathoNo)
+                });
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+                return await Task.FromResult(new BridgeResult<DataTable>
+                {
+                    status = false,
+                    message = ex.Message,
+                    result = null
+                });
+            }
+        }
+        public async Task<BridgeResult<OrderCassetteM[]>> GetDataByOrdNo(string ordNo)
+        {
+            try
+            {
+                OrderCassette order = new OrderCassette();
+
+                return await Task.FromResult(new BridgeResult<OrderCassetteM[]>
+                {
+                    status = true,
+                    message = string.Empty,
+                    result = order.GetCassettes(ordNo)
+                });
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+                return await Task.FromResult(new BridgeResult<OrderCassetteM[]>
+                {
+                    status = false,
+                    message = ex.Message,
+                    result = null
+                });
+
+            }
+        }
+
+        public async Task<BridgeResult<OrderCassetteM[]>> GetDataByOrdNo(string ordNo,int cassetteSequence)
+        {
+            try
+            {
+                OrderCassette order = new OrderCassette();
+
+                return await Task.FromResult(new BridgeResult<OrderCassetteM[]>
+                {
+                    status = true,
+                    message = string.Empty,
+                    result = order.GetCassettes(ordNo, cassetteSequence)
+                });
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+                return await Task.FromResult(new BridgeResult<OrderCassetteM[]>
+                {
+                    status = false,
+                    message = ex.Message,
+                    result = null
+                });
+
             }
         }
     }

@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DoctorSlideLog.cs" />
     <Compile Include="DoctorSlideWorkLoadV.cs" />
+    <Compile Include="BarcodeCassetteV.cs" />
+    <Compile Include="SysUser.cs" />
     <Compile Include="SysSlideSlot.cs" />
     <Compile Include="SysCassetteMagazine.cs" />
     <Compile Include="SysSpecimenStain.cs" />

@@ -79,6 +79,7 @@
     <Compile Include="Tables\TBCassetteWorkStation.cs" />
     <Compile Include="Tables\TBDoctorSlideLog.cs" />
     <Compile Include="Tables\TBCassetteTemplate.cs" />
+    <Compile Include="Tables\TBSysUser.cs" />
     <Compile Include="Tables\TBSysSlideSlot.cs" />
     <Compile Include="Tables\TBSysCassetteMagazine.cs" />
     <Compile Include="Tables\TBSysSpecimenStain.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Tables\TBOrderSlide.cs" />
     <Compile Include="Utils\AppSettings.cs" />
     <Compile Include="Utils\MyLog.cs" />
+    <Compile Include="Views\ViewBarcodeCassette.cs" />
     <Compile Include="Views\ViewSlideWorkLoad.cs" />
     <Compile Include="Views\ViewDoctorSlideWorkLoad.cs" />
     <Compile Include="Views\ViewEmbedWorkLoad.cs" />

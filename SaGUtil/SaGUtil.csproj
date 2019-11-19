@@ -77,16 +77,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\SaAppSettings.cs" />
+    <Compile Include="Data\SaArray.cs" />
     <Compile Include="Data\SaConverter.cs" />
     <Compile Include="Data\SaDateFormatter.cs" />
     <Compile Include="Extensions\SaDataGridViewExt.cs" />
+    <Compile Include="Extensions\SaIEnumerableExt.cs" />
     <Compile Include="Extensions\SaObjectExt.cs" />
+    <Compile Include="IO\SaDirectory.cs" />
     <Compile Include="IO\SaFile.cs" />
     <Compile Include="Json\SaJson.cs" />
     <Compile Include="Lib\SingletonProvider.cs" />
     <Compile Include="MyLog.cs" />
     <Compile Include="Network\SaMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Drawing\SaColor.cs" />
     <Compile Include="WinForm\SaAssembly.cs" />
     <Compile Include="Security\SaCryptography.cs" />
     <Compile Include="System\SaEnumVal.cs" />

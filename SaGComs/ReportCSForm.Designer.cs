@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportCSForm));
             this.toolstrip = new System.Windows.Forms.ToolStrip();
             this.tsbQuery = new System.Windows.Forms.ToolStripButton();
             this.tsbClear = new System.Windows.Forms.ToolStripButton();
@@ -156,6 +156,7 @@
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
+            this.dgvData.AllowUserToResizeRows = false;
             this.dgvData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -173,7 +174,7 @@
             this.saveFileDialog1.RestoreDirectory = true;
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
-            // ReportForm
+            // ReportCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,8 +182,9 @@
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolstrip);
             this.Font = new System.Drawing.Font("新細明體", 9F);
-            this.Name = "ReportForm";
+            this.Name = "ReportCSForm";
             this.Text = "ReportForm";
+            this.Load += new System.EventHandler(this.ReportCSForm_Load);
             this.toolstrip.ResumeLayout(false);
             this.toolstrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -205,7 +207,7 @@
         protected System.Windows.Forms.Panel panel1;
         protected System.Windows.Forms.ToolStrip toolstrip;
         protected System.Windows.Forms.SplitContainer splitContainer1;
-        protected System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        public System.Windows.Forms.DataGridView dgvData;
     }
 }

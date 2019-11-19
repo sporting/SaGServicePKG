@@ -73,6 +73,12 @@
     <Compile Include="ReportForm.Designer.cs">
       <DependentUpon>ReportForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucProgressState.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucProgressState.Designer.cs">
+      <DependentUpon>ucProgressState.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SaGCSBridge\SaGCSBridge.csproj">
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForm.resx">
       <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucProgressState.resx">
+      <DependentUpon>ucProgressState.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SaGUtil.Extensions;
 
 namespace SaGLogic
 {
@@ -111,7 +112,110 @@ namespace SaGLogic
             return false;
         }
 
+        
+        public OrderBarcodeM[] GetByOrdNo(string ordNo)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+                try
+                {
+                    db.OpenDB();
 
-  
+                    TBOrderBarcode tb = new TBOrderBarcode(db, $"ord_no='{ordNo}'");
+                    return new OrderBarcodeM().GenerateModel(tb.Table);
+                }
+                catch
+                {
+                    return new OrderBarcodeM[] { };
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return new OrderBarcodeM[] { };
+        }
+
+        public DataTable GetBarcodeGroup(string begDate, string endDate)
+        {
+            if (!string.IsNullOrEmpty(begDate) && !string.IsNullOrEmpty(endDate))
+            {
+                MyDB db = new MyDB();
+
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderBarcode tb;
+                    tb = new TBOrderBarcode(db, $"create_date>='{begDate}' and create_date<='{endDate}'");
+
+                    DataTable result = tb.Table.AsEnumerable()
+                         .Select(p => new
+                         {
+                             ord_no = p["ord_no"],
+                             create_date = p["create_date"],
+                             cassette_amount = p["cassette_total_amount"]
+                         }
+                         ).ToDataTable();
+
+                    return result;
+                }
+                catch
+                {
+                    return null;
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return null;
+        }
+        public DataTable GetCassettesGroup(string ordNo)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderCassette tb;
+                    tb = new TBOrderCassette(db, $"ord_no='{ordNo}'");
+
+                    DataTable result = tb.Table.AsEnumerable()
+                         .GroupBy(p => new
+                         {
+                             ord_no = p["ord_no"],
+                             op_date = p["op_date"]
+                         })
+                          .Select(p => new
+                          {
+                              ord_no = p.Key.ord_no,
+                              op_date = p.Key.op_date,
+                              count = p.Count(),
+                              slide_amount = p.Sum(r => SaConverter.ToInt(r["slide_total_amount"].ToString(), 0))
+                          }
+                          ).ToDataTable();
+
+                    return result;
+                }
+                catch
+                {
+                    return null;
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return null;
+        }
+
     }
 }

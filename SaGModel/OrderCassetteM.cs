@@ -16,6 +16,10 @@ namespace SaGModel
         public string CassetteRemark { get; set; }
         public string CassetteFieldA { get; set; }
         public string CassetteFieldB { get; set; }
+
+        public string CassetteSmallPiece { get; set; }
+        public string CassetteDocNo { get; set; }
+
         public string GrossUser { get; set; }
         public string GrossDate { get; set; }
         public string GrossTime { get; set; }
@@ -37,6 +41,10 @@ namespace SaGModel
                         CassetteRemark = row["cassette_remark"].ToString(),
                         CassetteFieldA = row["cassette_fieldA"].ToString(),
                         CassetteFieldB = row["cassette_fieldB"].ToString(),
+
+                        CassetteDocNo = row["cassette_doc_no"].ToString(),
+                        CassetteSmallPiece = row["cassette_small_pieces"].ToString(),
+
                         GrossUser = row["gross_user"].ToString(),
                         GrossDate = row["gross_date"].ToString(),
                         GrossTime = row["gross_time"].ToString(),

@@ -24,6 +24,7 @@ namespace SaGKernel.MajorClass
 
     public enum MajorClassEnum
     {
+        NonGynMC, //非婦科
         SkinMC, //皮膚
         FsMC, //冷凍切片
         EMRMC, //急作檢體

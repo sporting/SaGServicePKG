@@ -68,6 +68,7 @@
     <Compile Include="BaseCSBridge.cs" />
     <Compile Include="DoctorSlideLogBridge.cs" />
     <Compile Include="LoginBridge.cs" />
+    <Compile Include="OrderBarcodeBridge.cs" />
     <Compile Include="OrderBarcodeLogBridge.cs" />
     <Compile Include="OrderCassetteBridge.cs" />
     <Compile Include="OrderCounterBridge.cs" />
@@ -75,12 +76,14 @@
     <Compile Include="OrderGrossLogBridge.cs" />
     <Compile Include="OrderSlideBridge.cs" />
     <Compile Include="PreLoader\SysCassetteMagazineBridge.cs" />
+    <Compile Include="PreLoader\SysUserBridge.cs" />
     <Compile Include="PreLoader\SysSlideSlotBridge.cs" />
     <Compile Include="PreLoader\SysSpecimenStainBridge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\JwtAuthUtil.cs" />
     <Compile Include="SysParamsBridge.cs" />
     <Compile Include="Utils\AppSettings.cs" />
+    <Compile Include="BarcodeCassetteBridge.cs" />
     <Compile Include="WorkLoadBridge.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +98,10 @@
     <ProjectReference Include="..\..\SaGServicePKG\SaGUtil\SaGUtil.csproj">
       <Project>{5dd96848-8f84-46b8-a95e-c9eb3858a753}</Project>
       <Name>SaGUtil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SaGKernel\SaGKernel.csproj">
+      <Project>{E61015F8-F665-4530-8582-9A8864242C5B}</Project>
+      <Name>SaGKernel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

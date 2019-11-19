@@ -3,9 +3,9 @@ using SaGDB.Tables;
 using SaGModel;
 using SaGUtil.System;
 using SaGUtil.Data;
-using System;
 using System.Data;
 using System.Linq;
+using SaGUtil.Extensions;
 
 namespace SaGLogic
 {
@@ -47,6 +47,8 @@ namespace SaGLogic
                     row["cassette_remark"] = log.CassetteRemark;
                     row["cassette_fieldA"] = log.CassetteFieldA;
                     row["cassette_fieldB"] = log.CassetteFieldB;
+                    row["cassette_doc_no"] = log.CassetteDocNo;
+                    row["cassette_small_pieces"] = log.CassetteSmallPiece;
                     row["gross_user"] = log.GrossUser;
                     row["gross_date"] = log.GrossDate;
                     row["gross_time"] = log.GrossTime;
@@ -141,7 +143,7 @@ namespace SaGLogic
                     {
                         tb = new TBOrderCassette(db, $"gross_date>='{begDate}' and gross_date<='{endDate}' and gross_user='{grossUser}'");
                     }
-                    
+
                     return new OrderCassetteM().GenerateModel(tb.Table);
                 }
                 catch
@@ -176,6 +178,147 @@ namespace SaGLogic
                     {
                         tb = new TBOrderCassette(db, $"embed_date>='{begDate}' and embed_date<='{endDate}' and embed_user='{embedUser}'");
                     }
+
+                    return new OrderCassetteM().GenerateModel(tb.Table);
+                }
+                catch
+                {
+                    return new OrderCassetteM[] { };
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return new OrderCassetteM[] { };
+        }
+
+        public DataTable GetCassettesGroup(string begDate, string endDate)
+        {
+            if (!string.IsNullOrEmpty(begDate) && !string.IsNullOrEmpty(endDate))
+            {
+                MyDB db = new MyDB();
+
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderCassette tb;
+                    tb = new TBOrderCassette(db, $"op_date>='{begDate}' and op_date<='{endDate}'");
+
+                    DataTable result = tb.Table.AsEnumerable()
+                         .GroupBy(p => new
+                         {
+                             ord_no = p["ord_no"],
+                             op_date = p["op_date"]
+                         })
+                         .Select(p => new
+                         {
+                             ord_no = p.Key.ord_no,
+                             op_date = p.Key.op_date,
+                             count = p.Count(),
+                             slide_amount = p.Sum(r=>SaConverter.ToInt(r["slide_total_amount"].ToString(),0))
+                         }
+                         ).ToDataTable();
+
+                    return result;
+                }
+                catch
+                {
+                    return null;
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return null;
+        }
+        public DataTable GetCassettesGroup(string ordNo)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderCassette tb;
+                    tb = new TBOrderCassette(db, $"ord_no='{ordNo}'");
+
+                    DataTable result = tb.Table.AsEnumerable()
+                         .GroupBy(p => new
+                         {
+                             ord_no = p["ord_no"],
+                             op_date = p["op_date"]
+                         })
+                          .Select(p => new
+                          {
+                              ord_no = p.Key.ord_no,
+                              op_date = p.Key.op_date,
+                              count = p.Count(),
+                              slide_amount = p.Sum(r => SaConverter.ToInt(r["slide_total_amount"].ToString(), 0))
+                          }
+                          ).ToDataTable();
+
+                    return result;
+                }
+                catch
+                {
+                    return null;
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return null;
+        }
+
+        public OrderCassetteM[] GetCassettes(string ordNo)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderCassette tb;
+                    tb = new TBOrderCassette(db, $"ord_no='{ordNo}'");
+
+                    return new OrderCassetteM().GenerateModel(tb.Table);
+                }
+                catch
+                {
+                    return new OrderCassetteM[] { };
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return new OrderCassetteM[] { };
+        }
+
+        public OrderCassetteM[] GetCassettes(string ordNo,int cassetteSequence)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderCassette tb;
+                    tb = new TBOrderCassette(db, $"ord_no='{ordNo}' and cassette_sequence={cassetteSequence}");
 
                     return new OrderCassetteM().GenerateModel(tb.Table);
                 }
@@ -248,6 +391,6 @@ namespace SaGLogic
         }
 
 
-   
+
     }
 }

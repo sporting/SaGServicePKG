@@ -53,6 +53,57 @@ namespace SaGCSBridge
             }
         }
 
+        public async Task<BridgeResult<OrderSlideM[]>> GetByOrdNo(string ordNo)
+        {
+            try
+            {
+                OrderSlide order = new OrderSlide();
+                OrderSlideM[] osm = order.GetSlidesByOrdNo(ordNo);
+
+                return await Task.FromResult(new BridgeResult<OrderSlideM[]>
+                {
+                    status = true,
+                    message = string.Empty,
+                    result = osm
+                });
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+                return await Task.FromResult(new BridgeResult<OrderSlideM[]>
+                {
+                    status = false,
+                    message = ex.Message,
+                    result = new OrderSlideM[] { }
+                });
+            }
+        }
+
+        public async Task<BridgeResult<OrderSlideM[]>> GetByOrdNo(string ordNo,int cassetteSequence)
+        {
+            try
+            {
+                OrderSlide order = new OrderSlide();
+                OrderSlideM[] osm = order.GetSlidesByOrdNo(ordNo, cassetteSequence);
+
+                return await Task.FromResult(new BridgeResult<OrderSlideM[]>
+                {
+                    status = true,
+                    message = string.Empty,
+                    result = osm
+                });
+            }
+            catch (Exception ex)
+            {
+                MyLog.Fatal(this, ex.Message);
+                return await Task.FromResult(new BridgeResult<OrderSlideM[]>
+                {
+                    status = false,
+                    message = ex.Message,
+                    result = new OrderSlideM[] { }
+                });
+            }
+        }
         public async Task<BridgeResult<OrderSlideM>> GetByOrdNoSeq(string ordNo, int cassetteSequence, int slideSequence)
         {
             try

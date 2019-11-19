@@ -3,6 +3,7 @@ using SaGDB.Tables;
 using SaGModel;
 using SaGUtil.Data;
 using SaGUtil.System;
+using SaGUtil.Utils;
 using System;
 using System.Data;
 using System.Linq;
@@ -146,6 +147,76 @@ namespace SaGLogic
             }
 
             return null;
+        }
+
+        public OrderSlideM[] GetSlidesByOrdNo(string ordNo)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderSlide tb = new TBOrderSlide(db, $"ord_no='{ordNo}'");
+                    OrderSlideM[] osms = new OrderSlideM().GenerateModel(tb.Table);
+
+                    if (osms.Count() >0)
+                    {
+                        return osms;
+                    }
+                    else
+                    {
+                        return new OrderSlideM[] { };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MyLog.Fatal(this, ex.Message);
+                    return new OrderSlideM[] { };
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return new OrderSlideM[] { };
+        }
+
+        public OrderSlideM[] GetSlidesByOrdNo(string ordNo,int cassetteSequence)
+        {
+            if (!string.IsNullOrEmpty(ordNo))
+            {
+                MyDB db = new MyDB();
+                try
+                {
+                    db.OpenDB();
+
+                    TBOrderSlide tb = new TBOrderSlide(db, $"ord_no='{ordNo}' and cassette_sequence={cassetteSequence}");
+                    OrderSlideM[] osms = new OrderSlideM().GenerateModel(tb.Table);
+
+                    if (osms.Count() > 0)
+                    {
+                        return osms;
+                    }
+                    else
+                    {
+                        return new OrderSlideM[] { };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MyLog.Fatal(this, ex.Message);
+                    return new OrderSlideM[] { };
+                }
+                finally
+                {
+                    db.CloseDB();
+                }
+            }
+
+            return new OrderSlideM[] { };
         }
 
         public OrderSlideM[] GetSlidesByDoctorDate(string doctorDate)

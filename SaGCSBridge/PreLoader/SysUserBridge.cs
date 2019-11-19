@@ -6,75 +6,42 @@ using System.Threading.Tasks;
 using SaGModel;
 using SaGLogic;
 using SaGUtil.Utils;
-using SaGKernel.MajorClass;
 
 namespace SaGCSBridge
 {
-    public class SysCassetteMagazineBridge : BaseCSBridge<SysCassetteMagazineM>
+    public class SysUserBridge : BaseCSBridge<SysUserM>
     {
         protected override string Api
         {
             get
             {
-                return "SysCassetteMagazine";
+                return "SysUser";
             }
         }
-        public SysCassetteMagazineBridge(string token) : base(token)
+        public SysUserBridge(string token) : base(token)
         {
         }
 
-        public async Task<BridgeResult<SysCassetteMagazineM[]>> GetAll()
+        public async Task<BridgeResult<SysUserM[]>> GetAll()
         {
             try
             {
-                SysCassetteMagazine scmm = new SysCassetteMagazine();
-                 
-                return await Task.FromResult(new BridgeResult<SysCassetteMagazineM[]>
+                SysUser ssUser = new SysUser();
+                return await Task.FromResult(new BridgeResult<SysUserM[]>
                 {
                     status = true,
                     message = string.Empty,
-                    result = scmm.GetValues()
+                    result = ssUser.GetAll()
                 });
             }
             catch (Exception ex)
             {
                 MyLog.Fatal(this, ex.Message);
-                return await Task.FromResult(new BridgeResult<SysCassetteMagazineM[]>
+                return await Task.FromResult(new BridgeResult<SysUserM[]>
                 {
                     status = false,
                     message = ex.Message,
-                    result = new SysCassetteMagazineM[] { }
-                });
-            }
-        }
-
-        public async Task<BridgeResult<SysCassetteMagazineM[]>> GetValidAll()
-        {
-            try
-            {
-                SysCassetteMagazine scmm = new SysCassetteMagazine();
-
-                SysCassetteMagazineM[] scms =  scmm.GetValues();              
-                HashSet<IMajorClass> hs = MajorClassify.GetInstance().AllMajorClass();
-              
-                var res = hs.Join(scms, c => c.ClassName, s => s.MajorClass, (c, s) => s);
-
-
-                return await Task.FromResult(new BridgeResult<SysCassetteMagazineM[]>
-                {
-                    status = true,
-                    message = string.Empty,
-                    result = res.ToArray()
-                });
-            }
-            catch (Exception ex)
-            {
-                MyLog.Fatal(this, ex.Message);
-                return await Task.FromResult(new BridgeResult<SysCassetteMagazineM[]>
-                {
-                    status = false,
-                    message = ex.Message,
-                    result = new SysCassetteMagazineM[] { }
+                    result = new SysUserM[] { }
                 });
             }
         }
@@ -83,8 +50,8 @@ namespace SaGCSBridge
         {
             try
             {
-                SysCassetteMagazine scm = new SysCassetteMagazine();
-                if (scm.Delete(new int[] { id }))
+                SysUser ssUser = new SysUser();
+                if (ssUser.Delete(new int[] { id }))
                 {
                     return await Task.FromResult(new BridgeResult<bool>
                     {
@@ -98,7 +65,7 @@ namespace SaGCSBridge
                     return await Task.FromResult(new BridgeResult<bool>
                     {
                         status = true,
-                        message = "SysCassetteMagazine Delete failed",
+                        message = "SysUser Delete failed",
                         result = false
                     });
                 }
@@ -114,14 +81,12 @@ namespace SaGCSBridge
             }
         }
 
-
-        public async Task<BridgeResult<bool>> AddCassetteMagazine(SysCassetteMagazineM[] scms)
+        public async Task<BridgeResult<bool>> AddSysUser(SysUserM[] sums)
         {
             try
             {
-                SysCassetteMagazine scm = new SysCassetteMagazine();
-
-                if (scm.Update(scms))
+                SysUser ssUser = new SysUser();
+                if (ssUser.Updates(sums))
                 {
                     return await Task.FromResult(new BridgeResult<bool>
                     {
@@ -135,7 +100,7 @@ namespace SaGCSBridge
                     return await Task.FromResult(new BridgeResult<bool>
                     {
                         status = true,
-                        message = "SysCassetteMagazine Add failed",
+                        message = "SysUser Add failed",
                         result = false
                     });
                 }

@@ -14,6 +14,38 @@ namespace SaGComs
 {
     public partial class ReportCSForm : Form
     {
+
+        public ToolStripButton QueryStripButton
+        {
+            get
+            {
+                return tsbQuery;
+            }
+        }
+
+        public ToolStripButton ClearStripButton
+        {
+            get
+            {
+                return tsbClear;
+            }
+        }
+
+        public ToolStripButton ExportStripButton
+        {
+            get
+            {
+                return tsbExport;
+            }
+        }
+        public ToolStripButton CloseStripButton
+        {
+            get
+            {
+                return tsbClose;
+            }
+        }
+
         protected APClientCSForm MdiParentForm
         {
             get
@@ -63,11 +95,11 @@ namespace SaGComs
             {
                 if (SaveDialog.FilterIndex == 1)
                 {
-                    dgvData.ExportToExcel(SaveDialog.FileName, "Sheet1",true);
+                    dgvData.ExportToExcel(SaveDialog.FileName, "Sheet1", true);
                 }
                 else
                 {
-                    dgvData.ExportToCSV(SaveDialog.FileName, true,true, ",");
+                    dgvData.ExportToCSV(SaveDialog.FileName, true, true, ",");
                 }
             }
         }
@@ -119,6 +151,11 @@ namespace SaGComs
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void ReportCSForm_Load(object sender, EventArgs e)
+        {
+            ClearProcess();
         }
     }
 }
