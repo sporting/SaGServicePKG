@@ -19,7 +19,22 @@ namespace SaGModel
         public string OpDate { get; set; }
         public string OpTime { get; set; }
         public DeleteFlagEnum IsDeleteFlag { get; set; }
-
+        public OrderEmbedLogM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            OrdNo = string.Empty;
+            CassetteSequence = 0;
+            EmbedUser = string.Empty;
+            EmbedDate = string.Empty;
+            EmbedTime = string.Empty;
+            OpDate = string.Empty;
+            OpTime = string.Empty;
+            IsDeleteFlag = DeleteFlagEnum.Normal;
+        }
 
         public OrderEmbedLogM[] GenerateModel(DataTable dt)
         {

@@ -19,6 +19,21 @@ namespace SaGModel
 
         public string OpDate { get; set; }
         public string OpTime { get; set; }
+        public OrderBarcodeM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            OrdNo = string.Empty;
+            BarcodeTotalAmount = 0;
+            CassetteTotalAmount = 0;
+            CreateDate = string.Empty;
+            CreateTime = string.Empty;
+            OpDate = string.Empty;
+            OpTime = string.Empty;
+        }
 
         public OrderBarcodeM[] GenerateModel(DataTable dt)
         {

@@ -17,8 +17,19 @@ namespace SaGModel
         public string OpTime { get; set; }
 
         public bool RePrint { get; set; }
-
-
+        public OrderBarcodeLogM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            OrdNo = string.Empty;
+            Amount = 0;
+            OpDate = string.Empty;
+            OpTime = string.Empty;
+            RePrint = false;
+        }
         public OrderBarcodeLogM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

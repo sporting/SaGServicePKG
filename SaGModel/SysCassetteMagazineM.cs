@@ -15,7 +15,16 @@ namespace SaGModel
         public string MajorClass { get; set; }
         //包埋盒卡匣名稱
         public string Magazine { get; set; }
-
+        public SysCassetteMagazineM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            MajorClass = string.Empty;
+            Magazine = string.Empty;
+        }
         public SysCassetteMagazineM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

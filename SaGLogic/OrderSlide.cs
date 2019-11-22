@@ -47,9 +47,26 @@ namespace SaGLogic
                     row["slide_sequence"] = log.SlideSequence;
                     row["slide_user"] = log.SlideUser;
 
-                    row["slide_remark"] = log.SlideRemark;
-                    row["slide_fieldA"] = log.SlideFieldA;
-                    row["slide_fieldB"] = log.SlideFieldB;
+                    row["slide_F1"] = log.SlideF1;
+                    row["slide_F2"] = log.SlideF2;
+                    row["slide_F3"] = log.SlideF3;
+                    row["slide_F4"] = log.SlideF4;
+                    row["slide_F5"] = log.SlideF5;
+                    row["slide_F6"] = log.SlideF6;
+                    row["slide_F7"] = log.SlideF7;
+                    row["slide_F8"] = log.SlideF8;
+                    row["slide_F9"] = log.SlideF9;
+                    row["slide_F10"] = log.SlideF10;
+                    row["slide_F11"] = log.SlideF11;
+                    row["slide_F12"] = log.SlideF12;
+                    row["slide_F13"] = log.SlideF13;
+                    row["slide_F14"] = log.SlideF14;
+                    row["slide_F15"] = log.SlideF15;
+                    row["slide_F16"] = log.SlideF16;
+                    row["slide_F17"] = log.SlideF17;
+                    row["slide_F18"] = log.SlideF18;
+                    row["slide_F19"] = log.SlideF19;
+                    row["slide_F20"] = log.SlideF20;
 
                     row["doctor_user"] = log.DoctorUser;
                     row["doctor_date"] = log.DoctorDate;

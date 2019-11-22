@@ -15,8 +15,8 @@ namespace SaGModel
     /// </summary>
     /// <typeparam name="T"></typeparam>
     interface ITableModel<T>
-    {     
-
+    {
+        void Initialize();
         T[] GenerateModel(DataTable dt);
 
         DataTable GenerateDataTable(T[] models);

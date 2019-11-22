@@ -14,7 +14,17 @@ namespace SaGModel
         public string Name { get; set; }
         public int Seq { get; set; }
         public string Value { get; set; }
-
+        public SysParamsM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            Name = string.Empty;
+            Seq = 0;
+            Value = string.Empty;
+        }
         public SysParamsM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

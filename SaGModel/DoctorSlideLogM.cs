@@ -21,7 +21,23 @@ namespace SaGModel
         public string OpTime { get; set; }       
         public DeleteFlagEnum IsDeleteFlag { get; set; }
 
-
+        public DoctorSlideLogM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            OrdNo = string.Empty;
+            CassetteSequence = 0;
+            SlideSequence = 0;
+            DoctorUser = string.Empty;
+            DoctorDate = string.Empty;
+            DoctorTime = string.Empty;
+            OpDate = string.Empty;
+            OpTime = string.Empty;
+            IsDeleteFlag = DeleteFlagEnum.Normal;
+        }
 
         public DoctorSlideLogM[] GenerateModel(DataTable dt)
         {

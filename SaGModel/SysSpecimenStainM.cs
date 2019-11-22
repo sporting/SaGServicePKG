@@ -18,6 +18,18 @@ namespace SaGModel
         public string Stain { get; set; }
         //停用註記 Y/N
         public string StopFlag { get; set; }
+        public SysSpecimenStainM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            Specimen = string.Empty;
+            Seq = 0;
+            Stain = string.Empty;
+            StopFlag = "N";
+        }
         public SysSpecimenStainM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

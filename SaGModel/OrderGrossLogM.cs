@@ -19,7 +19,22 @@ namespace SaGModel
         public string OpDate { get; set; }
         public string OpTime { get; set; }
         public DeleteFlagEnum IsDeleteFlag { get; set; }
-
+        public OrderGrossLogM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            OrdNo = string.Empty;
+            CassetteSequence = 0;
+            GrossUser = string.Empty;
+            GrossDate = string.Empty;
+            GrossTime = string.Empty;
+            OpDate = string.Empty;
+            OpTime = string.Empty;
+            IsDeleteFlag = DeleteFlagEnum.Normal;
+        }
         public OrderGrossLogM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

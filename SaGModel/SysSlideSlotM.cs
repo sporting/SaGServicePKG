@@ -15,6 +15,16 @@ namespace SaGModel
         public string MajorClass { get; set; }
         //玻片卡匣序 0,1
         public int Slot { get; set; }
+        public SysSlideSlotM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            MajorClass = string.Empty;
+            Slot = 0;
+        }
 
         public SysSlideSlotM[] GenerateModel(DataTable dt)
         {

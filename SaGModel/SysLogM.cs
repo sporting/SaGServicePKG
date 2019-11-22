@@ -15,6 +15,18 @@ namespace SaGModel
         public string Params { get; set; }
         public string OpDate { get; set; }
         public string OpTime { get; set; }
+        public SysLogM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            EventName = string.Empty;
+            Params = string.Empty;
+            OpDate = string.Empty;
+            OpTime = string.Empty;
+        }
         public SysLogM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

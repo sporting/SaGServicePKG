@@ -13,6 +13,16 @@ namespace SaGModel
         public int Id { get; set; }
         public string UserId { get; set; }
         public string Name { get; set; }
+        public SysUserM()
+        {
+            Initialize();
+        }
+        public void Initialize()
+        {
+            Id = 0;
+            UserId = string.Empty;
+            Name = string.Empty;
+        }
         public SysUserM[] GenerateModel(DataTable dt)
         {
             var v = from DataRow row in dt.AsEnumerable()

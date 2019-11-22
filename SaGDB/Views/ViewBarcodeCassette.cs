@@ -21,7 +21,10 @@ namespace SaGDB.Views
             {
                 db.OpenDB();
 
-                string sql = $@"select a.ord_no,a.create_date as barcode_date,b.cassette_sequence,b.cassette_remark, b.cassette_fieldA, b.cassette_fieldB,b.cassette_doc_no, b.cassette_small_pieces,
+                string sql = $@"select a.ord_no,a.create_date as barcode_date,b.cassette_sequence,b.cassette_F1, b.cassette_F2, 
+b.cassette_F3,b.cassette_F4, b.cassette_F5, b.cassette_F6, b.cassette_F7, b.cassette_F8, b.cassette_F9, b.cassette_F10, b.cassette_F11,
+b.cassette_F12, b.cassette_F12, b.cassette_F13, b.cassette_F14, b.cassette_F15, b.cassette_F16, b.cassette_F17, b.cassette_F18, 
+b.cassette_F19, b.cassette_F20,
 b.gross_user,b.gross_date,b.embed_user,b.embed_date,
 (case when b.slide_total_amount is null then 0 else b.slide_total_amount end) slide_total_amount
 from {SchemaName}.order_barcode_tb a
@@ -43,7 +46,10 @@ where a.create_date >= '{begDate}' and a.create_date<='{endDate}'";
             {
                 db.OpenDB();
 
-                string sql = $@"select a.ord_no,a.create_date as barcode_date,b.cassette_sequence,b.cassette_remark, b.cassette_fieldA, b.cassette_fieldB,b.cassette_doc_no, b.cassette_small_pieces,
+                string sql = $@"select a.ord_no,a.create_date as barcode_date,b.cassette_sequence,b.cassette_F1, b.cassette_F2, 
+b.cassette_F3,b.cassette_F4, b.cassette_F5, b.cassette_F6, b.cassette_F7, b.cassette_F8, b.cassette_F9, b.cassette_F10, b.cassette_F11,
+b.cassette_F12, b.cassette_F12, b.cassette_F13, b.cassette_F14, b.cassette_F15, b.cassette_F16, b.cassette_F17, b.cassette_F18, 
+b.cassette_F19, b.cassette_F20,
 b.gross_user,b.gross_date,b.embed_user,b.embed_date,
 (case when b.slide_total_amount is null then 0 else b.slide_total_amount end) slide_total_amount
 from {SchemaName}.order_barcode_tb a
